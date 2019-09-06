@@ -1,13 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import reducer from './redux/reducers'
+import store from './redux/store'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-
-const store = createStore(reducer)
 
 // Provider component makes the store available to all container components in the application
 // without passing it explicitly.

@@ -47,9 +47,11 @@ class SignupForm extends React.Component {
                     </div>
                     <div className={styles.authenticateFormSubmit}>
                         <div>
-                            <CustomLink>
-                                <img onClick={e => this.props.handle_signup(e, this.state)} src={button_add} width="66" height="66" alt="signup"/>
-                            </CustomLink>
+                            <button
+                                className={styles.touchableOpacity}
+                                onClick={event => this.props.handle_signup(event, this.state)} >
+                                <img src={button_add} width="66" height="66" alt="signup"/>
+                            </button>
                         </div>
                         <div>
                             <CustomLink to="/login">

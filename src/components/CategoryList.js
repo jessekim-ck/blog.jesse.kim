@@ -1,14 +1,19 @@
 import React from 'react'
 import styles from '../app.module.css'
+import CustomLink from "./CustomLink";
 
 
 const CategoryItem = props => {
 
     return (
         <div className={styles.categoryListContainer}>
-            <div className={styles.categoryListTitle} onClick={() => props.updateCategoryList(props.categoryDetail.id)}>
-                {props.categoryDetail.title}
-            </div>
+            <CustomLink to={`/category/${props.categoryDetail.id}`}>
+                <div className={styles.categoryListTitle}
+                     // onClick={() => props.updateCategoryList(props.categoryDetail.id)}
+                >
+                    {props.categoryDetail.title}
+                </div>
+            </CustomLink>
             <div className={styles.categoryListDescription}>
                 {props.categoryDetail.description}
             </div>
@@ -21,7 +26,8 @@ const CategoryList = props => {
         categoryItem => <CategoryItem
             key={categoryItem.id}
             categoryDetail={{...categoryItem}}
-            updateCategoryList={props.updateCategoryList} />
+            // updateCategoryList={props.updateCategoryList}
+        />
     )
     return (
         <div>

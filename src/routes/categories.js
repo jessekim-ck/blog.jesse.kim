@@ -14,13 +14,23 @@ import CustomLink from "../components/CustomLink";
 
 class Categories extends React.Component {
 
+    state = {
+        category: {
+            id: null,
+            title: null,
+            parent_category_id: null
+        },
+        list: [],
+        categoryOrPost: CATEGORY
+    }
+
     updateCategoryList = async category_id => {
         const state = {};
 
         // Get children of current category
         const childrenCategories = await getCategoryList(category_id)
 
-        // If no child category
+        // If no child category, get posts in that category
         if (childrenCategories.length === 0) {
             const childrenPosts = await getPostList(category_id)
             // If no child post too
@@ -46,15 +56,27 @@ class Categories extends React.Component {
                 parent_category_id: null,
             }
         }
-        this.props.dispatch(loadCategoryChildren(state.category, state.categoryOrPost, state.list))
+        // this.props.dispatch(loadCategoryChildren(state.category, state.categoryOrPost, state.list))
+        this.setState({...state})
     }
 
     async componentDidMount() {
-        await this.updateCategoryList()
+        const category_id = this.props.match.params.id
+        if (category_id) {
+            await this.updateCategoryList(category_id)
+        } else {
+            await this.updateCategoryList()
+        }
+    }
+
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.match.params.id !== this.props.match.params.id) {
+            await this.updateCategoryList(this.props.match.params.id)
+        }
     }
 
     renderButton = () => {
-        switch (this.props.category.categoryOrPost) {
+        switch (this.state.categoryOrPost) {
             case CATEGORY:
                 return (
                     <div>
@@ -63,13 +85,13 @@ class Categories extends React.Component {
                 )
             case POST:
                 return (
-                    <CustomLink to={`/category/${this.props.category.category.id}/write_post`}>
+                    <CustomLink to={`/category/${this.state.category.id}/write_post`}>
                         <FloatButton source={button_add}/>
                     </CustomLink>
                 )
             default:
                 return (
-                    <CustomLink to={`/category/${this.props.category.category.id}/write_post`}>
+                    <CustomLink to={`/category/${this.state.category.id}/write_post`}>
                         <FloatButton source={button_add}/>
                     </CustomLink>
                 )
@@ -78,19 +100,20 @@ class Categories extends React.Component {
 
     render() {
         const renderList = () => {
-            switch (this.props.category.categoryOrPost) {
+            switch (this.state.categoryOrPost) {
                 case CATEGORY:
                     return (
                         <div>
                             <CategoryList
-                                categoryList={this.props.category.list}
-                                updateCategoryList={this.updateCategoryList} />
+                                categoryList={this.state.list}
+                                // updateCategoryList={this.updateCategoryList}
+                            />
                         </div>
                     )
                 case POST:
                     return (
                         <div>
-                            <PostList postList={this.props.category.list} />
+                            <PostList postList={this.state.list} />
                         </div>
                     )
                 default:
@@ -104,11 +127,14 @@ class Categories extends React.Component {
 
         return (
             <div>
-                <div
-                    className={styles.categoryListCategory}
-                    onClick={() => this.updateCategoryList(this.props.category.category.parent_category_id)} >
-                    {this.props.category.category.title ? `< ${this.props.category.category.title}` : 'Category'}
-                </div>
+                <CustomLink to={`/category${ this.state.category.parent_category_id ? '/' + this.state.category.parent_category_id : '' }`}>
+                    <div
+                        className={styles.categoryListCategory}
+                        // onClick={() => this.updateCategoryList(this.state.category.parent_category_id)}
+                    >
+                        {this.state.category.title ? `< ${this.state.category.title}` : 'Category'}
+                    </div>
+                </CustomLink>
                 {renderList()}
                 <div>
                     {this.props.user.authenticated && this.renderButton()}
@@ -119,6 +145,6 @@ class Categories extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ category: state.category, user: state.user })
+const mapStateToProps = state => ({ user: state.user })
 
 export default connect(mapStateToProps)(Categories)

@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, SETPOSTLIST, LOADCATEGORYCHILDREN, UPDATECATEGORYSELECTOR } from './actions'
+import { LOGIN, LOGOUT, SETPOSTLIST, LOADCATEGORYCHILDREN } from './actions'
 import { combineReducers } from 'redux'
 
 const initialState = {

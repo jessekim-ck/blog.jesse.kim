@@ -13,9 +13,11 @@ class PostDetailView extends React.Component {
     render() {
         return (
             <div className={styles.postDetailContainer}>
-                <div className={styles.postDetailCategory}>
-                    {this.props.postDetail.category || 'UNCATEGORIZED'}
-                </div>
+                <CustomLink to={ this.props.postDetail.category_id ? `/category/${this.props.postDetail.category_id}` : '/category'}>
+                    <div className={styles.postDetailCategory}>
+                        {this.props.postDetail.category || 'UNCATEGORIZED'}
+                    </div>
+                </CustomLink>
                 <div className={styles.postDetailTitle}>
                     {this.props.postDetail.title}
                 </div>

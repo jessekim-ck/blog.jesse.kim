@@ -49,16 +49,14 @@ class LoginForm extends React.Component {
                             onChange={this.handle_change} />
                     </div>
                     <div className={styles.authenticateFormSubmit}>
-                        <div>
-                            <CustomLink to="/" onClick={e => this.props.handle_login(e, this.state)}>
+                        <button
+                            className={styles.touchableOpacity}
+                            onClick={event => this.props.handle_login(event, this.state)}>
                                 <img src={button_ok} width="66" height="66" alt="login"/>
-                            </CustomLink>
-                        </div>
-                        <div>
-                            <CustomLink to="/signup">
-                                <img src={button_add} width="66" height="66" alt="signup"/>
-                            </CustomLink>
-                        </div>
+                        </button>
+                        <CustomLink to="/signup">
+                            <img src={button_add} width="66" height="66" alt="signup"/>
+                        </CustomLink>
                     </div>
                 </div>
             </form>

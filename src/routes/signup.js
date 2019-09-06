@@ -6,10 +6,20 @@ import {connect} from "react-redux";
 
 class Signup extends React.Component {
 
-    handle_signup = async (e, data) => {
-        const response = await signupUser(data.username, data.password)
-        this.props.dispatch(login(response.username))
-        this.props.history.push('/')
+    handle_signup = async (event, data) => {
+        try {
+            event.preventDefault()
+            const code = prompt('code?')
+            if (code === '2068') {
+                const response = await signupUser(data.username, data.password)
+                this.props.dispatch(login(response.username))
+                this.props.history.push('/')
+            } else {
+                alert('You cannot sign up.')
+            }
+        } catch (err) {
+            console.log('signup failed!')
+        }
     }
 
     render() {

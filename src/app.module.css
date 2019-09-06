@@ -149,7 +149,6 @@
     word-break: keep-all;
     word-wrap: normal;
     line-height: 1.8;
-
 }
 
 *:focus {
@@ -201,3 +200,7 @@
     opacity: 0.6;
 }
 
+.touchableOpacity {
+    background-color: transparent;
+    border: 0px;
+}

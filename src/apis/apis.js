@@ -82,6 +82,8 @@ export const getPostList = async category_id => {
     }
 }
 
+
+
 // Write Post (Should be Authenticated)
 export const writePost = async (writer_id, category_id, title, text) => {
     try {
@@ -129,8 +131,20 @@ export const getCategoryDetail = async category_id => {
     try {
         const response = await axios_api.get(`api/categories/${category_id}/`)
         const result = await response.data
+        return result
+    } catch (err) {
+        console.log(err)
+        throw err
+    }
+}
+
+
+export const getCategoryDetailRecursive = async category_id => {
+    try {
+        const response = await axios_api.get(`api/categories/${category_id}/`)
+        const result = await response.data
         if (result.parent_category_id) {
-            const parent = await getCategoryDetail(result.parent_category_id)
+            const parent = await getCategoryDetailRecursive(result.parent_category_id)
             result.parent = await parent
         } else {
             result.parent = null
