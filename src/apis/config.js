@@ -11,7 +11,7 @@ export const axios_api = (() => {
     }
 
     return axios.create({
-        baseURL: 'http://localhost:8000/',
+        baseURL: 'https://api.weekend.kim/',
         timeout: 5000,
         headers: header
     })
