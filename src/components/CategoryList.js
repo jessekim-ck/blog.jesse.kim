@@ -7,32 +7,28 @@ const CategoryItem = props => {
 
     return (
         <div className={styles.categoryListContainer}>
-            <CustomLink to={`/category/${props.categoryDetail.id}`}>
-                <div className={styles.categoryListTitle}
-                     // onClick={() => props.updateCategoryList(props.categoryDetail.id)}
-                >
-                    {props.categoryDetail.title}
+            <CustomLink to={`/category/${props.category.id}`}>
+                <div className={styles.categoryListTitle} >
+                    {props.category.title}
                 </div>
             </CustomLink>
             <div className={styles.categoryListDescription}>
-                {props.categoryDetail.description}
+                {props.category.description}
             </div>
         </div>
     )
 }
 
 const CategoryList = props => {
-    const categoryItems = props.categoryList.map(
-        categoryItem => <CategoryItem
-            key={categoryItem.id}
-            categoryDetail={{...categoryItem}}
-            // updateCategoryList={props.updateCategoryList}
-        />
+    const category_list = props.children_category_list.map(
+        category => <CategoryItem
+            key={category.id}
+            category={{...category}} />
     )
     return (
         <div>
             <div>
-                {categoryItems}
+                {category_list}
             </div>
         </div>
     )

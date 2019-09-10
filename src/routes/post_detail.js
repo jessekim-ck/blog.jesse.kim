@@ -8,24 +8,20 @@ class PostDetail extends React.Component {
 
     // Should I process this information through Redux?
     state = {
-        postDetail: {
-            id: '',
-            title: '',
-            text: '',
-        }
+        id: '',
+        title: '',
+        text: '',
     }
 
     async componentDidMount() {
-        const postDetail = await getPostDetail(this.props.match.params.id)
-        this.setState({
-            postDetail
-        })
+        const state = await getPostDetail(this.props.match.params.id)
+        this.setState({...state})
     }
 
     render() {
         return (
             <div>
-                <PostDetailView postDetail={this.state.postDetail} />
+                <PostDetailView post_detail={this.state} />
             </div>
         )
     }

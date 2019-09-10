@@ -2,8 +2,8 @@
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
-export const SETPOSTLIST = 'SETPOSTLIST'
-export const LOADCATEGORYCHILDREN = 'LOADCATEGORYCHILDREN'
+export const SET_RECENT_POST_LIST = 'SET_RECENT_POST_LIST'
+export const SET_CURRENT_CATEGORY = 'SET_CURRENT_CATEGORY'
 
 
 // Action Creators
@@ -24,18 +24,18 @@ export const logout = () => {
     })
 }
 
-export const setPostList = postList => {
+export const setRecentPostList = recentPostList => {
     return ({
-        type: SETPOSTLIST,
+        type: SET_RECENT_POST_LIST,
         payload: {
-            postList
+            recentPostList
         }
     })
 }
 
-export const loadCategoryChildren = (category, categoryOrPost, list) => {
+export const setCurrentCategory = props => {
     return ({
-        type: LOADCATEGORYCHILDREN,
-        payload: {category, categoryOrPost, list}
+        type: SET_CURRENT_CATEGORY,
+        payload: {...props}
     })
 }

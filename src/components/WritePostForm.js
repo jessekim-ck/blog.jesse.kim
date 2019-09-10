@@ -2,7 +2,7 @@ import React from 'react'
 import styles from '../app.module.css'
 import button_ok from "../assets/button_ok.png";
 import Form from 'react-bootstrap/Form'
-import {getCategoryDetailRecursive, getCategoryList, getPostDetail} from "../apis/apis";
+import {getCategoryGenealogy, getPostDetail} from "../apis/apis";
 import FloatButton from "./FloatButton";
 import CategorySelector from "./CategorySelector";
 
@@ -10,8 +10,10 @@ import CategorySelector from "./CategorySelector";
 class WritePostForm extends React.Component {
 
     state = {
-        title: '',
-        text: '',
+        post: {
+            title: '',
+            text: '',
+        },
         category: {
             id: null,
             title: null,
@@ -20,29 +22,32 @@ class WritePostForm extends React.Component {
 
     async componentDidMount() {
         const post_id = await this.props.post_id
-        if (post_id) {
-            const postDetail = await getPostDetail(post_id)
-            const category = await getCategoryDetailRecursive(postDetail.category_id)
-            const childrenCategory = await getCategoryList(postDetail.category_id)
-            this.setState({...postDetail, category, childrenCategory})
-        }
         const category_id = await this.props.category_id
-        if (category_id) {
-            const category = await getCategoryDetailRecursive(category_id)
-            this.setState({category})
+        const state = {}
+        if (post_id) {
+            state.post = await getPostDetail(post_id)
+            if (state.post.category_id) {
+                state.category = await getCategoryGenealogy(state.post.category_id)
+            }
+        } else if (category_id) {
+            state.category = await getCategoryGenealogy(category_id)
         }
+
+        this.setState({...state})
     }
 
     handleSelectCategory = async category_id => {
-        const category = await getCategoryDetailRecursive(category_id)
-        this.setState({category})
+        const category = await getCategoryGenealogy(category_id)
+        this.setState({category: category})
     }
 
     handle_change = event => {
         const name = event.target.name
         const value = event.target.value
         this.setState({
-            [name]: value
+            post: {
+                [name]: value
+            }
         })
     }
 
@@ -56,7 +61,7 @@ class WritePostForm extends React.Component {
                             type="text"
                             name="title"
                             placeholder="Title"
-                            value={this.state.title}
+                            value={this.state.post.title}
                             onChange={event => this.handle_change(event)} />
                     </div>
                     <div>
@@ -71,13 +76,13 @@ class WritePostForm extends React.Component {
                             name="text"
                             rows="20"
                             placeholder="Write your post..."
-                            value={this.state.text}
+                            value={this.state.post.text}
                             onChange={event => this.handle_change(event)} />
                     </div>
                     <div>
                         <FloatButton
                             source={button_ok}
-                            handle_click={() => this.props.handle_write_post(this.state)}/>
+                            handle_click={() => this.props.handle_write_post(this.state)} />
                     </div>
                 </div>
             </form>

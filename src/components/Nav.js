@@ -34,7 +34,7 @@ class Navigation extends React.Component {
                     <div className={styles.navBarTop}>
                         <div>
                             <CustomLink to="/" color='white' >
-                                A BLOG.
+                                JESSEKIM'S BLOG.
                             </CustomLink>
                         </div>
                         <div>

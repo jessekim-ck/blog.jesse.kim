@@ -40,7 +40,6 @@ export const getCurrentUser = async () => {
     try {
         const response = await axios_api.get('api/current_user/')
         const result = await response.data
-        await refreshToken()
         return result
     } catch (err) {
         localStorage.removeItem('token')
@@ -53,7 +52,7 @@ export const getCurrentUser = async () => {
 export const signupUser = async (username, password) => {
     try {
         const response = await axios_api.post(
-            'api/users/',
+            'api/user/',
             {username, password},
         )
         await localStorage.setItem('token', response.token)
@@ -64,18 +63,14 @@ export const signupUser = async (username, password) => {
     }
 }
 
+
+
 // Get Post List
-export const getPostList = async category_id => {
+export const getRecentPostList = async category_id => {
     try {
-        if (category_id) {
-            const response = await axios_api.get(`api/categories/${category_id}/posts/`)
-            const result = await response.data
-            return result
-        } else {
-            const response = await axios_api.get('api/posts/')
-            const result = await response.data
-            return result
-        }
+        const response = await axios_api.get('api/post/')
+        const result = await response.data
+        return result
     } catch (err) {
         console.log(err)
         throw err
@@ -83,12 +78,11 @@ export const getPostList = async category_id => {
 }
 
 
-
 // Write Post (Should be Authenticated)
 export const writePost = async (writer_id, category_id, title, text) => {
     try {
         const response = await axios_api.post(
-            'api/posts/',
+            'api/post/',
             {writer_id, category_id, title, text},
         )
         const result = await response.data
@@ -103,7 +97,7 @@ export const writePost = async (writer_id, category_id, title, text) => {
 export const editPost = async (post_id, writer_id, title, text) => {
     try {
         await axios_api.put(
-            `api/posts/${post_id}/`,
+            `api/post/${post_id}/`,
             {writer_id, title, text},
         )
     } catch (err) {
@@ -116,7 +110,7 @@ export const editPost = async (post_id, writer_id, title, text) => {
 export const getPostDetail = async post_id => {
     try {
         const response = await axios_api.get(
-            `api/posts/${post_id}`
+            `api/post/${post_id}/`
         )
         const result = await response.data
         return result
@@ -127,9 +121,21 @@ export const getPostDetail = async post_id => {
 }
 
 
+export const getCategoryList = async () => {
+    try {
+        const response = await axios_api.get('api/category/list/')
+        const result = await response.data.children_category_list
+        return result
+    } catch (err) {
+        console.log(err)
+        throw err
+    }
+}
+
+
 export const getCategoryDetail = async category_id => {
     try {
-        const response = await axios_api.get(`api/categories/${category_id}/`)
+        const response = await axios_api.get(`api/category/${category_id}/`)
         const result = await response.data
         return result
     } catch (err) {
@@ -139,12 +145,12 @@ export const getCategoryDetail = async category_id => {
 }
 
 
-export const getCategoryDetailRecursive = async category_id => {
+export const getCategoryGenealogy = async category_id => {
     try {
-        const response = await axios_api.get(`api/categories/${category_id}/`)
-        const result = await response.data
+        const response = await axios_api.get(`api/category/${category_id}/`)
+        const result = await response.data.category
         if (result.parent_category_id) {
-            const parent = await getCategoryDetailRecursive(result.parent_category_id)
+            const parent = await getCategoryGenealogy(result.parent_category_id)
             result.parent = await parent
         } else {
             result.parent = null
@@ -157,19 +163,3 @@ export const getCategoryDetailRecursive = async category_id => {
 }
 
 
-export const getCategoryList = async parent_id => {
-    try {
-        if (parent_id) {
-            const response = await axios_api.get(`api/categories/${parent_id}/list/`)
-            const result = await response.data
-            return result
-        } else {
-            const response = await axios_api.get('api/categories/list/')
-            const result = await response.data
-            return result
-        }
-    } catch (err) {
-        console.log(err)
-        throw err
-    }
-}

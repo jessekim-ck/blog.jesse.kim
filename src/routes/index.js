@@ -1,16 +1,16 @@
 import React from 'react'
 import {connect} from "react-redux";
 import PostList from "../components/PostList";
-import {getPostList} from "../apis/apis";
-import {setPostList} from "../redux/actions";
+import {getRecentPostList} from "../apis/apis";
+import {setRecentPostList} from "../redux/actions";
 import styles from "../app.module.css";
 
 
 class Index extends React.Component {
 
     async componentDidMount() {
-        const postList = await getPostList()
-        this.props.dispatch(setPostList(postList))
+        const postList = await getRecentPostList()
+        this.props.dispatch(setRecentPostList(postList))
     }
 
     render() {
@@ -20,13 +20,13 @@ class Index extends React.Component {
                     {'Recents'}
                 </div>
                 <div>
-                    <PostList postList={this.props.postList} />
+                    <PostList post_list={this.props.recentPostList} />
                 </div>
             </div>
         )
     }
 }
 
-const mapStateToProps = state => state.post
+const mapStateToProps = state => state.recentPost
 
 export default connect(mapStateToProps)(Index)

@@ -3,7 +3,7 @@ import styles from '../app.module.css'
 import CustomLink from "./CustomLink";
 
 const PostItem = props => {
-    const created = new Date(props.postDetail.created)
+    const created = new Date(props.post.created)
     const
         year_created = created.getFullYear(),
         month_created = ('0' + (1 + created.getMonth())).slice(-2),
@@ -13,18 +13,18 @@ const PostItem = props => {
 
     return (
         <div className={styles.postListContainer}>
-            <CustomLink to={`/post/${props.postDetail.id}`}>
+            <CustomLink to={`/post/${props.post.id}`}>
                 <div className={styles.postListHeader}>
                     <div className={styles.postListTitle}>
-                        {props.postDetail.title}
+                        {props.post.title}
                     </div>
                     <div className={styles.postListSubtitle}>
-                        {props.postDetail.category || 'UNCATEGORIZED'} | {year_created}-{month_created}-{date_created} {hour_created}:{minute_created}
+                        {props.post.category || 'UNCATEGORIZED'} | {year_created}-{month_created}-{date_created} {hour_created}:{minute_created}
                     </div>
                 </div>
                 <div className={styles.postListBody}>
                     <div className={styles.postListText}>
-                        {props.postDetail.text}
+                        {props.post.text}
                     </div>
                 </div>
             </CustomLink>
@@ -33,13 +33,13 @@ const PostItem = props => {
 }
 
 const PostList = props => {
-    const postItems = props.postList.map(
-        postItem => <PostItem postDetail={{...postItem}} key={postItem.id} />
+    const post_list = props.post_list.map(
+        post => <PostItem post={{...post}} key={post.id} />
     )
 
     return (
         <div>
-            {postItems}
+            {post_list}
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import * as AxiosLogger from 'axios-logger'
 
+
 export const axios_api = (() => {
     const token = localStorage.getItem('token')
     let header
@@ -11,11 +12,13 @@ export const axios_api = (() => {
     }
 
     return axios.create({
-        baseURL: 'https://api.weekend.kim/',
+        // baseURL: 'https://api.weekend.kim/',
+        baseURL: 'http://127.0.0.1:8000/',
         timeout: 5000,
         headers: header
     })
 })()
+
 
 axios_api.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
 axios_api.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);

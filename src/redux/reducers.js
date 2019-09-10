@@ -1,14 +1,8 @@
-import { LOGIN, LOGOUT, SETPOSTLIST, LOADCATEGORYCHILDREN } from './actions'
+import { LOGIN, LOGOUT, SET_RECENT_POST_LIST, SET_CURRENT_CATEGORY } from './actions'
 import { combineReducers } from 'redux'
 
-const initialState = {
-    authenticated: false,
-    currentUser: {
-        username: 'Stranger'
-    },
-}
 
-const userReducer = (state = initialState, action) => {
+const userReducer = (state = {authenticated: false, currentUser: {username: 'Stranger'}}, action) => {
     switch (action.type) {
         case LOGIN:
             return ({
@@ -29,36 +23,37 @@ const userReducer = (state = initialState, action) => {
     }
 }
 
-const postReducer = (state = {postList: []}, action) => {
+const recentPostReducer = (state = {recentPostList: []}, action) => {
     switch (action.type) {
-        case SETPOSTLIST:
+        case SET_RECENT_POST_LIST:
             return ({
                 ...state,
-                postList: action.payload.postList,
+                recentPostList: action.payload.recentPostList,
             })
         default:
             return state
     }
 }
 
-export const
-    CATEGORY = 'CATEGORY',
-    POST = 'POST'
 
-const initialCategory = {
-    category: {
-        id: null,
-        title: null,
-        parent_category_id: null,
+const currentCategoryReducer = (
+    state = {
+        category:
+            {
+                id: null,
+                title: null,
+                parent_category_id: null
+            },
+        children_category_list: [],
+        children_post_list: []
     },
-    categoryOrPost: CATEGORY,
-    list: []
-}
-
-const categoryReducer = (state = initialCategory, action) => {
+    action) => {
     switch (action.type) {
-        case LOADCATEGORYCHILDREN:
-            return ({...action.payload})
+        case SET_CURRENT_CATEGORY:
+            return ({
+                ...state,
+                ...action.payload
+            })
         default:
             return state
     }
@@ -66,8 +61,8 @@ const categoryReducer = (state = initialCategory, action) => {
 
 const reducer = combineReducers({
     user: userReducer,
-    post: postReducer,
-    category: categoryReducer,
+    recentPost: recentPostReducer,
+    currentCategory: currentCategoryReducer,
 })
 
 export default reducer

@@ -32,8 +32,7 @@
 
 
 .postListContainer {
-    padding: 24px 0 24px 0;
-    width: 80%;
+    padding: 18px 0 24px 0;
     border-bottom: solid 1px black;
 }
 
@@ -47,6 +46,7 @@
 
 .postListBody {
     height: 64px;
+    width: 80%;
     overflow: hidden;
 }
 

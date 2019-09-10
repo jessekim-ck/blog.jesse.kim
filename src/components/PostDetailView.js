@@ -13,30 +13,30 @@ class PostDetailView extends React.Component {
     render() {
         return (
             <div className={styles.postDetailContainer}>
-                <CustomLink to={ this.props.postDetail.category_id ? `/category/${this.props.postDetail.category_id}` : '/category'}>
+                <CustomLink to={ this.props.post_detail.category_id ? `/category/${this.props.post_detail.category_id}` : '/category'}>
                     <div className={styles.postDetailCategory}>
-                        {this.props.postDetail.category || 'UNCATEGORIZED'}
+                        {this.props.post_detail.category || 'UNCATEGORIZED'}
                     </div>
                 </CustomLink>
                 <div className={styles.postDetailTitle}>
-                    {this.props.postDetail.title}
+                    {this.props.post_detail.title}
                 </div>
                 <div className={styles.postDetailSubtitle}>
                     <div>
-                        Created: {this.props.postDetail.created}
+                        Created: {this.props.post_detail.created}
                     </div>
                     <div>
-                        Last Updated: {this.props.postDetail.updated}
+                        Last Updated: {this.props.post_detail.updated}
                     </div>
                 </div>
                 <div className={styles.postDetailText}>
                     <ReactMarkdown
-                        source={this.props.postDetail.text}
+                        source={this.props.post_detail.text}
                         renderers={{code: CodeBlock}} />
                 </div>
                 {
                     this.props.user.authenticated &&
-                    <CustomLink to={`/post/${this.props.postDetail.id}/edit`}>
+                    <CustomLink to={`/post/${this.props.post_detail.id}/edit`}>
                         <FloatButton
                             source={button_edit} />
                     </CustomLink>

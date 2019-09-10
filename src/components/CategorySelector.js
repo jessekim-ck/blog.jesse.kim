@@ -1,10 +1,10 @@
 import React from 'react'
-import {getCategoryList} from "../apis/apis";
+import {getCategoryDetail, getCategoryList} from "../apis/apis";
 import styles from '../app.module.css'
 
 
 const CategoryOption = props => {
-    const options = props.categoryOptionList.map(
+    const categories = props.category_list.map(
         category => (<option value={category.id} key={category.id}>{`${category.title}/`}</option>)
     )
 
@@ -14,7 +14,7 @@ const CategoryOption = props => {
             value={props.category_id || ""}
             onChange={event => props.handleSelectCategory(event.target.value)}>
             <option value="default" key="default">(SELECT CATEGORY)</option>
-            {options}
+            {categories}
         </select>
     )
 }
@@ -43,13 +43,14 @@ class CategorySelector extends React.Component {
         if (category.id) {
 
             // Child List
-            const childList = await getCategoryList(category.id)
-            if (childList.length === 0) {
-
+            const temp_child_list = await getCategoryDetail(category.id)
+            const child_list = await temp_child_list.children_category_list
+            if (child_list.length === 0) {
+                // Do nothing
             } else {
                 await list.push(
                     <CategoryOption
-                        categoryOptionList={childList}
+                        category_list={child_list}
                         handleSelectCategory={this.props.handleSelectCategory}
                         renderObjectList={this.renderObjectList} />
                 )
@@ -59,21 +60,23 @@ class CategorySelector extends React.Component {
                 // Peer List
                 if (category.parent_category_id) {
                     // When Parent (They are more than secondary)
-                    const peerList = await getCategoryList(category.parent_category_id)
+                    const temp_peer_list = await getCategoryDetail(category.parent_category_id)
+                    const peer_list = await temp_peer_list.children_category_list
                     await list.push(
                         <CategoryOption
                             category_id={category.id}
-                            categoryOptionList={peerList}
+                            category_list={peer_list}
                             handleSelectCategory={this.props.handleSelectCategory}
                             renderObjectList={this.renderObjectList} />
                     )
                 } else {
                     // When No Parent (They are Primary Categories)
-                    const parentList = await getCategoryList()
+                    const parent_list = await getCategoryList()
+                    console.log(parent_list)
                     await list.push(
                         <CategoryOption
                             category_id={category.id}
-                            categoryOptionList={parentList}
+                            category_list={parent_list}
                             handleSelectCategory={this.props.handleSelectCategory}
                             renderObjectList={this.renderObjectList} />
                     )
@@ -82,12 +85,11 @@ class CategorySelector extends React.Component {
                 category = category.parent
             }
         } else {
-
             // Primary Category List
-            const parentList = await getCategoryList()
+            const parent_list = await getCategoryList()
             await list.push(
                 <CategoryOption
-                    categoryOptionList={parentList}
+                    category_list={parent_list}
                     handleSelectCategory={this.props.handleSelectCategory}
                     renderObjectList={this.renderObjectList} />
             )
