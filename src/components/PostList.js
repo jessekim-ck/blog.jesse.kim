@@ -12,7 +12,7 @@ const PostItem = props => {
         minute_created = ('0' + created.getMinutes()).slice(-2)
 
     return (
-        <div className={styles.postListContainer}>
+        <div className={styles.postListContainer} key={props.post.id}>
             <CustomLink to={`/post/${props.post.id}`}>
                 <div className={styles.postListHeader}>
                     <div className={styles.postListTitle}>

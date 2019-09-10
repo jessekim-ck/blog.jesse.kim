@@ -81,7 +81,7 @@ class WritePostForm extends React.Component {
                             value={this.state.post.text}
                             onChange={event => this.handle_change(event)} />
                     </div>
-                    <div>
+                    <div className={styles.floatButtonContainer}>
                         <FloatButton
                             source={button_ok}
                             handle_click={() => this.props.handle_write_post(this.state)} />

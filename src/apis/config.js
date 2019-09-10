@@ -1,5 +1,5 @@
 import axios from 'axios'
-import * as AxiosLogger from 'axios-logger'
+// import * as AxiosLogger from 'axios-logger'
 
 
 export const axios_api = (() => {
@@ -12,13 +12,13 @@ export const axios_api = (() => {
     }
 
     return axios.create({
-        // baseURL: 'https://api.weekend.kim/',
-        baseURL: 'http://127.0.0.1:8000/',
+        baseURL: 'https://api.weekend.kim/',
+        // baseURL: 'http://127.0.0.1:8000/',
         timeout: 5000,
         headers: header
     })
 })()
 
 
-axios_api.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
-axios_api.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);
+// axios_api.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
+// axios_api.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);

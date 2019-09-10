@@ -36,7 +36,9 @@ class PostDetailView extends React.Component {
                 </div>
                 {
                     this.props.user.authenticated &&
-                    <CustomLink to={`/post/${this.props.post_detail.id}/edit`}>
+                    <CustomLink
+                        className={styles.floatButtonContainer}
+                        to={`/post/${this.props.post_detail.id}/edit`}>
                         <FloatButton
                             source={button_edit} />
                     </CustomLink>

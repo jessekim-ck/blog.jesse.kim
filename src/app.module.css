@@ -157,10 +157,16 @@
     box-shadow: none;
 }
 
-.postDetailSubmit {
+.floatButtonContainer {
     position: fixed;
+    flex-direction: row;
+    display: flex;
     bottom: 30px;
     right: 30px;
+}
+
+.floatButtonItem {
+    margin: 6px;
 }
 
 .postDetailSubtitle {

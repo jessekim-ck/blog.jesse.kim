@@ -75,7 +75,7 @@ class Categories extends React.Component {
                 <div>
                     {
                         this.props.user.authenticated &&
-                            <div>
+                            <div className={styles.floatButtonContainer}>
                                 <CustomLink to={`/category/${this.props.currentCategory.category.id}/write_post`}>
                                     <FloatButton source={button_add}/>
                                 </CustomLink>

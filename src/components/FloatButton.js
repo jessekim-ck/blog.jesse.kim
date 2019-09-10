@@ -4,7 +4,7 @@ import styles from "../app.module.css";
 
 const FloatButton = props => {
     return (
-        <div className={styles.postDetailSubmit}>
+        <div className={styles.floatButtonItem}>
             <img
                 className={styles.basicButton}
                 onClick={props.handle_click}
