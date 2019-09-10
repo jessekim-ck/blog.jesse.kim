@@ -94,11 +94,11 @@ export const writePost = async (writer_id, category_id, title, text) => {
 }
 
 // Edit Existing Post's Content
-export const editPost = async (post_id, writer_id, title, text) => {
+export const editPost = async (post_id, writer_id, category_id, title, text) => {
     try {
         await axios_api.put(
             `api/post/${post_id}/`,
-            {writer_id, title, text},
+            {writer_id, category_id, title, text},
         )
     } catch (err) {
         console.log(err)

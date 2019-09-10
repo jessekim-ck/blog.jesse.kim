@@ -72,7 +72,6 @@ class CategorySelector extends React.Component {
                 } else {
                     // When No Parent (They are Primary Categories)
                     const parent_list = await getCategoryList()
-                    console.log(parent_list)
                     await list.push(
                         <CategoryOption
                             category_id={category.id}

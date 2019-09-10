@@ -7,7 +7,7 @@ class WritePost extends React.Component {
 
     handle_write_post = async data => {
         const writer_id = await this.props.currentUser.id
-        const post = await writePost(writer_id, data.category.id, data.title, data.text)
+        const post = await writePost(writer_id, data.category.id, data.post.title, data.post.text)
         this.props.history.push(`/post/${post.id}`)
     }
 

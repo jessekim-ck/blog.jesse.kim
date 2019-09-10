@@ -8,8 +8,8 @@ import Unauthorized from "../components/Unauthorized";
 class EditPost extends React.Component {
 
     handle_write_post = async data => {
-        await editPost(data.id, data.writer_id, data.title, data.text)
-        this.props.history.push(`/post/${this.props.match.params.id}`)
+        await editPost(data.post.id, data.post.writer_id, data.category.id, data.post.title, data.post.text)
+        this.props.history.push(`/post/${data.post.id}`)
     }
 
     render() {

@@ -25,7 +25,8 @@ class WritePostForm extends React.Component {
         const category_id = await this.props.category_id
         const state = {}
         if (post_id) {
-            state.post = await getPostDetail(post_id)
+            const post_detail = await getPostDetail(post_id)
+            state.post = await post_detail.post
             if (state.post.category_id) {
                 state.category = await getCategoryGenealogy(state.post.category_id)
             }
@@ -46,6 +47,7 @@ class WritePostForm extends React.Component {
         const value = event.target.value
         this.setState({
             post: {
+                ...this.state.post,
                 [name]: value
             }
         })
