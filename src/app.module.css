@@ -143,8 +143,9 @@
 
 .postDetailText {
     margin-top: 24px;
+    padding-bottom: 128px;
     padding-left: 14px;
-    border: 0px;
+    border-bottom: 1px solid lightgrey;
 
     word-break: keep-all;
     word-wrap: normal;
@@ -203,4 +204,59 @@
 .touchableOpacity {
     background-color: transparent;
     border: 0px;
+}
+
+.commentRowContainer {
+    margin: 12px 0px 12px 0px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.commentRowNickname {
+    color: black;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.commentRowText {
+    color: black;
+    font-size: 14px;
+}
+
+.commentFormContainer {
+    margin-top: 18px;
+}
+
+.commentFormHeader {
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+}
+
+.commentFormNickname {
+    width: 120px;
+    padding-left: 14px;
+    font-size: 14px;
+    border: 0px;
+    border-bottom: 1px solid black;
+}
+
+.commentFormText {
+    margin-top: 12px;
+    padding-left: 14px;
+    border: 1px solid grey;
+    border-radius: 10px;
+
+    word-break: keep-all;
+    word-wrap: normal;
+    line-height: 1.5;
+}
+
+.commentFormText:focus {
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+.commentFormButton {
+
 }

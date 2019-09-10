@@ -163,3 +163,16 @@ export const getCategoryGenealogy = async category_id => {
 }
 
 
+export const writeComment = async (post_id, nickname, text) => {
+    try {
+        const response = await axios_api.post(
+            `api/comment/${post_id}/`,
+            {post_id, nickname, text}
+        )
+        const result = await response.data
+        return result
+    } catch (err) {
+        console.log (err)
+        throw err
+    }
+}
