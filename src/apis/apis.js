@@ -26,10 +26,10 @@ export const refreshToken = async () => {
             {token}
             )
         const result = await response.data
-        await localStorage.removeItem('token')
         await localStorage.setItem('token', result.token)
         return result
     } catch (err) {
+        localStorage.removeItem('token')
         console.log(err)
         throw err
     }
@@ -51,12 +51,14 @@ export const getCurrentUser = async () => {
 // Enroll User: Not Needed
 export const signupUser = async (username, password) => {
     try {
+        console.log(axios_api)
         const response = await axios_api.post(
             'api/user/',
             {username, password},
         )
-        await localStorage.setItem('token', response.token)
-        return response
+        const result = await response.data
+        await localStorage.setItem('token', result.token)
+        return result
     } catch (err) {
         console.log(err)
         throw err

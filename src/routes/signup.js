@@ -12,8 +12,8 @@ class Signup extends React.Component {
             const code = prompt('code?')
             if (code === '2068') {
                 const response = await signupUser(data.username, data.password)
-                this.props.dispatch(login(response.username))
-                this.props.history.push('/')
+                await this.props.dispatch(login(response))
+                await this.props.history.push('/')
             } else {
                 alert('You cannot sign up.')
             }

@@ -18,11 +18,13 @@ import Categories from './routes/categories'
 class App extends React.Component {
 
   async componentDidMount() {
-      const token = localStorage.getItem('token')
-      if (token) {
-          const currentUser = await getCurrentUser()
+      const token = await localStorage.getItem('token')
+      if (!token || token === 'undefined') {
+          await localStorage.removeItem('token')
+      } else {
           await refreshToken()
-          this.props.dispatch(login(currentUser))
+          const currentUser = await getCurrentUser()
+          await this.props.dispatch(login(currentUser))
       }
   }
 

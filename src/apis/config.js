@@ -1,15 +1,18 @@
 import axios from 'axios'
-// import * as AxiosLogger from 'axios-logger'
+import * as AxiosLogger from 'axios-logger'
 
 
 export const axios_api = (() => {
     const token = localStorage.getItem('token')
+    console.log(typeof token)
+    console.log(token)
     let header
     if (token) {
         header = { Authorization: `JWT ${token}` }
     } else {
         header = {}
     }
+    console.log(header)
 
     return axios.create({
         baseURL: 'https://api.weekend.kim/',
@@ -20,5 +23,5 @@ export const axios_api = (() => {
 })()
 
 
-// axios_api.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
-// axios_api.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);
+axios_api.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
+axios_api.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);
