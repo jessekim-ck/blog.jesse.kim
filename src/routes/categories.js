@@ -59,14 +59,7 @@ class Categories extends React.Component {
                             <CategoryList children_category_list={this.props.currentCategory.children_category_list} />
                         </div>
                     </div>
-                    <div style={{ marginTop: 48 }}>
-                        {
-                            this.props.currentCategory.children_category_list.length !== 0 &&
-                                this.props.currentCategory.children_post_list.length !== 0 &&
-                                    <div className={styles.categoryListCategory}>
-                                        {'Posts'}
-                                    </div>
-                        }
+                    <div>
                         <div>
                             <PostList post_list={this.props.currentCategory.children_post_list} />
                         </div>

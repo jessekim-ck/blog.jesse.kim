@@ -14,7 +14,7 @@ class Login extends React.Component {
             await this.props.dispatch(login(currentUser))
             this.props.history.push('/')
         } catch (err) {
-            console.log('login failed')
+            console.log('login failed!')
         }
     }
 

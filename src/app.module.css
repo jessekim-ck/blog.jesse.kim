@@ -1,12 +1,12 @@
 
 .appContainer {
-    padding: 30px 170px 30px 170px;
+    padding: 28px 13% 28px 13%;
     background-color: white;
 }
 
 
 .navContainer {
-    padding: 14px 170px 14px 170px;
+    padding: 14px 13% 14px 13%;
     background-color: black;
     color: white;
 }
@@ -46,7 +46,7 @@
 
 .postListBody {
     height: 64px;
-    width: 80%;
+    width: 90%;
     overflow: hidden;
 }
 
@@ -97,12 +97,11 @@
 }
 
 .postDetailContainer {
-    width: 80%;
-    margin: 12px auto;
+    max-width: 840px;
+    margin: auto;
 }
 
 .postDetailCategory {
-    padding-left: 14px;
     font-size: 18px;
     color: grey;
     margin-bottom: 8px;
@@ -110,16 +109,16 @@
 
 .postDetailTitle {
     width: 100%;
-    height: 48px;
-    padding-left: 14px;
+    height: auto;
+    padding-bottom: 8px;
     font-size: 24px;
+    font-weight: bold;
     border: 0px;
     border-bottom: 1px solid black;
 }
 
 .categorySelectorContainer {
     margin-top: 12px;
-    padding-left: 14px;
 }
 
 .categorySelector {
@@ -144,7 +143,6 @@
 .postDetailText {
     margin-top: 24px;
     padding-bottom: 128px;
-    padding-left: 14px;
     border-bottom: 1px solid lightgrey;
 
     word-break: keep-all;
@@ -170,7 +168,6 @@
 }
 
 .postDetailSubtitle {
-    padding-left: 14px;
     margin-top: 14px;
     color: grey;
     font-size: 14px;
@@ -184,7 +181,7 @@
 .categoryListCategory {
     color: grey;
     font-size: 18px;
-    margin-bottom: 12px;
+    margin-bottom: 4px;
 }
 
 .categoryListTitle {
