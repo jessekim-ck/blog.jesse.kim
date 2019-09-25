@@ -1,10 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {Helmet} from "react-helmet";
 import Nav from "./components/Nav";
 import { connect } from 'react-redux'
 import {getCurrentUser, refreshToken} from "./apis/apis"
 import { login } from "./redux/actions"
 import styles from './app.module.css'
+import favicon from './assets/favicon.ico'
 
 import Index from './routes/index'
 import Login from './routes/login'
@@ -31,6 +33,13 @@ class App extends React.Component {
   render() {
       return (
           <Router>
+              <div className="application">
+                  <Helmet>
+                      <meta charset="utf-8"/>
+                      <title>Jessekim's Blog</title>
+                      <link rel="shortcut icon" href={favicon} />
+                  </Helmet>
+              </div>
               <div>
                   <div>
                       <Nav />
