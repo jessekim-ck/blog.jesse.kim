@@ -142,7 +142,7 @@
 
 .postDetailText {
     margin-top: 24px;
-    padding-bottom: 128px;
+    padding-bottom: 15%;
     border-bottom: 1px solid lightgrey;
 
     word-break: keep-all;
@@ -262,4 +262,25 @@
 
 .commentFormButton {
 
+}
+
+@media (max-width: 1023px) {
+    .appContainer {
+        padding: 28px 5% 28px 5%;
+        background-color: white;
+    }
+
+    .navContainer {
+        padding: 14px 5% 14px 5%;
+        background-color: black;
+        color: white;
+    }
+
+    .postDetailTitle {
+        font-size: 18px;
+    }
+
+    .postDetailText {
+        font-size: 14px;
+    }
 }
