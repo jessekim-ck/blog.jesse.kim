@@ -1,4 +1,4 @@
-import { axios_api } from "./config"
+import axios_api from "./config"
 
 
 // Authenticate User and Save the Token To the LocalStorage
@@ -51,7 +51,6 @@ export const getCurrentUser = async () => {
 // Enroll User: Not Needed
 export const signupUser = async (username, password) => {
     try {
-        console.log(axios_api)
         const response = await axios_api.post(
             'api/user/',
             {username, password},
