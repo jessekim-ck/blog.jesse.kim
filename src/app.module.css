@@ -97,7 +97,7 @@
 }
 
 .postDetailContainer {
-    max-width: 840px;
+    width: 80%;
     margin: auto;
 }
 
@@ -123,15 +123,14 @@
 
 .categorySelector {
     border: 0px;
-    margin-right: 2px;
     font-size: 14px;
     color: grey;
-    padding: 0px;
 
     -webkit-appearance: none;  /* 네이티브 외형 감추기 */
     -moz-appearance: none;
     appearance: none;
     background: none;  /* 화살표 모양의 이미지 */
+    display: inline-block;
 }
 
 .categorySelector::-ms-expand {
@@ -141,13 +140,14 @@
 }
 
 .postDetailText {
+    width: 100%;
     margin-top: 24px;
     padding-bottom: 15%;
     border-bottom: 1px solid lightgrey;
-
+    font-size: 16px;
+    line-height: 1.8;
     word-break: keep-all;
     word-wrap: normal;
-    line-height: 1.8;
 }
 
 *:focus {
@@ -237,8 +237,8 @@
 }
 
 .commentFormNickname {
-    width: 120px;
-    padding-left: 14px;
+    width: 100px;
+    padding-left: 10px;
     font-size: 14px;
     border: 0px;
     border-bottom: 1px solid black;
@@ -246,9 +246,10 @@
 
 .commentFormText {
     margin-top: 12px;
-    padding-left: 14px;
+    padding: 4px 10px 4px 10px;
     border: 1px solid grey;
-    border-radius: 10px;
+    border-radius: 6px;
+    font-size: 14px;
 
     word-break: keep-all;
     word-wrap: normal;
@@ -265,15 +266,32 @@
 }
 
 @media (max-width: 1023px) {
+    .postListBody {
+        height: 92px;
+    }
+
+    .postListTitle {
+        font-size: 15px;
+    }
+
+    .postListSubtitle {
+        font-size: 14px;
+    }
+
+    .postListText {
+        font-size: 13px;
+    }
+
     .appContainer {
         padding: 28px 5% 28px 5%;
-        background-color: white;
     }
 
     .navContainer {
         padding: 14px 5% 14px 5%;
-        background-color: black;
-        color: white;
+    }
+
+    .postDetailContainer {
+        width: 100%;
     }
 
     .postDetailTitle {
