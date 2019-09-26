@@ -4,16 +4,26 @@ import styles from '../app.module.css'
 
 
 const CategoryOption = props => {
+
     const categories = props.category_list.map(
         category => (<option value={category.id} key={category.id}>{`${category.title}/`}</option>)
     )
 
+    const get_text_width = (text, font) => {
+        const element = document.createElement('canvas');
+        const context = element.getContext('2d');
+        context.font = "14px arial"
+        const width = context.measureText(text).width + 10;
+        return width
+    }
+
     return (
         <select
             className={styles.categorySelector}
+            style={{ width: `${get_text_width(props.category_title || 'Select Category')}px` }}
             value={props.category_id || ""}
             onChange={event => props.handleSelectCategory(event.target.value)}>
-            <option value="default" key="default">(SELECT CATEGORY)</option>
+            <option value="default" key="default">Select Category</option>
             {categories}
         </select>
     )
@@ -65,6 +75,7 @@ class CategorySelector extends React.Component {
                     await list.push(
                         <CategoryOption
                             category_id={category.id}
+                            category_title={category.title}
                             category_list={peer_list}
                             handleSelectCategory={this.props.handleSelectCategory}
                             renderObjectList={this.renderObjectList} />
@@ -75,6 +86,7 @@ class CategorySelector extends React.Component {
                     await list.push(
                         <CategoryOption
                             category_id={category.id}
+                            category_title={category.title}
                             category_list={parent_list}
                             handleSelectCategory={this.props.handleSelectCategory}
                             renderObjectList={this.renderObjectList} />
