@@ -1,7 +1,6 @@
 import React from 'react'
 import Form from "react-bootstrap/Form";
 import styles from "../app.module.css";
-import CustomLink from "./CustomLink";
 
 
 const CommentRow = props => (
@@ -43,15 +42,14 @@ class CommentForm extends React.Component {
                             value={this.state.nickname}
                             onChange={event => this.handle_change(event)} />
                     </div>
-                    <CustomLink
-                        color='black'
+                    <div
                         className={styles.commentFormButton}
                         onClick={() => {
                             this.props.handleWriteComment(this.state.nickname, this.state.text)
                             this.setState({nickname: '', text: ''})
                         }}>
                         Comment
-                    </CustomLink>
+                    </div>
                 </div>
                 <div>
                     <Form.Control
@@ -72,7 +70,7 @@ class CommentForm extends React.Component {
 const CommentView = props => {
 
     const comment_list = props.comment_list.map(
-        comment => <CommentRow comment={comment} />
+        comment => <CommentRow comment={comment} key={comment.id} />
     )
 
     return (
