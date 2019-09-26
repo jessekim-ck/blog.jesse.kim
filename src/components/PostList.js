@@ -1,15 +1,9 @@
 import React from 'react'
 import styles from '../app.module.css'
 import CustomLink from "./CustomLink";
+import format_datetime from '../utils/format_datetime'
 
 const PostItem = props => {
-    const created = new Date(props.post.created)
-    const
-        year_created = created.getFullYear(),
-        month_created = ('0' + (1 + created.getMonth())).slice(-2),
-        date_created = ('0' + created.getDate()).slice(-2),
-        hour_created = ('0' + created.getHours()).slice(-2),
-        minute_created = ('0' + created.getMinutes()).slice(-2)
 
     return (
         <div className={styles.postListContainer} key={props.post.id}>
@@ -19,7 +13,7 @@ const PostItem = props => {
                         {props.post.title}
                     </div>
                     <div className={styles.postListSubtitle}>
-                        {props.post.category || 'UNCATEGORIZED'} | {year_created}-{month_created}-{date_created} {hour_created}:{minute_created}
+                        {props.post.writer} | {props.post.category || 'UNCATEGORIZED'} | {format_datetime(props.post.created)}
                     </div>
                 </div>
                 <div className={styles.postListBody}>

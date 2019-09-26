@@ -6,7 +6,7 @@ import button_edit from "../assets/button_edit.png";
 import {connect} from "react-redux";
 import ReactMarkdown from 'react-markdown'
 import FloatButton from "./FloatButton";
-
+import format_datetime from "../utils/format_datetime"
 
 class PostDetailView extends React.Component {
 
@@ -23,10 +23,13 @@ class PostDetailView extends React.Component {
                 </div>
                 <div className={styles.postDetailSubtitle}>
                     <div>
-                        Created: {this.props.post_detail.created}
+                        Writer: {this.props.post_detail.writer}
                     </div>
                     <div>
-                        Last Updated: {this.props.post_detail.updated}
+                        Created: {format_datetime(this.props.post_detail.created)}
+                    </div>
+                    <div>
+                        Last Updated: {format_datetime(this.props.post_detail.updated)}
                     </div>
                 </div>
                 <div className={styles.postDetailText}>
@@ -37,10 +40,9 @@ class PostDetailView extends React.Component {
                 {
                     this.props.user.authenticated &&
                     <CustomLink
-                        className={styles.floatButtonContainer}
-                        to={`/post/${this.props.post_detail.id}/edit`}>
-                        <FloatButton
-                            source={button_edit} />
+                        to={`/post/${this.props.post_detail.id}/edit`}
+                        className={styles.floatButtonContainer} >
+                        <FloatButton source={button_edit} />
                     </CustomLink>
                 }
             </div>
