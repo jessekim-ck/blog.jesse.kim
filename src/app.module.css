@@ -1,12 +1,16 @@
 
 .appContainer {
+    margin-top: 88px;
     padding: 28px 13% 28px 13%;
     background-color: white;
 }
 
 
 .navContainer {
+    top: 0;
+    position: fixed;
     padding: 14px 13% 14px 13%;
+    width: 100%;
     background-color: black;
     color: white;
 }
