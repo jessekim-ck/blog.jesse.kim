@@ -30,7 +30,7 @@ class LoginForm extends React.Component {
             <form>
                 <div className={styles.authenticateFormContainer}>
                     <div className={styles.authenticateFormHeader}>
-                        Log In.
+                        LOG IN.
                     </div>
                     <div>
                         <input
