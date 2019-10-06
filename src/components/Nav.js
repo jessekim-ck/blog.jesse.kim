@@ -10,7 +10,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 class Navigation extends React.Component {
 
     state = {
-        currentPath: window.location.pathname
+        currentPath: window.location.pathname.split('/')[1]
     }
 
     handle_logout = async () => {
@@ -33,7 +33,11 @@ class Navigation extends React.Component {
                 <div>
                     <div className={styles.navBarTop}>
                         <div>
-                            <CustomLink to="/" color='white' hover_opacity={1}>
+                            <CustomLink
+                                to="/"
+                                color='white'
+                                onClick={() => this.setState({ currentPath: "" })}
+                                hover_opacity={1}>
                                 JESSEKIM'S BLOG.
                             </CustomLink>
                         </div>
@@ -66,16 +70,16 @@ class Navigation extends React.Component {
                             <div className={styles.navBarItem}>
                                 <CustomLink
                                     to="/"
-                                    onClick={() => this.setState({ currentPath: '/' })}
-                                    color={this.mapFontColor('/')} >
+                                    onClick={() => this.setState({ currentPath: "" })}
+                                    color={this.mapFontColor("")} >
                                     HOME
                                 </CustomLink>
                             </div>
                             <div className={styles.navBarItem}>
                                 <CustomLink
                                     to="/category"
-                                    onClick={() => this.setState({ currentPath: '/category' })}
-                                    color={this.mapFontColor('/category')} >
+                                    onClick={() => this.setState({ currentPath: "category" })}
+                                    color={this.mapFontColor("category")} >
                                     CATEGORY
                                 </CustomLink>
                             </div>
@@ -84,8 +88,8 @@ class Navigation extends React.Component {
                                 <div className={styles.navBarItem}>
                                     <CustomLink
                                         to="/write_post"
-                                        onClick={() => this.setState({ currentPath: '/write_post' })}
-                                        color={this.mapFontColor('/write_post')} >
+                                        onClick={() => this.setState({ currentPath: "write_post" })}
+                                        color={this.mapFontColor("write_post")} >
                                         +
                                     </CustomLink>
                                 </div>
@@ -98,20 +102,18 @@ class Navigation extends React.Component {
     }
 }
 
-class CustomToggle extends React.Component {
+const CustomToggle = props => {
 
-    handleClick = e => {
+    const handleClick = e => {
         e.preventDefault();
-        this.props.onClick(e);
+        props.onClick(e);
     }
 
-    render() {
-        return (
-            <div onClick={this.handleClick}>
-                <img src={logo} width="30" height="30" alt="JesseKim" />
-            </div>
-        );
-    }
+    return (
+        <div onClick={handleClick}>
+            <img src={logo} width="30" height="30" alt="JesseKim" />
+        </div>
+    );
 }
 
 const mapStateToProps = state => state
