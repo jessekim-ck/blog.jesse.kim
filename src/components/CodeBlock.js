@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { darcula } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 
 class CodeBlock extends PureComponent {
@@ -17,7 +17,7 @@ class CodeBlock extends PureComponent {
     render() {
         const { language, value } = this.props;
         return (
-            <SyntaxHighlighter language={language} style={docco}>
+            <SyntaxHighlighter language={language} style={darcula}>
                 {value}
             </SyntaxHighlighter>
         );
