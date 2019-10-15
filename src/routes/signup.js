@@ -8,21 +8,23 @@ class Signup extends React.Component {
 
     handle_signup = async (event, data) => {
         try {
-            event.preventDefault()
+            await event.preventDefault()
             const code = prompt('code?')
             if (code === '2068') {
                 const response = await signupUser(data.username, data.password)
+                await this.props.history.goBack()
                 await this.props.dispatch(login(response))
-                await this.props.history.push('/')
             } else {
-                alert('You cannot sign up.')
+                alert('You cannot sign up!')
             }
         } catch (err) {
-            console.log('signup failed!')
+            console.log('Signup failed!')
+            console.log("Error message: " + err)
         }
     }
 
     render() {
+        if (this.props.authenticated === true) {this.props.history.push("/")}
         return (
             <div>
                 <SignupForm handle_signup={this.handle_signup} />
@@ -31,5 +33,6 @@ class Signup extends React.Component {
     }
 }
 
+const mapStateToProps = state => state.user
 
-export default connect()(Signup)
+export default connect(mapStateToProps)(Signup)

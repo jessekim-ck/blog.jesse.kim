@@ -8,17 +8,19 @@ class Login extends React.Component {
 
     handle_login = async (event, data) => {
         try {
-            event.preventDefault()
+            await event.preventDefault()
             await authenticateUser(data.username, data.password)
+            await this.props.history.goBack()
             const currentUser = await getCurrentUser()
             await this.props.dispatch(login(currentUser))
-            this.props.history.push('/')
         } catch (err) {
-            console.log('login failed!')
+            console.log('Login failed!')
+            console.log("Error message: " + err)
         }
     }
 
     render() {
+        if (this.props.authenticated === true) {this.props.history.push("/")}
         return (
             <div>
                 <LoginForm handle_login={this.handle_login}/>

@@ -12,7 +12,10 @@ export const authenticateUser = async (username, password) => {
         await localStorage.setItem('token', result.token)
         return result
     } catch (err) {
-        console.log(err)
+        const err_msg = err.toString()
+        if (err_msg.includes("400")) {
+            alert("Cannot find the account!")
+        }
         throw err
     }
 }
