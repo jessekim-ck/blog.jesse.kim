@@ -10,7 +10,7 @@ class Index extends React.Component {
 
     async componentDidMount() {
         const postList = await getRecentPostList()
-        this.props.dispatch(setRecentPostList(postList.slice(0, 5)))
+        this.props.dispatch(setRecentPostList(postList))
     }
 
     render() {
