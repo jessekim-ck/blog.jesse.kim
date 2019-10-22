@@ -17,7 +17,6 @@ export default (
         <Route path="/write_post" component={WritePost} />
         <Route path="/post/:id/edit" component={EditPost} />
         <Route path="/post/:id" component={PostDetail} />
-        <Route path="/category/:id/write_post" component={WritePost} />
         <Route path="/category" component={Category} />
         <Route />
     </Switch>

@@ -33,10 +33,9 @@
     margin: 0px 28px 0px 0px;
 }
 
-
 .postListContainer {
     padding: 18px 0 24px 0;
-    border-bottom: solid 1px black;
+    border-bottom: solid 1px rgba(0,0,0,.125);
 }
 
 .postListContainer:hover .postListTitle {
@@ -289,12 +288,22 @@
 }
 
 @media (max-width: 1023px) {
-    .postListBody {
-        height: 92px;
+
+    .categoryListCategory {
+        margin-left: 4px;
+    }
+
+    .postListHeader {
+        padding-left: 4px;
     }
 
     .postListTitle {
         font-size: 15px;
+    }
+
+    .postListBody {
+        height: 92px;
+        padding-left: 4px;
     }
 
     .postListSubtitle {
@@ -324,5 +333,13 @@
 
     .postDetailText {
         font-size: 14px;
+    }
+
+    .categoryListHeader {
+        padding-left: 4px;
+    }
+
+    .categoryListChildPost {
+        padding-left: 4px;
     }
 }

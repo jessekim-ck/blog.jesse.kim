@@ -37,7 +37,7 @@ class App extends React.Component {
               <div>
                   <Router>
                       <div>
-                          <Nav />
+                          <Nav/>
                       </div>
                       <div className={styles.appContainer}>
                           {Route}

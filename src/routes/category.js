@@ -44,8 +44,12 @@ class CategoryItem extends React.Component {
                     className={styles.categoryListHeader}
                     eventKey={this.props.category.id}
                     as={Card.Header}>
-                    <div className={styles.categoryListTitle}>{this.props.category.title}</div>
-                    <div className={styles.categoryListDescription}>{this.props.category.description}</div>
+                    <div className={styles.categoryListTitle}>
+                        {this.props.category.title}
+                    </div>
+                    <div className={styles.categoryListDescription}>
+                        {this.props.category.description} | {this.props.category.num_total_posts} posts
+                    </div>
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey={this.props.category.id}>
                     <div className={styles.categoryListChild}>

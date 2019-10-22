@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../app.module.css'
 import CustomLink from "./CustomLink";
-import format_datetime from '../utils/format_datetime'
+
 
 const PostItem = props => {
 
@@ -13,7 +13,7 @@ const PostItem = props => {
                         {props.post.title}
                     </div>
                     <div className={styles.postListSubtitle}>
-                        {props.post.writer} | {props.post.category || 'UNCATEGORIZED'} | {format_datetime(props.post.created)}
+                        {props.post.writer} | {props.post.category || 'UNCATEGORIZED'} | {props.post.num_comments} comments
                     </div>
                 </div>
                 <div className={styles.postListBody}>
@@ -25,6 +25,7 @@ const PostItem = props => {
         </div>
     )
 }
+
 
 const PostList = props => {
     const post_list = props.post_list.map(
