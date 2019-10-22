@@ -1,4 +1,4 @@
-import axios_api from "./config"
+import {axios_api, get_header} from "./config"
 
 
 // Authenticate User and Save the Token To the LocalStorage
@@ -23,10 +23,12 @@ export const authenticateUser = async (username, password) => {
 // Refresh JWT Token using Current Token
 export const refreshToken = async () => {
     try {
+        const header = await get_header()
         const token = await localStorage.getItem('token')
         const response = await axios_api.post(
             'token-refresh/',
-            {token}
+            {token},
+            {headers: header}
             )
         const result = await response.data
         await localStorage.setItem('token', result.token)
@@ -41,7 +43,11 @@ export const refreshToken = async () => {
 // Get Current User Information using Saved Token
 export const getCurrentUser = async () => {
     try {
-        const response = await axios_api.get('api/current_user/')
+        const header = await get_header()
+        const response = await axios_api.get(
+            'api/current_user/',
+            {headers: header}
+        )
         const result = await response.data
         return result
     } catch (err) {
@@ -85,9 +91,11 @@ export const getRecentPostList = async category_id => {
 // Write Post (Should be Authenticated)
 export const writePost = async (writer_id, category_id, title, text) => {
     try {
+        const header = await get_header()
         const response = await axios_api.post(
             'api/post/',
             {writer_id, category_id, title, text},
+            {headers: header}
         )
         const result = await response.data
         return result
@@ -100,9 +108,11 @@ export const writePost = async (writer_id, category_id, title, text) => {
 // Edit Existing Post's Content
 export const editPost = async (post_id, writer_id, category_id, title, text) => {
     try {
+        const header = await get_header()
         await axios_api.put(
             `api/post/${post_id}/`,
             {writer_id, category_id, title, text},
+            {headers: header}
         )
     } catch (err) {
         console.log(err)
