@@ -7,7 +7,7 @@ import Signup from "./routes/signup";
 import WritePost from "./routes/write_post";
 import EditPost from "./routes/edit_post";
 import PostDetail from "./routes/post_detail";
-import Categories from "./routes/categories";
+import Category from "./routes/category"
 
 export default (
     <Switch>
@@ -18,7 +18,7 @@ export default (
         <Route path="/post/:id/edit" component={EditPost} />
         <Route path="/post/:id" component={PostDetail} />
         <Route path="/category/:id/write_post" component={WritePost} />
-        <Route path="/category/:id" component={Categories} />
-        <Route path="/category" component={Categories} />
+        <Route path="/category" component={Category} />
+        <Route />
     </Switch>
 );
