@@ -8,6 +8,7 @@ import WritePost from "./routes/write_post";
 import EditPost from "./routes/edit_post";
 import PostDetail from "./routes/post_detail";
 import Category from "./routes/category"
+import PageNotFound from './components/PageNotFound'
 
 export default (
     <Switch>
@@ -18,6 +19,6 @@ export default (
         <Route path="/post/:id/edit" component={EditPost} />
         <Route path="/post/:id" component={PostDetail} />
         <Route path="/category" component={Category} />
-        <Route />
+        <Route component={PageNotFound} />
     </Switch>
 );
