@@ -4,6 +4,7 @@ import PostDetailView from '../components/PostDetailView'
 import {getPostDetail, writeComment} from "../apis/apis";
 import CommentView from "../components/CommentView";
 import styles from "../app.module.css";
+import {Helmet} from "react-helmet";
 
 
 class PostDetail extends React.Component {
@@ -14,6 +15,7 @@ class PostDetail extends React.Component {
             id: '',
             title: '',
             text: '',
+            category: '',
         },
         comment_list: []
     }
@@ -35,6 +37,9 @@ class PostDetail extends React.Component {
     render() {
         return (
             <div className={styles.postDetailContainer}>
+                <Helmet>
+                    <title>{`${this.state.post.category}: ${this.state.post.title}`}</title>
+                </Helmet>
                 <PostDetailView post_detail={this.state.post} />
                 <CommentView
                     comment_list={this.state.comment_list}
