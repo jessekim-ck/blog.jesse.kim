@@ -28,8 +28,8 @@ class CategoryItem extends React.Component {
 
     children_post_items = () => this.state.children_post_list.map(
         post => (
-            <CustomLink to={`/post/${post.id}`}>
-                <Card.Body className={styles.categoryListChildPost} key={post.id}>
+            <CustomLink to={`/post/${post.id}`} key={post.id}>
+                <Card.Body className={styles.categoryListChildPost}>
                         {post.title}
                 </Card.Body>
             </CustomLink>

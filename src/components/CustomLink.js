@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 
-const styleLink = (fontColor, underline, hover_opacity) => styled(Link)`
+const styleLink = (font_color, underline, hover_opacity) => styled(Link)`
     text-decoration: none;
-    color: ${ fontColor };
+    color: ${ font_color || 'black' };
     
     :hover {
         text-decoration: ${ underline ? 'underline' : 'none' };
-        color: ${ fontColor };
+        color: ${ font_color };
         opacity: ${ hover_opacity || 0.6 };
     }
 `
