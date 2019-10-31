@@ -1,12 +1,12 @@
 import React from 'react'
 import styles from "../app.module.css";
-import CodeBlock from './CodeBlock'
 import CustomLink from "./CustomLink";
 import button_edit from "../assets/button_edit.png";
-import {connect} from "react-redux";
-import ReactMarkdown from 'react-markdown'
 import FloatButton from "./FloatButton";
 import format_datetime from "../utils/format_datetime"
+import {connect} from "react-redux";
+import MarkdownRenderer from "./MarkdownRenderer"
+
 
 class PostDetailView extends React.Component {
 
@@ -33,9 +33,7 @@ class PostDetailView extends React.Component {
                     </div>
                 </div>
                 <div className={styles.postDetailText}>
-                    <ReactMarkdown
-                        source={this.props.post_detail.text}
-                        renderers={{code: CodeBlock}} />
+                    <MarkdownRenderer source={this.props.post_detail.text}/>
                 </div>
                 {
                     this.props.user.authenticated &&

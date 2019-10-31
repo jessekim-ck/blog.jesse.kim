@@ -9,7 +9,6 @@ import {Helmet} from "react-helmet";
 
 class PostDetail extends React.Component {
 
-    // Should I process this information through Redux?
     state = {
         post: {
             id: '',
