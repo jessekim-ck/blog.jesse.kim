@@ -30,7 +30,12 @@ class PostDetail extends React.Component {
 
     updatePostDetail = async () => {
         const state = await getPostDetail(this.props.match.params.id)
-        this.setState({...state})
+        if (!state) {
+            alert("Invalid post id")
+            this.props.history.push("/")
+        } else {
+            this.setState({...state})
+        }
     }
 
     render() {

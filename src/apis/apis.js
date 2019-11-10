@@ -129,8 +129,12 @@ export const getPostDetail = async post_id => {
         const result = await response.data
         return result
     } catch (err) {
-        console.log(err)
-        throw err
+        if (err.message.includes("404")) {
+            return null
+        } else {
+            console.log(err)
+            throw err
+        }
     }
 }
 

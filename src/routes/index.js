@@ -30,6 +30,4 @@ class Index extends React.Component {
     }
 }
 
-const mapStateToProps = state => state.recentPost
-
-export default connect(mapStateToProps)(Index)
+export default connect()(Index)
