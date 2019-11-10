@@ -30,7 +30,7 @@ class App extends React.Component {
                   <Helmet>
                       <meta charSet="utf-8"/>
                       <title>Jessekim's Blog</title>
-                      <description>제씨킴의 데이터사이언스 프로그래밍 일상 블로그입니다</description>
+                      <meta name="description" content="제씨킴의 데이터사이언스 프로그래밍 일상 블로그"/>
                       <link rel="shortcut icon" href={favicon}/>
                   </Helmet>
               </div>

@@ -76,7 +76,7 @@ export const signupUser = async (username, password) => {
 
 
 // Get Post List
-export const getRecentPostList = async category_id => {
+export const getPostList = async () => {
     try {
         const response = await axios_api.get('api/post/')
         const result = await response.data
