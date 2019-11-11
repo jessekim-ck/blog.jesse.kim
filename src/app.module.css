@@ -199,7 +199,7 @@ h1 h2 h3 h4 h5 strong {
     color: black;
 }
 
-.categoryListTitle:hover {
+.categoryListTitle:hover, .categoryListChildPost:hover {
     text-decoration: underline;
 }
 
@@ -216,10 +216,6 @@ h1 h2 h3 h4 h5 strong {
 .categoryListChildPost {
     color: black;
     border-bottom: 1px solid rgba(0,0,0,.125);
-}
-
-.categoryListChildPost:hover {
-    font-weight: bold;
 }
 
 .categoryListCategory {

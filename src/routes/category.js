@@ -6,6 +6,22 @@ import styles from "../app.module.css"
 import CustomLink from "../components/CustomLink";
 
 
+const PostItem = props => {
+
+    const children_post_items = () => props.children_post_list.map(
+        post => (
+            <CustomLink to={`/post/${post.id}`} key={post.id}>
+                <Card.Body className={styles.categoryListChildPost}>
+                    {post.title}
+                </Card.Body>
+            </CustomLink>
+        )
+    )
+
+    return children_post_items()
+}
+
+
 class CategoryItem extends React.Component {
 
     state = {
@@ -25,17 +41,6 @@ class CategoryItem extends React.Component {
     children_category_items = () => this.state.children_category_list.map(
         category => <CategoryItem category={{...category}} key={category.id}/>
     )
-
-    children_post_items = () => this.state.children_post_list.map(
-        post => (
-            <CustomLink to={`/post/${post.id}`} key={post.id}>
-                <Card.Body className={styles.categoryListChildPost}>
-                        {post.title}
-                </Card.Body>
-            </CustomLink>
-        )
-    )
-
 
     render() {
         return (
@@ -57,7 +62,7 @@ class CategoryItem extends React.Component {
                             {this.children_category_items()}
                         </div>
                         <div>
-                            {this.children_post_items()}
+                            <PostItem children_post_list={this.state.children_post_list}/>
                         </div>
                     </div>
                 </Accordion.Collapse>
@@ -70,15 +75,16 @@ class CategoryItem extends React.Component {
 class Category extends React.Component {
 
     state = {
-        category_list: [],
+        children_category_list: [],
+        children_post_list: [],
     }
 
     async componentDidMount() {
-        const category_list = await getCategoryList()
-        this.setState({category_list})
+        const state = await getCategoryList()
+        this.setState({...state})
     }
 
-    parent_category_items = () => this.state.category_list.map(
+    parent_category_items = () => this.state.children_category_list.map(
         category => <CategoryItem category={{...category}} key={category.id} />
     )
 
@@ -87,6 +93,7 @@ class Category extends React.Component {
             <div>
                 <div className={styles.categoryListCategory}>Category</div>
                 {this.parent_category_items()}
+                <PostItem children_post_list={this.state.children_post_list}/>
             </div>
         )
     }

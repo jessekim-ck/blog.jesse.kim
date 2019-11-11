@@ -142,7 +142,7 @@ export const getPostDetail = async post_id => {
 export const getCategoryList = async () => {
     try {
         const response = await axios_api.get('api/category/list/')
-        const result = await response.data.children_category_list
+        const result = await response.data
         return result
     } catch (err) {
         console.log(err)
