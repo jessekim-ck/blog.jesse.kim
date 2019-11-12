@@ -87,7 +87,7 @@ class CategorySelector extends React.Component {
                         <CategoryOption
                             category_id={category.id}
                             category_title={category.title}
-                            category_list={parent_list}
+                            category_list={parent_list.children_category_list}
                             handleSelectCategory={this.props.handleSelectCategory}
                             renderObjectList={this.renderObjectList} />
                     )
@@ -100,7 +100,7 @@ class CategorySelector extends React.Component {
             const parent_list = await getCategoryList()
             await list.push(
                 <CategoryOption
-                    category_list={parent_list}
+                    category_list={parent_list.children_category_list}
                     handleSelectCategory={this.props.handleSelectCategory}
                     renderObjectList={this.renderObjectList} />
             )
