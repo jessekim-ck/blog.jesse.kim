@@ -28,9 +28,6 @@ class App extends React.Component {
           <div>
               <div className="application">
                   <Helmet>
-                      <meta charSet="utf-8"/>
-                      <title>Jessekim's Blog</title>
-                      <meta name="description" content="제씨킴의 데이터사이언스 프로그래밍 일상 블로그"/>
                       <link rel="shortcut icon" href={favicon}/>
                   </Helmet>
               </div>

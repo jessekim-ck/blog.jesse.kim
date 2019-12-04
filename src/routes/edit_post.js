@@ -3,6 +3,7 @@ import WritePostForm from '../components/WritePostForm'
 import { connect } from "react-redux";
 import { editPost } from "../apis/apis";
 import Unauthorized from "../components/Unauthorized";
+import {Helmet} from "react-helmet"
 
 
 class EditPost extends React.Component {
@@ -20,6 +21,9 @@ class EditPost extends React.Component {
         }
         return (
             <div>
+                <Helmet>
+                    <title>Edit post</title>
+                </Helmet>
                 <WritePostForm
                     handle_write_post={this.handle_write_post}
                     post_id={this.props.match.params.id} />

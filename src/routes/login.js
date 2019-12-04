@@ -3,6 +3,8 @@ import LoginForm from '../components/LoginForm'
 import {authenticateUser, getCurrentUser} from "../apis/apis";
 import {login} from "../redux/actions";
 import {connect} from "react-redux";
+import {Helmet} from "react-helmet"
+
 
 class Login extends React.Component {
 
@@ -23,6 +25,10 @@ class Login extends React.Component {
         if (this.props.authenticated === true) {this.props.history.push("/")}
         return (
             <div>
+                <Helmet>
+                    <title>Login</title>
+                    <link rel="canonical" href="https://blog.weekend.kim/login"/>
+                </Helmet>
                 <LoginForm handle_login={this.handle_login}/>
             </div>
         )

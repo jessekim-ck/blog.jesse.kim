@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card'
 import {getCategoryDetail, getCategoryList} from "../apis/apis";
 import styles from "../app.module.css"
 import CustomLink from "../components/CustomLink";
+import {Helmet} from "react-helmet"
 
 
 const PostItem = props => {
@@ -91,6 +92,11 @@ class Category extends React.Component {
     render() {
         return (
             <div>
+                <Helmet>
+                    <title>Jessekim's Blog: Category</title>
+                    <meta name="description" content="제씨킴의 데이터사이언스 프로그래밍 일상 블로그 카테고리"/>
+                    <link rel="canonical" href="https://blog.weekend.kim/category"/>
+                </Helmet>
                 <div className={styles.categoryListCategory}>Category</div>
                 {this.parent_category_items()}
                 <PostItem children_post_list={this.state.children_post_list}/>

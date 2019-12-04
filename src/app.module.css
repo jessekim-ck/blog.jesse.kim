@@ -50,14 +50,14 @@ h1 h2 h3 h4 h5 strong {
 
 .postListHeader {
     margin-bottom: 8px;
-    padding-left: 18px;
+    padding-left: 24px;
 }
 
 .postListBody {
     height: 64px;
     width: 90%;
     overflow: hidden;
-    padding-left: 18px;
+    padding-left: 24px;
 }
 
 .postListTitle {
@@ -190,7 +190,7 @@ h1 h2 h3 h4 h5 strong {
 
 .categoryListHeader {
     background-color: white;
-    padding: 18px;
+    padding: 18px 24px;
 }
 
 .categoryListTitle {
@@ -210,7 +210,7 @@ h1 h2 h3 h4 h5 strong {
 }
 
 .categoryListChild {
-    margin-left: 18px;
+    margin-left: 24px;
 }
 
 .categoryListChildPost {
@@ -221,7 +221,7 @@ h1 h2 h3 h4 h5 strong {
 .categoryListCategory {
     color: grey;
     font-size: 18px;
-    margin: 8px 18px;
+    margin: 8px 24px;
 }
 
 .basicButton:hover {

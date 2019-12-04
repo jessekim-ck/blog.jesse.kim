@@ -1,8 +1,10 @@
-import React from 'react'
-import SignupForm from '../components/SignupForm'
+import React from 'react';
+import SignupForm from '../components/SignupForm';
 import {signupUser} from "../apis/apis";
 import {login} from "../redux/actions";
 import {connect} from "react-redux";
+import {Helmet} from "react-helmet";
+
 
 class Signup extends React.Component {
 
@@ -27,6 +29,10 @@ class Signup extends React.Component {
         if (this.props.authenticated === true) {this.props.history.push("/")}
         return (
             <div>
+                <Helmet>
+                    <title>Signup</title>
+                    <link rel="canonical" href="https://blog.weekend.kim/signup"/>
+                </Helmet>
                 <SignupForm handle_signup={this.handle_signup} />
             </div>
         )
