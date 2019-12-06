@@ -9,7 +9,7 @@ export const authenticateUser = async (username, password) => {
             {username, password},
         )
         const result = await response.data
-        await localStorage.setItem('token', result.token)
+        localStorage.setItem('token', result.token)
         return result
     } catch (err) {
         const err_msg = err.toString()
@@ -24,18 +24,17 @@ export const authenticateUser = async (username, password) => {
 export const refreshToken = async () => {
     try {
         const header = await get_header()
-        const token = await localStorage.getItem('token')
+        const token = localStorage.getItem('token')
         const response = await axios_api.post(
             'token-refresh/',
             {token},
             {headers: header}
-            )
+        )
         const result = await response.data
-        await localStorage.setItem('token', result.token)
+        localStorage.setItem('token', result.token)
         return result
     } catch (err) {
-        localStorage.removeItem('token')
-        console.log(err)
+        alert("Error refreshing token! " + err)
         throw err
     }
 }
@@ -51,7 +50,6 @@ export const getCurrentUser = async () => {
         const result = await response.data
         return result
     } catch (err) {
-        localStorage.removeItem('token')
         console.log(err)
         throw err
     }
@@ -65,7 +63,7 @@ export const signupUser = async (username, password) => {
             {username, password},
         )
         const result = await response.data
-        await localStorage.setItem('token', result.token)
+        localStorage.setItem('token', result.token)
         return result
     } catch (err) {
         console.log(err)

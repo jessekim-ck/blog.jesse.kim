@@ -1,6 +1,6 @@
 {
   "name": "weekendkim_frontend",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "axios": "^0.19.0",
@@ -27,8 +27,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "aws s3 sync ./build s3://weekendkim-blog --profile=jessekim",
-    "invalidate": "aws cloudfront create-invalidation --profile=jessekim --distribution-id E3HB1AFRE6NUBX --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico /sitemap.xml /robots.txt"
+    "deploy": "aws2 s3 sync ./build s3://weekendkim-blog --profile=jessekim",
+    "invalidate": "aws2 cloudfront create-invalidation --profile=jessekim --distribution-id E3HB1AFRE6NUBX --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico /sitemap.xml /robots.txt"
   },
   "react-scripts": "2.0.3",
   "eslintConfig": {

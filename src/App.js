@@ -13,9 +13,9 @@ import Route from './router'
 class App extends React.Component {
 
   async componentDidMount() {
-      const token = await localStorage.getItem('token')
-      if (!token || token === 'undefined') {
-          await localStorage.removeItem('token')
+      const token = localStorage.getItem('token')
+      if (!token) {
+          localStorage.removeItem('token')
       } else {
           await refreshToken()
           const currentUser = await getCurrentUser()
