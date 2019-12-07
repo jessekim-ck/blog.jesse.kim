@@ -1,4 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
-Sitemap: https://blog.weekend.kim/sitemap.xml
+Sitemap: https://blog.jesse.kim/sitemap.xml

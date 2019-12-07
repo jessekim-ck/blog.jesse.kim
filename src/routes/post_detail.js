@@ -44,7 +44,7 @@ class PostDetail extends React.Component {
                 <Helmet>
                     <title>{`${this.state.post.category}-${this.state.post.title}`}</title>
                     <meta name="description" content={`${this.state.post.category}-${this.state.post.title}`}/>
-                    <link rel="canonical" href={`https://blog.weekend.kim/post/${this.props.match.params.id}`}/>
+                    <link rel="canonical" href={`https://blog.jesse.kim/post/${this.props.match.params.id}`}/>
                 </Helmet>
                 <PostDetailView post_detail={this.state.post} />
                 <CommentView

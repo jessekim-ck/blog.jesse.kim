@@ -31,7 +31,7 @@ class Signup extends React.Component {
             <div>
                 <Helmet>
                     <title>Signup</title>
-                    <link rel="canonical" href="https://blog.weekend.kim/signup"/>
+                    <link rel="canonical" href="https://blog.jesse.kim/signup"/>
                 </Helmet>
                 <SignupForm handle_signup={this.handle_signup} />
             </div>

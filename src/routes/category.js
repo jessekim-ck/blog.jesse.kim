@@ -95,7 +95,7 @@ class Category extends React.Component {
                 <Helmet>
                     <title>Jessekim's Blog: Category</title>
                     <meta name="description" content="제씨킴의 데이터사이언스 프로그래밍 일상 블로그 카테고리"/>
-                    <link rel="canonical" href="https://blog.weekend.kim/category"/>
+                    <link rel="canonical" href="https://blog.jesse.kim/category"/>
                 </Helmet>
                 <div className={styles.categoryListCategory}>Category</div>
                 {this.parent_category_items()}

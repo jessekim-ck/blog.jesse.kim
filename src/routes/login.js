@@ -27,7 +27,7 @@ class Login extends React.Component {
             <div>
                 <Helmet>
                     <title>Login</title>
-                    <link rel="canonical" href="https://blog.weekend.kim/login"/>
+                    <link rel="canonical" href="https://blog.jesse.kim/login"/>
                 </Helmet>
                 <LoginForm handle_login={this.handle_login}/>
             </div>

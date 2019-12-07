@@ -10,7 +10,7 @@ export const get_header = async () => {
 }
 
 export const axios_api = axios.create({
-    baseURL: 'https://api.weekend.kim/',
+    baseURL: 'https://api.jesse.kim/',
     timeout: 5000,
 })
 
@@ -24,7 +24,7 @@ export const axios_api = axios.create({
 //     }
 //
 //     return axios.create({
-//         baseURL: 'https://api.weekend.kim/',
+//         baseURL: 'https://api.jesse.kim/',
 //         timeout: 5000,
 //         headers: header
 //     })
