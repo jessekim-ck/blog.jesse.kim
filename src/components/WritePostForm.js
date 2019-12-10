@@ -18,6 +18,8 @@ class WritePostForm extends React.Component {
             id: null,
             title: null,
         },
+        shortcut_prefix: "",
+        saved: true,
     }
 
     async componentDidMount() {
@@ -25,16 +27,43 @@ class WritePostForm extends React.Component {
         const category_id = await this.props.category_id
         const state = {}
         if (post_id) {
+            // When editing post
             const post_detail = await getPostDetail(post_id)
             state.post = await post_detail.post
             if (state.post.category_id) {
                 state.category = await getCategoryGenealogy(state.post.category_id)
             }
         } else if (category_id) {
+            // When creating post with selected category - now not used
             state.category = await getCategoryGenealogy(category_id)
         }
-
         this.setState({...state})
+
+        window.addEventListener(
+            'keydown',
+            event => {
+                if (event.key === "Meta") {
+                    window.addEventListener('keydown', this.onKeyUp);
+                }
+            }
+        )
+
+        window.addEventListener(
+            'keyup',
+            event => {
+                if (event.key === "Meta") {
+                    window.removeEventListener('keydown', this.onKeyUp);
+                }
+            }
+        )
+    }
+
+    onKeyUp = event => {
+        if (event.key === "s") {
+            event.preventDefault();
+            this.props.save_post(this.state);
+            this.setState({saved: true})
+        }
     }
 
     handleSelectCategory = async category_id => {
@@ -51,6 +80,7 @@ class WritePostForm extends React.Component {
                 [name]: value
             }
         })
+        this.setState({saved: false})
     }
 
     render() {

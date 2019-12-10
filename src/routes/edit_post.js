@@ -9,8 +9,12 @@ import {Helmet} from "react-helmet"
 class EditPost extends React.Component {
 
     handle_write_post = async data => {
-        await editPost(data.post.id, data.post.writer_id, data.category.id, data.post.title, data.post.text)
+        await this.save_post(data)
         this.props.history.push(`/post/${data.post.id}`)
+    }
+
+    save_post = async data => {
+        await editPost(data.post.id, data.post.writer_id, data.category.id, data.post.title, data.post.text)
     }
 
     render() {
@@ -26,6 +30,7 @@ class EditPost extends React.Component {
                 </Helmet>
                 <WritePostForm
                     handle_write_post={this.handle_write_post}
+                    save_post={this.save_post}
                     post_id={this.props.match.params.id} />
             </div>
         )

@@ -58,7 +58,7 @@ class CategorySelector extends React.Component {
             if (child_list.length === 0) {
                 // Do nothing
             } else {
-                await list.push(
+                list.push(
                     <CategoryOption
                         category_list={child_list}
                         handleSelectCategory={this.props.handleSelectCategory}
@@ -72,7 +72,7 @@ class CategorySelector extends React.Component {
                     // When Parent (They are more than secondary)
                     const temp_peer_list = await getCategoryDetail(category.parent_category_id)
                     const peer_list = await temp_peer_list.children_category_list
-                    await list.push(
+                    list.push(
                         <CategoryOption
                             category_id={category.id}
                             category_title={category.title}
@@ -83,7 +83,7 @@ class CategorySelector extends React.Component {
                 } else {
                     // When No Parent (They are Primary Categories)
                     const parent_list = await getCategoryList()
-                    await list.push(
+                    list.push(
                         <CategoryOption
                             category_id={category.id}
                             category_title={category.title}
@@ -98,7 +98,7 @@ class CategorySelector extends React.Component {
         } else {
             // Primary Category List
             const parent_list = await getCategoryList()
-            await list.push(
+            list.push(
                 <CategoryOption
                     category_list={parent_list.children_category_list}
                     handleSelectCategory={this.props.handleSelectCategory}
