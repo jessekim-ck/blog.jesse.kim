@@ -19,7 +19,7 @@ const CategoryOption = props => {
 
     return (
         <select
-            className={styles.categorySelector}
+            className={styles.categorySelectorSelect}
             style={{ width: `${get_text_width(props.category_title || 'Select Category')}px` }}
             value={props.category_id || ""}
             onChange={event => props.handleSelectCategory(event.target.value)}>
@@ -111,7 +111,7 @@ class CategorySelector extends React.Component {
 
     render() {
         return (
-            <div className={styles.categorySelectorContainer}>
+            <div className={styles.categorySelector}>
                 {this.state.list}
             </div>
         )

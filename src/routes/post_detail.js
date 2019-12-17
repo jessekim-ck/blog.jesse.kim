@@ -5,6 +5,9 @@ import {getPostDetail, writeComment} from "../apis/apis";
 import CommentView from "../components/CommentView";
 import styles from "../app.module.css";
 import {Helmet} from "react-helmet";
+import {Link} from "react-router-dom";
+import button_edit from "../assets/button_edit.png";
+import FloatButton from "../components/FloatButton";
 
 
 class PostDetail extends React.Component {
@@ -28,6 +31,12 @@ class PostDetail extends React.Component {
         await this.updatePostDetail()
     }
 
+    async componentDidUpdate(prevProps) {
+        if (this.props.match.params.id !== prevProps.match.params.id) {
+            await this.updatePostDetail()
+        }
+    }
+
     updatePostDetail = async () => {
         const state = await getPostDetail(this.props.match.params.id)
         if (!state) {
@@ -40,19 +49,31 @@ class PostDetail extends React.Component {
 
     render() {
         return (
-            <div className={styles.postDetailContainer}>
+            <div className={styles.post}>
                 <Helmet>
                     <title>{`${this.state.post.category || "Uncategorized"}-${this.state.post.title}`}</title>
                     <meta name="description" content={`${this.state.post.category}-${this.state.post.title}`}/>
                     <link rel="canonical" href={`https://blog.jesse.kim/post/${this.props.match.params.id}`}/>
                 </Helmet>
-                <PostDetailView post_detail={this.state.post} />
+                <PostDetailView post_detail={this.state.post}/>
                 <CommentView
                     comment_list={this.state.comment_list}
-                    handleWriteComment={this.handleWriteComment} />
+                    handleWriteComment={this.handleWriteComment}
+                />
+                {
+                    this.props.user.authenticated &&
+                    <Link
+                        to={`/post/${this.state.post.id}/edit`}
+                        className={styles.floatButton}
+                    >
+                        <FloatButton source={button_edit}/>
+                    </Link>
+                }
             </div>
         )
     }
 }
 
-export default connect()(PostDetail)
+const mapStateToProps = state => state
+
+export default connect(mapStateToProps)(PostDetail)

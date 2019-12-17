@@ -4,7 +4,7 @@ import styles from "../app.module.css";
 
 
 const CommentRow = props => (
-    <div className={styles.commentRowContainer}>
+    <div className={styles.commentRow}>
         <div className={styles.commentRowNickname}>
             {props.comment.nickname || 'Stranger'}
         </div>
@@ -31,17 +31,16 @@ class CommentForm extends React.Component {
 
     render() {
         return (
-            <div className={styles.commentFormContainer}>
+            <div className={styles.commentForm}>
                 <div className={styles.commentFormHeader}>
-                    <div>
-                        <input
-                            className={styles.commentFormNickname}
-                            type="text"
-                            name="nickname"
-                            placeholder="Nickname"
-                            value={this.state.nickname}
-                            onChange={event => this.handle_change(event)} />
-                    </div>
+                    <input
+                        className={styles.commentFormNickname}
+                        type="text"
+                        name="nickname"
+                        placeholder="Nickname"
+                        value={this.state.nickname}
+                        onChange={event => this.handle_change(event)}
+                    />
                     <div
                         className={styles.commentFormButton}
                         onClick={() => {
@@ -51,16 +50,15 @@ class CommentForm extends React.Component {
                         Comment
                     </div>
                 </div>
-                <div>
-                    <Form.Control
-                        as="textarea"
-                        className={styles.commentFormText}
-                        name="text"
-                        rows="3"
-                        placeholder="You can comment anything, but it can be deleted."
-                        value={this.state.text}
-                        onChange={event => this.handle_change(event)} />
-                </div>
+                <Form.Control
+                    as="textarea"
+                    className={styles.commentFormText}
+                    name="text"
+                    rows="3"
+                    placeholder="You can comment anything, but it can be deleted."
+                    value={this.state.text}
+                    onChange={event => this.handle_change(event)}
+                />
             </div>
         )
     }
@@ -74,12 +72,11 @@ const CommentView = props => {
     )
 
     return (
-        <div>
+        <div className={styles.comment}>
             {comment_list}
             <CommentForm handleWriteComment={props.handleWriteComment} />
         </div>
     )
 }
-
 
 export default CommentView

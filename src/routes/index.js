@@ -2,8 +2,8 @@ import React from 'react'
 import {connect} from "react-redux";
 import PostList from "../components/PostList";
 import {getPostList} from "../apis/apis";
+import {Helmet} from "react-helmet";
 import styles from "../app.module.css";
-import {Helmet} from "react-helmet"
 
 class Index extends React.Component {
 
@@ -24,11 +24,8 @@ class Index extends React.Component {
                     <meta name="description" content="제씨킴의 데이터사이언스 프로그래밍 일상 블로그"/>
                     <link rel="canonical" href="https://blog.jesse.kim"/>
                 </Helmet>
-                <div className={styles.categoryListCategory}>
-                    {'Recents'}
-                </div>
-                <div>
-                    <PostList post_list={this.state.post_list} />
+                <div className={styles.postList}>
+                    <PostList post_list={this.state.post_list}/>
                 </div>
             </div>
         )

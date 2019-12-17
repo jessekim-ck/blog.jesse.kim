@@ -5,6 +5,7 @@ import logo from '../logo.svg'
 import styles from '../app.module.css'
 import CustomLink from '../components/CustomLink'
 import Dropdown from "react-bootstrap/Dropdown";
+import {isMobile} from "react-device-detect";
 
 
 class Navigation extends React.Component {
@@ -14,7 +15,7 @@ class Navigation extends React.Component {
     }
 
     handle_logout = async () => {
-        await localStorage.removeItem('token')
+        localStorage.removeItem('token')
         this.props.dispatch(logout())
     }
 
@@ -66,21 +67,13 @@ class Navigation extends React.Component {
                         </div>
                     </div>
                     <div className={styles.navBarBottom}>
-                        <div className={styles.navBarBottom}>
+                        <div className={styles.navBarBottomItems}>
                             <div className={styles.navBarItem}>
                                 <CustomLink
                                     to="/"
                                     onClick={() => this.setState({ currentPath: "" })}
                                     color={this.mapFontColor("")} >
                                     HOME
-                                </CustomLink>
-                            </div>
-                            <div className={styles.navBarItem}>
-                                <CustomLink
-                                    to="/category"
-                                    onClick={() => this.setState({ currentPath: "category" })}
-                                    color={this.mapFontColor("category")} >
-                                    CATEGORY
                                 </CustomLink>
                             </div>
                             {
@@ -95,6 +88,16 @@ class Navigation extends React.Component {
                                 </div>
                             }
                         </div>
+                        {
+                            isMobile &&
+                            <div className={styles.navBarBottomItems}>
+                                <CustomLink
+                                    onClick={this.props.toggle_sidebar}
+                                    color={this.mapFontColor("")} >
+                                    Category!
+                                </CustomLink>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

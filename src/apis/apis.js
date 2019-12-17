@@ -34,7 +34,6 @@ export const refreshToken = async () => {
         localStorage.setItem('token', result.token)
         return result
     } catch (err) {
-        alert("Error refreshing token! " + err)
         throw err
     }
 }
@@ -98,8 +97,13 @@ export const writePost = async (writer_id, category_id, title, text) => {
         const result = await response.data
         return result
     } catch (err) {
-        console.log(err)
-        throw err
+        if (err.message.includes("400")) {
+            alert("Bad Request!")
+            throw err
+        } else {
+            console.log(err)
+            throw err
+        }
     }
 }
 

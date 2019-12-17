@@ -1,7 +1,9 @@
 import React from 'react'
 import WritePostForm from '../components/WritePostForm'
-import { writePost } from "../apis/apis";
-import { connect } from "react-redux";
+import {writePost} from "../apis/apis";
+import {connect} from "react-redux";
+import styles from '../app.module.css';
+
 
 class WritePost extends React.Component {
 
@@ -18,10 +20,14 @@ class WritePost extends React.Component {
 
     render() {
         return (
-            <WritePostForm
-                handle_write_post={this.handle_write_post}
-                save_post={this.save_post}
-                category_id={this.props.match ? this.props.match.params.id : null} />
+            <div className={styles.post}>
+                <WritePostForm
+                    handle_write_post={this.handle_write_post}
+                    save_post={this.handle_write_post}
+                    category_id={this.props.match ? this.props.match.params.id : null}
+                />
+            </div>
+            
         )
     }
 }

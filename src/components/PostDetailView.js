@@ -1,48 +1,35 @@
-import React from 'react'
+import React from 'react';
 import styles from "../app.module.css";
-import CustomLink from "./CustomLink";
-import button_edit from "../assets/button_edit.png";
-import FloatButton from "./FloatButton";
-import format_datetime from "../utils/format_datetime"
+import format_datetime from "../utils/format_datetime";
 import {connect} from "react-redux";
-import MarkdownRenderer from "./MarkdownRenderer"
+import MarkdownRenderer from "./MarkdownRenderer";
 
 
 class PostDetailView extends React.Component {
 
     render() {
         return (
-            <div >
-                <CustomLink to="/category">
-                    <div className={styles.postDetailCategory}>
-                        {this.props.post_detail.category || 'UNCATEGORIZED'}
-                    </div>
-                </CustomLink>
-                <div className={styles.postDetailTitle}>
+            <div>
+                <div className={styles.subtitle}>
+                    {this.props.post_detail.category || 'UNCATEGORIZED'}
+                </div>
+                <div className={styles.title}>
                     {this.props.post_detail.title}
                 </div>
-                <div className={styles.postDetailSubtitle}>
+                <div className={styles.description}>
                     <div>
-                        Writer: {this.props.post_detail.writer}
+                        writer: {this.props.post_detail.writer}
                     </div>
                     <div>
-                        Created: {format_datetime(this.props.post_detail.created)}
+                        created: {format_datetime(this.props.post_detail.created)}
                     </div>
                     <div>
-                        Last Updated: {format_datetime(this.props.post_detail.updated)}
+                        last updated: {format_datetime(this.props.post_detail.updated)}
                     </div>
                 </div>
-                <div className={styles.postDetailText}>
+                <div className={styles.body}>
                     <MarkdownRenderer source={this.props.post_detail.text}/>
                 </div>
-                {
-                    this.props.user.authenticated &&
-                    <CustomLink
-                        to={`/post/${this.props.post_detail.id}/edit`}
-                        className={styles.floatButtonContainer} >
-                        <FloatButton source={button_edit} />
-                    </CustomLink>
-                }
             </div>
         )
     }

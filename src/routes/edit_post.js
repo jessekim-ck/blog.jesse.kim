@@ -1,9 +1,10 @@
 import React from 'react'
 import WritePostForm from '../components/WritePostForm'
-import { connect } from "react-redux";
-import { editPost } from "../apis/apis";
+import {connect} from "react-redux";
+import {editPost} from "../apis/apis";
 import Unauthorized from "../components/Unauthorized";
-import {Helmet} from "react-helmet"
+import {Helmet} from "react-helmet";
+import styles from "../app.module.css";
 
 
 class EditPost extends React.Component {
@@ -24,14 +25,15 @@ class EditPost extends React.Component {
             )
         }
         return (
-            <div>
+            <div className={styles.post}>
                 <Helmet>
                     <title>Edit post</title>
                 </Helmet>
                 <WritePostForm
                     handle_write_post={this.handle_write_post}
                     save_post={this.save_post}
-                    post_id={this.props.match.params.id} />
+                    post_id={this.props.match.params.id}
+                />
             </div>
         )
     }

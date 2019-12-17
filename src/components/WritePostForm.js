@@ -1,11 +1,43 @@
-import React from 'react'
-import styles from '../app.module.css'
-import button_ok from "../assets/button_ok.png";
-import Form from 'react-bootstrap/Form'
+import React from 'react';
+import styles from '../app.module.css';
 import {getCategoryGenealogy, getPostDetail} from "../apis/apis";
 import FloatButton from "./FloatButton";
+import button_ok from "../assets/button_ok.png";
 import CategorySelector from "./CategorySelector";
+import TextareaAutosize from 'react-textarea-autosize';
 
+
+class ToastMessage extends React.Component {
+
+    state = {
+        visible: false
+    }
+
+    componentDidUpdate(prevProps) {
+        if (!prevProps.saved && this.props.saved) {
+            this.setState({visible: true})
+            setTimeout(
+                () => this.setState({visible: false}),
+                1500
+            )
+        }
+    }
+
+    render() {
+
+        if (!this.state.visible) {
+            return null
+        }
+
+        const now = new Date()
+
+        return (
+            <div className={styles.toast}>
+                Saved at {`${now.getFullYear()}-${now.getMonth()}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`}
+            </div>
+        )
+    }
+}
 
 class WritePostForm extends React.Component {
 
@@ -62,7 +94,8 @@ class WritePostForm extends React.Component {
         if (event.key === "s") {
             event.preventDefault();
             this.props.save_post(this.state);
-            this.setState({saved: true})
+            this.setState({saved: true});
+
         }
     }
 
@@ -86,37 +119,32 @@ class WritePostForm extends React.Component {
     render() {
         return (
             <form>
-                <div className={styles.postDetailContainer}>
-                    <div>
-                        <input
-                            className={styles.postDetailTitle}
-                            type="text"
-                            name="title"
-                            placeholder="Title"
-                            value={this.state.post.title}
-                            onChange={event => this.handle_change(event)} />
-                    </div>
-                    <div>
-                        <CategorySelector
-                            handleSelectCategory={this.handleSelectCategory}
-                            category={this.state.category} />
-                    </div>
-                    <div>
-                        <Form.Control
-                            as="textarea"
-                            className={styles.postDetailText}
-                            name="text"
-                            rows="20"
-                            placeholder="Write your post..."
-                            value={this.state.post.text}
-                            onChange={event => this.handle_change(event)} />
-                    </div>
-                    <div className={styles.floatButtonContainer}>
-                        <FloatButton
-                            source={button_ok}
-                            handle_click={() => this.props.handle_write_post(this.state)} />
-                    </div>
-                </div>
+                <input
+                    className={styles.title}
+                    type="text"
+                    name="title"
+                    placeholder="Title"
+                    value={this.state.post.title}
+                    onChange={event => this.handle_change(event)}
+                />
+                <CategorySelector
+                    handleSelectCategory={this.handleSelectCategory}
+                    category={this.state.category}
+                />
+                <TextareaAutosize
+                    className={styles.body}
+                    minRows="12"
+                    as="textarea"
+                    name="text"
+                    placeholder="Write your post..."
+                    value={this.state.post.text}
+                    onChange={event => this.handle_change(event)}
+                />
+                <FloatButton
+                    source={button_ok}
+                    handle_click={() => this.props.handle_write_post(this.state)}
+                />
+                <ToastMessage saved={this.state.saved} />
             </form>
         )
     }

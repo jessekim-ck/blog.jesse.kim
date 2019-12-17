@@ -32,9 +32,24 @@
 
     <!--  Remove the ugly outline of the React Bootstrap!  -->
     <style>
-      .form-control {border: 0px; padding: 0px; margin: 0px;}
-      .form-control:focus{border-color: transparent;  box-shadow: none; -webkit-box-shadow: none;}
-      .has-error .form-control:focus{box-shadow: none; -webkit-box-shadow: none;}
+      .form-control {border: 0px; padding: 0px; margin: 0px; height: auto;}
+      .form-control:focus {border-color: inherit;  box-shadow: none; -webkit-box-shadow: none;}
+      textarea {
+        border: none;
+        overflow: auto;
+        outline: none;
+        
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+
+        resize: none;
+      }
+      .has-error .form-control:focus {box-shadow: none; -webkit-box-shadow: none;}
+      .navbar-brand {padding: 7px 0 8px 0;}
+      .navbar-expand .navbar-nav .nav-link {padding: 8px 24px 7px 0;}
+      .card-header {background-color: transparent;}
+      a:hover {color: inherit;}
     </style>
 
     <!--  Google webmaster  -->
@@ -49,6 +64,18 @@
     <meta property="og:description" content="제씨킴의 데이터사이언스 프로그래밍 일상 블로그입니다"/>
     <meta property="og:image" content="https://blog.jesse.kim/opengraph.jpg"/>
     <meta property="og:url" content="https://blog.jesse.kim/"/>
+
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
+
+    <!-- Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <style>
+      #root {
+        font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      }
+    </style>
 
   </head>
   <body>

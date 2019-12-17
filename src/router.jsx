@@ -15,7 +15,7 @@ export default (
         <Route exact path="/" component={Index} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/write_post" component={WritePost} />
+        <Route path="/post/write" component={WritePost} />
         <Route path="/post/:id/edit" component={EditPost} />
         <Route path="/post/:id" component={PostDetail} />
         <Route path="/category" component={Category} />

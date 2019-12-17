@@ -1,27 +1,23 @@
 import React from 'react'
 import styles from '../app.module.css'
-import CustomLink from "./CustomLink";
+import {Link} from "react-router-dom";
 
 
 const PostItem = props => {
 
     return (
-        <div className={styles.postListContainer} key={props.post.id}>
-            <CustomLink to={`/post/${props.post.id}`}>
-                <div className={styles.postListHeader}>
-                    <div className={styles.postListTitle}>
-                        {props.post.title}
-                    </div>
-                    <div className={styles.postListSubtitle}>
-                        {props.post.writer} | {props.post.category || 'UNCATEGORIZED'} | {props.post.num_comments} comments
-                    </div>
+        <div key={props.post.id} className={styles.postListItem}>
+            <Link className={styles.touchable} to={`/post/${props.post.id}`}>
+                <div className={styles.title}>
+                    {props.post.title}
                 </div>
-                <div className={styles.postListBody}>
-                    <div className={styles.postListText}>
-                        {props.post.text}
-                    </div>
+                <div className={styles.description}>
+                    {props.post.writer} | {props.post.category || 'UNCATEGORIZED'} | {props.post.num_comments} comments
                 </div>
-            </CustomLink>
+                <div className={styles.body}>
+                    {props.post.text}
+                </div>
+            </Link>
         </div>
     )
 }

@@ -4,14 +4,15 @@ import styles from "../app.module.css";
 
 const FloatButton = props => {
     return (
-        <div className={styles.floatButtonItem}>
+        <div className={styles.floatButton}>
             <img
-                className={styles.basicButton}
+                className={styles.touchable}
                 onClick={props.handle_click}
                 src={props.source}
                 width="66"
                 height="66"
-                alt="login"/>
+                alt="login"
+            />
         </div>
     )
 }

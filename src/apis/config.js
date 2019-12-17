@@ -2,7 +2,7 @@ import axios from 'axios'
 // import * as AxiosLogger from 'axios-logger'
 
 export const get_header = async () => {
-    const token = await localStorage.getItem('token')
+    const token = localStorage.getItem('token')
     const header = {
         Authorization: `JWT ${token}`
     }

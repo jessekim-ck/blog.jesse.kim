@@ -1,104 +1,138 @@
-
-p {
-    margin-top: 22px;
-    color: #555555 !important;
+p, ul {
+    margin: 14px 0;
+    line-height: 2.2;
 }
 
 h1 h2 h3 h4 h5 strong {
     color: black !important;
 }
 
+.title {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 1.3;
+    color: black;
+}
+
+.subtitle {
+    color: grey;
+    font-size: 16px;
+}
+
+.description {
+    color: grey;
+    font-size: 14px;
+}
+
+.body {
+    color: #555555;
+    word-break: keep-all;
+    word-wrap: normal;
+}
+
 .appContainer {
-    padding: 28px 13% 28px 13%;
+    width: 100%;
+    padding: 48px 13%;
     background-color: white;
 }
 
 .navContainer {
-    padding: 14px 13% 14px 13%;
     width: 100%;
+    padding: 12px 13%;
     background-color: black;
     color: white;
+    display: inline-block;
+    font-size: 16px;
 }
 
-.navBarTop {
-    flex-direction: row;
+.sidebar {
+    width: 100%;
+    background-color: white;
+    padding: 12px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    font-size: 18px;
-    margin-bottom: 10px;
 }
 
-.navBarBottom {
-    flex-direction: row;
-    display: flex;
+.contentNav {
+    margin-bottom: 24px;
+}
+
+.contentNavItem {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.contentNavItem .title {
     font-size: 16px;
-}
-
-.navBarItem {
-    font-size: 16px;
-    margin-right: 28px;
-}
-
-.postListContainer {
-    padding: 18px 0 24px 0;
-    border-bottom: solid 1px rgba(0,0,0,.125);
-}
-
-.postListContainer:hover .postListTitle {
-    text-decoration: underline;
-}
-
-.postListHeader {
-    margin-bottom: 8px;
-    padding-left: 24px;
-}
-
-.postListBody {
-    height: 64px;
-    width: 90%;
-    overflow: hidden;
-    padding-left: 24px;
-}
-
-.postListTitle {
     font-weight: bold;
-    font-size: 18px;
+    padding: 4px 4px;
+}
+
+.contentNavItem .description {
+    font-size: 14px;
+    padding: 4px 4px;
+}
+
+.contentNavChildren {
+    padding-left: 12px;
+}
+
+.contentNavItem:hover {
+    text-decoration: underline;
     color: black;
 }
 
-.postListSubtitle {
-    font-size: 14px;
-    color: grey;
+.sidebar .authentication {
+    text-align: center;
+    margin: 24px 0;
 }
 
-.postListText {
-    word-break: keep-all;
-    word-wrap: normal;
-    font-size: 14px;
+.postList {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.postListItem {
+    padding: 28px 12px;
+    border-bottom: solid 1px rgba(0,0,0,.125);
+}
+
+.postList .title {
+    margin-bottom: 8px;
+}
+
+.postList .description {
+    margin-bottom: 8px;
+}
+
+.postList .body {
+    height: 75px;
+    overflow: hidden;
     color: #555555;
 }
 
-.authenticateFormContainer {
-    max-width: 330px;
-    margin: 15% auto;
+.authForm {
+    max-width: 300px;
+    margin: 96px auto;
 }
 
-.authenticateFormHeader {
-    font-size: 34px;
+.authFormHeader {
+    font-size: 28px;
     text-align: center;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
 }
 
-.authenticateFormInput {
-    border: solid 1px black;
+.authFormInput {
+    font-size: 16px;
+    border: solid 1px grey;
     border-radius: 100px;
     width: 100%;
     height: 36px;
-    margin: 10px auto 10px auto;
+    margin: 12px 0;
     text-align: center;
 }
 
-.authenticateFormSubmit {
+.authFormSubmit {
     width: 60%;
     margin: 24px auto;
     flex-direction: row;
@@ -106,50 +140,32 @@ h1 h2 h3 h4 h5 strong {
     justify-content: space-between;
 }
 
-.postDetailContainer {
-    width: 80%;
-    margin: 48px auto;
+.post {
+    max-width: 812px;
+    margin: 24px auto;
 }
 
-.postDetailCategory {
-    font-size: 18px;
-    color: grey;
-    margin-bottom: 8px;
-}
-
-.postDetailTitle {
+.post .title {
     width: 100%;
-    height: auto;
-    padding-bottom: 8px;
-    font-size: 24px;
-    font-weight: bold;
     border: 0px;
     border-bottom: 1px solid black;
+    font-size: 24px;
+    padding: 8px 0;
+    margin: 4px 0;
 }
 
-.postDetailText {
-    margin-top: 28px;
-    padding-right: 8px;
-    padding-bottom: 10%;
-    border-bottom: 1px solid lightgrey;
+.post .body {
+    width: 100%;
+    margin: 28px 0;
     font-size: 16px;
-    line-height: 2.3;
-    word-break: keep-all;
-    word-wrap: normal;
-}
-
-
-.postDetailSubtitle {
-    margin-top: 14px;
-    color: grey;
-    font-size: 14px;
-}
-
-.categorySelectorContainer {
-    margin-top: 12px;
+    line-height: 2.5;
 }
 
 .categorySelector {
+    margin: 12px 0;
+}
+
+.categorySelectorSelect {
     border: 0px;
     font-size: 14px;
     color: grey;
@@ -161,79 +177,43 @@ h1 h2 h3 h4 h5 strong {
     display: inline-block;
 }
 
-.categorySelector::-ms-expand {
+.categorySelectorSelect::-ms-expand {
     background-color: white;
     border: 0px;
     width: auto;
 }
 
-*:focus {
+.categorySelectorSelect:focus {
     outline: none !important;
     box-shadow: none;
 }
 
-.floatButtonContainer {
+.floatButton {
     position: fixed;
     flex-direction: row;
     display: flex;
     bottom: 30px;
     right: 30px;
-}
-
-.floatButtonItem {
     margin: 6px;
 }
 
-.categoryList {
-
-}
-
-.categoryListHeader {
-    background-color: white;
-    padding: 18px 24px;
-}
-
-.categoryListTitle {
-    font-weight: bold;
-    font-size: 18px;
+.touchable {
     color: black;
-}
-
-.categoryListTitle:hover, .categoryListChildPost:hover {
-    text-decoration: underline;
-}
-
-.categoryListDescription {
-    margin-top: 4px;
-    font-size: 14px;
-    color: black;
-}
-
-.categoryListChild {
-    margin-left: 24px;
-}
-
-.categoryListChildPost {
-    color: black;
-    border-bottom: 1px solid rgba(0,0,0,.125);
-}
-
-.categoryListCategory {
-    color: grey;
-    font-size: 18px;
-    margin: 8px 24px;
-}
-
-.basicButton:hover {
-    opacity: 0.6;
-}
-
-.touchableOpacity {
     background-color: transparent;
     border: 0px;
 }
 
-.commentRowContainer {
+.touchable:hover {
+    opacity: 0.6;
+    text-decoration: underline;
+    color: inherit;
+}
+
+.comment {
+    margin-top: 96px;
+}
+
+.commentRow {
     margin: 12px 0px 12px 0px;
     padding-bottom: 8px;
     border-bottom: 1px solid lightgrey;
@@ -250,8 +230,8 @@ h1 h2 h3 h4 h5 strong {
     font-size: 14px;
 }
 
-.commentFormContainer {
-    margin-top: 18px;
+.commentForm {
+    margin: 18px 0;
 }
 
 .commentFormHeader {
@@ -272,76 +252,29 @@ h1 h2 h3 h4 h5 strong {
     margin-top: 12px;
     padding: 4px 10px 4px 10px;
     border: 1px solid grey;
-    border-radius: 6px;
     font-size: 14px;
-
-    word-break: keep-all;
-    word-wrap: normal;
-    line-height: 1.5;
 }
 
-.commentFormText:focus {
-    border: 1px solid grey;
-    border-radius: 10px;
-}
-
-.commentFormButton {
-
+.toast {
+    background-color: black;
+    opacity: 0.7;
+    padding: 4px 24px;
+    border-radius: 100px;
+    color: white;
+    position: fixed;
+    bottom: 30px;
+    margin: 0 auto;
+    width: fit-content;
+    left: 0;
+    right: 0;
 }
 
 @media (max-width: 1023px) {
-
-    .categoryListCategory {
-        margin-left: 4px;
-    }
-
-    .postListHeader {
-        padding-left: 4px;
-    }
-
-    .postListTitle {
-        font-size: 15px;
-    }
-
-    .postListBody {
-        height: 92px;
-        padding-left: 4px;
-    }
-
-    .postListSubtitle {
-        font-size: 14px;
-    }
-
-    .postListText {
-        font-size: 13px;
-    }
-
     .appContainer {
-        padding: 28px 5% 28px 5%;
+        padding: 24px 18px;
     }
 
     .navContainer {
-        padding: 14px 5% 14px 5%;
-    }
-
-    .postDetailContainer {
-        width: 100%;
-        margin: 8px auto;
-    }
-
-    .postDetailTitle {
-        font-size: 18px;
-    }
-
-    .postDetailText {
-        font-size: 14px;
-    }
-
-    .categoryListHeader {
-        padding-left: 4px;
-    }
-
-    .categoryListChildPost {
-        padding-left: 4px;
+        padding: 12px 18px;
     }
 }
