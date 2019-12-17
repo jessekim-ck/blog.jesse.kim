@@ -34,7 +34,7 @@ export const refreshToken = async () => {
         localStorage.setItem('token', result.token)
         return result
     } catch (err) {
-        throw err
+        console.log("Error Refreshing Token")
     }
 }
 

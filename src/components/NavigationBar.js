@@ -3,6 +3,7 @@ import {Navbar, Nav} from "react-bootstrap";
 import {connect} from "react-redux";
 import styles from "../app.module.css";
 import logo from '../logo.svg'
+import {Link} from "react-router-dom";
 
 
 const NavigationBar = props => {
@@ -11,9 +12,9 @@ const NavigationBar = props => {
         <Navbar variant="dark" className={styles.navContainer}>
             <div>
                 <Navbar.Collapse>
-                    <Navbar.Brand href="/">
+                    <Link className="navbar-brand" to="/">
                         JESSEKIM'S BLOG
-                    </Navbar.Brand>
+                    </Link>
                     <Navbar.Collapse className="justify-content-end">
                         <img 
                             src={logo} 
@@ -27,10 +28,10 @@ const NavigationBar = props => {
             </div>
             <div>
                 <Nav className="mr-auto">
-                    <Nav.Link href="/">HOME</Nav.Link>
+                    <Link className="nav-link" to="/">HOME</Link>
                     {
                         props.authenticated &&
-                        <Nav.Link href="/post/write">+</Nav.Link>
+                        <Link className="nav-link" to="/post/write">+</Link>
                     }                    
                 </Nav>
             </div>

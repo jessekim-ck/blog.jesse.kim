@@ -1,15 +1,23 @@
-import React from 'react'
-import {connect} from "react-redux";
+import React from 'react';
 import PostList from "../components/PostList";
 import {getPostList} from "../apis/apis";
 import {Helmet} from "react-helmet";
 import styles from "../app.module.css";
+
+import {connect} from "react-redux";
+import {enroll_shortcut, remove_shortcut} from "../redux/actions";
+
 
 class Index extends React.Component {
 
     async componentDidMount() {
         const post_list = await getPostList()
         this.setState({post_list})
+        this.props.dispatch(enroll_shortcut("u", () => this.props.history.push("/post/write")))
+    }
+
+    componentWillUnmount() {
+        this.props.dispatch(remove_shortcut("u"))
     }
 
     state = {

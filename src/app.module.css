@@ -258,7 +258,7 @@ h1 h2 h3 h4 h5 strong {
 .toast {
     background-color: black;
     opacity: 0.7;
-    padding: 4px 24px;
+    padding: 8px 24px;
     border-radius: 100px;
     color: white;
     position: fixed;

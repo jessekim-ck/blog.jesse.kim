@@ -5,6 +5,8 @@ import FloatButton from "./FloatButton";
 import button_ok from "../assets/button_ok.png";
 import CategorySelector from "./CategorySelector";
 import TextareaAutosize from 'react-textarea-autosize';
+import { connect } from 'react-redux';
+import { enroll_shortcut, remove_shortcut } from '../redux/actions';
 
 
 class ToastMessage extends React.Component {
@@ -50,7 +52,6 @@ class WritePostForm extends React.Component {
             id: null,
             title: null,
         },
-        shortcut_prefix: "",
         saved: true,
     }
 
@@ -71,32 +72,16 @@ class WritePostForm extends React.Component {
         }
         this.setState({...state})
 
-        window.addEventListener(
-            'keydown',
-            event => {
-                if (event.key === "Meta") {
-                    window.addEventListener('keydown', this.onKeyUp);
-                }
-            }
-        )
-
-        window.addEventListener(
-            'keyup',
-            event => {
-                if (event.key === "Meta") {
-                    window.removeEventListener('keydown', this.onKeyUp);
-                }
-            }
-        )
+        this.props.dispatch(enroll_shortcut("s", this.save_post))
     }
 
-    onKeyUp = event => {
-        if (event.key === "s") {
-            event.preventDefault();
-            this.props.save_post(this.state);
-            this.setState({saved: true});
+    componentWillUnmount() {
+        this.props.dispatch(remove_shortcut("s"))
+    }
 
-        }
+    save_post = () => {
+        this.props.save_post(this.state);
+        this.setState({saved: true});
     }
 
     handleSelectCategory = async category_id => {
@@ -133,7 +118,7 @@ class WritePostForm extends React.Component {
                 />
                 <TextareaAutosize
                     className={styles.body}
-                    minRows="12"
+                    minRows={12}
                     as="textarea"
                     name="text"
                     placeholder="Write your post..."
@@ -144,10 +129,10 @@ class WritePostForm extends React.Component {
                     source={button_ok}
                     handle_click={() => this.props.handle_write_post(this.state)}
                 />
-                <ToastMessage saved={this.state.saved} />
+                <ToastMessage saved={this.state.saved}/>
             </form>
         )
     }
 }
 
-export default WritePostForm
+export default connect()(WritePostForm)
