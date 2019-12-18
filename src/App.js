@@ -36,13 +36,13 @@ class App extends React.Component {
     }
 
     onMetaUp = event => {
-        if (event.key === "Meta") {
+        if (event.key === "Meta" || event.key === "Control") {
             window.addEventListener('keydown', this.onKeyUp);
         }
     }
 
     onMetaDown = event => {
-        if (event.key === "Meta") {
+        if (event.key === "Meta" || event.key === "Control") {
             window.removeEventListener('keydown', this.onKeyUp);
         }
     }
