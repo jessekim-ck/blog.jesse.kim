@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import MathJax from "react-mathjax";
 import ReactMarkdown from "react-markdown";
 import RemarkMathPlugin from "remark-math";
