@@ -30,10 +30,12 @@ class PostDetail extends React.Component {
     }
 
     async componentDidMount() {
-        await this.updatePostDetail()
-        this.props.dispatch(
-            enroll_shortcut("e", () => this.props.history.push(`/post/${this.props.match.params.id}/edit`))
-        )
+        await this.updatePostDetail();
+        
+        const post_id = this.props.match.params.id;
+        this.props.dispatch(enroll_shortcut("e", () => this.props.history.push(`/post/${post_id}/edit`)));
+        this.props.dispatch(enroll_shortcut("h", () => this.props.history.push("/")));
+        this.props.dispatch(enroll_shortcut("u", () => this.props.history.push("/post/write")));
     }
 
     async componentDidUpdate(prevProps) {
@@ -43,7 +45,9 @@ class PostDetail extends React.Component {
     }
 
     componentWillUnmount() {
-        this.props.dispatch(remove_shortcut("e"))
+        this.props.dispatch(remove_shortcut("e"));
+        this.props.dispatch(remove_shortcut("h"));
+        this.props.dispatch(remove_shortcut("u"));
     }
 
     updatePostDetail = async () => {

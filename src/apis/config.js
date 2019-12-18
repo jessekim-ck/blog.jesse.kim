@@ -10,7 +10,8 @@ export const get_header = async () => {
 }
 
 export const axios_api = axios.create({
-    baseURL: 'https://api.jesse.kim/',
+    // baseURL: 'https://api.jesse.kim/',
+    baseURL: 'http://127.0.0.1:8000/',
     timeout: 5000,
 })
 

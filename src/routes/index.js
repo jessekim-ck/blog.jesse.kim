@@ -13,11 +13,14 @@ class Index extends React.Component {
     async componentDidMount() {
         const post_list = await getPostList()
         this.setState({post_list})
-        this.props.dispatch(enroll_shortcut("u", () => this.props.history.push("/post/write")))
+        
+        this.props.dispatch(enroll_shortcut("h", () => this.props.history.push("/")));
+        this.props.dispatch(enroll_shortcut("u", () => this.props.history.push("/post/write")));
     }
 
     componentWillUnmount() {
-        this.props.dispatch(remove_shortcut("u"))
+        this.props.dispatch(remove_shortcut("h"));
+        this.props.dispatch(remove_shortcut("u"));
     }
 
     state = {

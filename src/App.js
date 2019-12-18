@@ -23,16 +23,21 @@ import {
 class App extends React.Component {
     
     async componentDidMount() {
-        const token = localStorage.getItem('token')
-        this.props.dispatch(enroll_shortcut("i", this.toggle_sidebar))
+        const token = localStorage.getItem('token');
+        this.props.dispatch(enroll_shortcut("i", this.toggle_sidebar));
         if (token) {
-            await refreshToken()
-            const currentUser = await getCurrentUser()
-            this.props.dispatch(login(currentUser))
+            await refreshToken();
+            const currentUser = await getCurrentUser();
+            this.props.dispatch(login(currentUser));
         }
 
-        window.addEventListener('keydown', this.onMetaUp)
-        window.addEventListener('keyup', this.onMetaDown)
+        window.addEventListener('keydown', this.onMetaUp);
+        window.addEventListener('keyup', this.onMetaDown);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("keydown", this.onMetaUp);
+	    window.removeEventListener("keyup", this.onMetaDown);
     }
 
     onMetaUp = event => {

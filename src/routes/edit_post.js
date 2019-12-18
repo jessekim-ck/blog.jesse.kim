@@ -1,13 +1,25 @@
-import React from 'react'
-import WritePostForm from '../components/WritePostForm'
-import {connect} from "react-redux";
+import React from 'react';
+import WritePostForm from '../components/WritePostForm';
 import {editPost} from "../apis/apis";
 import Unauthorized from "../components/Unauthorized";
 import {Helmet} from "react-helmet";
 import styles from "../app.module.css";
 
+import {connect} from "react-redux";
+import {enroll_shortcut, remove_shortcut} from "../redux/actions"
+
 
 class EditPost extends React.Component {
+
+    componentDidMount() {
+        this.props.dispatch(enroll_shortcut("h", () => this.props.history.push("/")));
+        this.props.dispatch(enroll_shortcut("u", () => this.props.history.push("/post/write")));
+    }
+
+    componentWillUnmount() {
+        this.props.dispatch(remove_shortcut("h"));
+        this.props.dispatch(remove_shortcut("u"));
+    }
 
     handle_write_post = async data => {
         await this.save_post(data)
