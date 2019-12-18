@@ -80,8 +80,12 @@ class WritePostForm extends React.Component {
     }
 
     save_post = () => {
-        this.props.save_post(this.state);
-        this.setState({saved: true});
+        if (this.state.saved) {
+	    this.props.handle_write_post(this.state)
+	} else {
+	    this.props.save_post(this.state);
+            this.setState({saved: true});
+	}
     }
 
     handleSelectCategory = async category_id => {
