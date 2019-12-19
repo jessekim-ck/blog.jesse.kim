@@ -160,6 +160,7 @@ h1, h2, h3, h4, h5, strong {
     margin: 28px 0;
     font-size: 16px;
     line-height: 2.5;
+    overflow-x: auto;
 }
 
 .categorySelector {
