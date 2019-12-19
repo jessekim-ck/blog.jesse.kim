@@ -61,11 +61,21 @@ class PostDetail extends React.Component {
     }
 
     render() {
+
+        const title = this.state.post.category && (this.state.post.category + "-") + this.state.post.title
+        // `${this.state.post.category || "Uncategorized"}-${this.state.post.title}`
+        const description = this.state.post.text.split("\n\n")[0]
+
+        console.log(title)
+        console.log(description)
+
         return (
             <div className={styles.post}>
                 <Helmet>
-                    <title>{`${this.state.post.category || "Uncategorized"}-${this.state.post.title}`}</title>
-                    <meta name="description" content={`${this.state.post.category}-${this.state.post.title}`}/>
+                    <title>{title}</title>
+                    <meta name="description" content={description}/>
+                    <meta property="og:title" content={title}/>
+                    <meta property="og:description" content={description}/>
                     <link rel="canonical" href={`https://blog.jesse.kim/post/${this.props.match.params.id}`}/>
                 </Helmet>
                 <PostDetailView post_detail={this.state.post}/>

@@ -32,7 +32,9 @@ class Index extends React.Component {
             <div>
                 <Helmet>
                     <title>Jessekim's Blog</title>
-                    <meta name="description" content="제씨킴의 데이터사이언스 프로그래밍 일상 블로그"/>
+                    <meta name="description" content="제씨킴의 데이터사이언스 프로그래밍 일상 블로그입니다."/>
+                    <meta property="og:title" content="Jessekim's Blog"/>
+                    <meta property="og:description" content="제씨킴의 데이터사이언스 프로그래밍 일상 블로그입니다."/>
                     <link rel="canonical" href="https://blog.jesse.kim"/>
                 </Helmet>
                 <div className={styles.postList}>

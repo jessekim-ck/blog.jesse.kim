@@ -32,9 +32,10 @@ export const refreshToken = async () => {
         )
         const result = await response.data
         localStorage.setItem('token', result.token)
-        return result
+        return true
     } catch (err) {
         console.log("Error Refreshing Token")
+        return false
     }
 }
 

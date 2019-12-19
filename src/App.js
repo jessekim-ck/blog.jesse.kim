@@ -24,13 +24,15 @@ class App extends React.Component {
     
     async componentDidMount() {
         const token = localStorage.getItem('token');
-        this.props.dispatch(enroll_shortcut("i", this.toggle_sidebar));
         if (token) {
-            await refreshToken();
-            const currentUser = await getCurrentUser();
-            this.props.dispatch(login(currentUser));
+            const token_refreshed = await refreshToken();
+            if (token_refreshed) {
+                const currentUser = await getCurrentUser();
+                this.props.dispatch(login(currentUser));
+            }
         }
 
+        this.props.dispatch(enroll_shortcut("i", this.toggle_sidebar));
         window.addEventListener('keydown', this.onMetaUp);
         window.addEventListener('keyup', this.onMetaDown);
     }
