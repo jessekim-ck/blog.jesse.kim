@@ -62,21 +62,15 @@ class PostDetail extends React.Component {
 
     render() {
 
-        const title = this.state.post.category && (this.state.post.category + "-") + this.state.post.title
-        // `${this.state.post.category || "Uncategorized"}-${this.state.post.title}`
-        const description = this.state.post.text.split("\n\n")[0]
-
-        console.log(title)
-        console.log(description)
+        const title = (this.state.post.category && (this.state.post.category + "-") + this.state.post.title) || "JesseKim's Blog"
+        const description = this.state.post.text.split("\n\n")[0] || "제씨킴의 데이터사이언스 프로그래밍 일상 블로그입니다."
 
         return (
             <div className={styles.post}>
                 <Helmet>
                     <title>{title}</title>
                     <meta name="description" content={description}/>
-                    <meta property="og:title" content={title}/>
-                    <meta property="og:description" content={description}/>
-                    <link rel="canonical" href={`https://blog.jesse.kim/post/${this.props.match.params.id}`}/>
+                    <link rel="canonical" href={"https://blog.jesse.kim" + window.location.pathname}/>
                 </Helmet>
                 <PostDetailView post_detail={this.state.post}/>
                 <CommentView
