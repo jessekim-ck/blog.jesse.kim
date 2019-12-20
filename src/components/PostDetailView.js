@@ -29,7 +29,9 @@ class PostDetailView extends React.Component {
                     </div>
                 </div>
                 <div className={styles.body}>
-                    <MarkdownRenderer source={this.props.post_detail.text}/>
+                    <MarkdownRenderer 
+                        source={this.props.post_detail.text.replace(/-->/gi, "$\\rightarrow$")}
+                    />
                 </div>
             </div>
         )
