@@ -73,10 +73,55 @@ class WritePostForm extends React.Component {
         this.setState({...state})
 
         this.props.dispatch(enroll_shortcut("s", this.save_post))
+        this.props.dispatch(enroll_shortcut("b", () => this.decorate_text("**")))
+        this.props.dispatch(enroll_shortcut("i", () => this.decorate_text("*")))
     }
 
     componentWillUnmount() {
         this.props.dispatch(remove_shortcut("s"))
+        this.props.dispatch(remove_shortcut("b"))
+        this.props.dispatch(remove_shortcut("i"))
+    }
+
+    decorate_text = letter => {
+        const body = document.getElementById("post_body");
+        const start = body.selectionStart;
+        const end = body.selectionEnd;
+
+        const text = this.state.post.text;
+
+        const len = letter.length
+
+        let new_text = ""
+        let new_start = 0;
+        let new_end = 0;
+
+        if (
+            text.substring(start - len, start) === letter &&
+            text.substring(end, end + len) === letter
+        ) {
+            new_text = text.substring(0, start - len) +
+                text.substring(start, end) +
+                text.substring(end + len, text.length);
+            new_start = start - len;
+            new_end = end - len;
+        } else {
+            new_text = text.substring(0, start) +
+                letter + text.substring(start, end) + letter +
+                text.substring(end, text.length);
+            new_start = start + len;
+            new_end = end + len;
+        }
+
+        this.setState({
+            post: {
+                ...this.state.post,
+                text: new_text
+            }
+        })
+
+        body.selectionStart = new_start;
+        body.selectionEnd = new_end;
     }
 
     save_post = () => {
@@ -85,7 +130,7 @@ class WritePostForm extends React.Component {
 	} else {
 	    this.props.save_post(this.state);
             this.setState({saved: true});
-	}
+        }
     }
 
     handleSelectCategory = async category_id => {
@@ -121,6 +166,7 @@ class WritePostForm extends React.Component {
                     category={this.state.category}
                 />
                 <TextareaAutosize
+                    id="post_body"
                     className={styles.body}
                     minRows={12}
                     as="textarea"
