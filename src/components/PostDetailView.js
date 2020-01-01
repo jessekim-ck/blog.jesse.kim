@@ -30,7 +30,18 @@ class PostDetailView extends React.Component {
                 </div>
                 <div className={styles.body}>
                     <MarkdownRenderer 
-                        source={this.props.post_detail.text.replace(/-->/gi, "$\\rightarrow$")}
+                        source={
+                            this.props.post_detail.text.replace(
+                                // Replace "-->" to "$rightarrow$"
+                                /-->/gi, "$\\rightarrow$"
+                            ).replace(
+                                // Detect empty lines
+                                /^(\r\n|\n|\r|\s*)$/gm, "&nbsp;\n"
+                            ).replace(
+                                // Detect end of lines
+                                /$/gm, "  "
+                            )
+                        }
                     />
                 </div>
             </div>
