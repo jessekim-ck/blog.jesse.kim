@@ -5,8 +5,9 @@ import FloatButton from "./FloatButton";
 import button_ok from "../assets/button_ok.png";
 import CategorySelector from "./CategorySelector";
 import TextareaAutosize from 'react-textarea-autosize';
-import { connect } from 'react-redux';
-import { enroll_shortcut, remove_shortcut } from '../redux/actions';
+import {connect} from 'react-redux';
+import {enroll_shortcut, remove_shortcut} from '../redux/actions';
+import {Prompt} from "react-router-dom";
 
 
 class ToastMessage extends React.Component {
@@ -77,10 +78,20 @@ class WritePostForm extends React.Component {
         this.props.dispatch(enroll_shortcut("i", () => this.decorate_text("*")))
     }
 
+    componentDidUpdate() {
+        if (!this.state.saved) {
+            // Prevents from leaving/refreshing site when unsaved
+            window.onbeforeunload = () => true;
+        } else {
+            window.onbeforeunload = null;
+        }
+    }
+
     componentWillUnmount() {
         this.props.dispatch(remove_shortcut("s"))
         this.props.dispatch(remove_shortcut("b"))
         this.props.dispatch(remove_shortcut("i"))
+        window.onbeforeunload = null;
     }
 
     decorate_text = letter => {
@@ -152,35 +163,43 @@ class WritePostForm extends React.Component {
 
     render() {
         return (
-            <form>
-                <input
-                    className={styles.title}
-                    type="text"
-                    name="title"
-                    placeholder="Title"
-                    value={this.state.post.title}
-                    onChange={event => this.handle_change(event)}
+            <div>
+                <form>
+                    <input
+                        className={styles.title}
+                        type="text"
+                        name="title"
+                        placeholder="Title"
+                        value={this.state.post.title}
+                        onChange={event => this.handle_change(event)}
+                    />
+                    <CategorySelector
+                        handleSelectCategory={this.handleSelectCategory}
+                        category={this.state.category}
+                    />
+                    <TextareaAutosize
+                        id="post_body"
+                        className={styles.body}
+                        minRows={12}
+                        as="textarea"
+                        name="text"
+                        placeholder="Write your post..."
+                        value={this.state.post.text}
+                        onChange={event => this.handle_change(event)}
+                    />
+                    <FloatButton
+                        source={button_ok}
+                        handle_click={() => this.props.handle_write_post(this.state)}
+                    />
+                    <ToastMessage saved={this.state.saved}/>
+                </form>
+                {/* Alert when unsaved changes would be discarded */}
+                <Prompt
+                    when={!this.state.saved}
+                    message="Hey!"
                 />
-                <CategorySelector
-                    handleSelectCategory={this.handleSelectCategory}
-                    category={this.state.category}
-                />
-                <TextareaAutosize
-                    id="post_body"
-                    className={styles.body}
-                    minRows={12}
-                    as="textarea"
-                    name="text"
-                    placeholder="Write your post..."
-                    value={this.state.post.text}
-                    onChange={event => this.handle_change(event)}
-                />
-                <FloatButton
-                    source={button_ok}
-                    handle_click={() => this.props.handle_write_post(this.state)}
-                />
-                <ToastMessage saved={this.state.saved}/>
-            </form>
+            </div>
+            
         )
     }
 }
