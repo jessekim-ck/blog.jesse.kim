@@ -92,20 +92,28 @@ h1, h2, h3, h4, h5, strong {
     margin: 0 auto;
 }
 
-.postListItem {
-    padding: 28px 12px;
-    border-bottom: solid 1px rgba(0,0,0,.125);
-}
-
 .postList .title {
     margin-bottom: 8px;
 }
 
 .postList .description {
+    margin-bottom: 12px;
+}
+
+.postListItem {
+    padding: 28px 12px;
+    border-bottom: solid 1px rgba(0,0,0,.125);
+}
+
+.postListItem .title {
     margin-bottom: 8px;
 }
 
-.postList .body {
+.postListItem .description {
+    margin-bottom: 8px;
+}
+
+.postListItem .body {
     height: 75px;
     overflow: hidden;
     color: #555555;
@@ -199,7 +207,7 @@ h1, h2, h3, h4, h5, strong {
 }
 
 .touchable {
-    color: black;
+    color: inherit;
     background-color: transparent;
     border: 0px;
 }

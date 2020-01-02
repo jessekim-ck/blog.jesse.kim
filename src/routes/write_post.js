@@ -1,7 +1,8 @@
-import React from 'react'
-import WritePostForm from '../components/WritePostForm'
+import React from 'react';
 import {writePost} from "../apis/apis";
 import styles from '../app.module.css';
+import Unauthorized from "../components/Unauthorized";
+import WritePostForm from '../components/WritePostForm';
 
 import {connect} from "react-redux";
 import {enroll_shortcut, remove_shortcut} from "../redux/actions"
@@ -31,6 +32,11 @@ class WritePost extends React.Component {
     }
 
     render() {
+        if (!this.props.authenticated) {
+            return (
+                <Unauthorized/>
+            )
+        }
         return (
             <div className={styles.post}>
                 <WritePostForm

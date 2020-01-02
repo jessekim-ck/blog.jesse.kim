@@ -3,7 +3,7 @@ import React from 'react'
 
 const Unauthorized = () => (
     <div>
-        Unauthorized approach
+        Unauthorized Approach!
     </div>
 )
 

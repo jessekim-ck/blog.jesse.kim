@@ -1,5 +1,5 @@
 import React from 'react'
-import PostDetailView from '../components/PostDetailView'
+// import PostDetailView from '../components/PostDetailView'
 import {getPostDetail, writeComment} from "../apis/apis";
 import CommentView from "../components/CommentView";
 import styles from "../app.module.css";
@@ -7,6 +7,8 @@ import {Helmet} from "react-helmet";
 import {Link} from "react-router-dom";
 import button_edit from "../assets/button_edit.png";
 import FloatButton from "../components/FloatButton";
+import format_datetime from "../utils/format_datetime";
+import MarkdownRenderer from "../components/MarkdownRenderer";
 
 import {connect} from "react-redux";
 import {enroll_shortcut, remove_shortcut} from "../redux/actions";
@@ -72,7 +74,39 @@ class PostDetail extends React.Component {
                     <meta name="description" content={description}/>
                     <link rel="canonical" href={"https://blog.jesse.kim" + window.location.pathname}/>
                 </Helmet>
-                <PostDetailView post_detail={this.state.post}/>
+                <div>
+                    <div className={styles.subtitle}>
+                        {
+                            <Link className={styles.touchable} to={`/category/${this.state.post.category_id}`}>
+                                {this.state.post.category}
+                            </Link> 
+                            || 
+                            'UNCATEGORIZED'
+                        }
+                    </div>
+                    <div className={styles.title}>
+                        {this.state.post.title}
+                    </div>
+                    <div className={styles.description}>
+                        <div>
+                            writer: {this.state.post.writer}
+                        </div>
+                        <div>
+                            created: {format_datetime(this.state.post.created)}
+                        </div>
+                        <div>
+                            last updated: {format_datetime(this.state.post.updated)}
+                        </div>
+                    </div>
+                    <div className={styles.body}>
+                        <MarkdownRenderer 
+                            source={
+                                this.state.post.text
+                            }
+                        />
+                    </div>
+                </div>
+                {/* <PostDetailView post_detail={this.state.post}/> */}
                 <CommentView
                     comment_list={this.state.comment_list}
                     handleWriteComment={this.handleWriteComment}

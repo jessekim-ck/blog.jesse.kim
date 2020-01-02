@@ -18,7 +18,8 @@ export default (
         <Route path="/post/write" component={WritePost} />
         <Route path="/post/:id/edit" component={EditPost} />
         <Route path="/post/:id" component={PostDetail} />
-        <Route path="/category" component={Category} />
+        <Route path="/category/:id/write" component={WritePost} />
+        <Route path="/category/:id" component={Category} />
         <Route component={PageNotFound} />
     </Switch>
 );

@@ -11,7 +11,18 @@ const MarkdownRenderer = props => {
     return (
         <MathJax.Provider>
             <ReactMarkdown
-                source={props.source}
+                source={
+                    props.source.replace(
+                        // Replace "-->" to "$rightarrow$"
+                        /-->/gi, "$\\rightarrow$"
+                    ).replace(
+                        // Detect empty lines
+                        /^(\r\n|\n|\r|\s*)$/gm, "&nbsp;\n"
+                    ).replace(
+                        // Detect end of lines
+                        /$/gm, "  "
+                    )
+                }
                 plugins={[RemarkMathPlugin]}
                 renderers={{
                     code: props => <SyntaxHighlighter language={props.language} style={darcula}>{props.value}</SyntaxHighlighter>,
