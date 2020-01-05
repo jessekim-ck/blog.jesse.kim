@@ -21,6 +21,10 @@ import {
 
 
 class App extends React.Component {
+
+    state = {
+        render: false
+    }
     
     async componentDidMount() {
         const token = localStorage.getItem('token');
@@ -35,6 +39,8 @@ class App extends React.Component {
         this.props.dispatch(enroll_shortcut("l", this.toggle_sidebar));
         window.addEventListener('keydown', this.onMetaUp);
         window.addEventListener('keyup', this.onMetaDown);
+
+        this.setState({render: true})
     }
 
     componentWillUnmount() {
@@ -69,6 +75,12 @@ class App extends React.Component {
     toggle_sidebar = () => this.props.dispatch(toggle_sidebar())
 
     render() {
+        if (!this.state.render) {
+            return (
+                <div></div>
+            )
+        }
+        
         const sidebar_width = isMobile ? null : "wide"
 
         return (

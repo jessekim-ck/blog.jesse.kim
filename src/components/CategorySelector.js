@@ -40,7 +40,7 @@ class CategorySelector extends React.Component {
         await this.renderObjectList()
     }
 
-    async componentDidUpdate(prevProps, prevState, snapshot) {
+    async componentDidUpdate(prevProps) {
         if (prevProps.category.id !== this.props.category.id) {
             await this.renderObjectList()
         }
@@ -91,7 +91,7 @@ class CategorySelector extends React.Component {
                             handleSelectCategory={this.props.handleSelectCategory}
                             renderObjectList={this.renderObjectList} />
                     )
-                    break
+                    break;
                 }
                 category = category.parent
             }

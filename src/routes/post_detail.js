@@ -26,14 +26,12 @@ class PostDetail extends React.Component {
         comment_list: []
     }
 
-    handleWriteComment = async (nickname, title) => {
-        await writeComment(this.state.post.id, nickname, title)
-        await this.updatePostDetail()
-    }
-
     async componentDidMount() {
         await this.updatePostDetail();
-        
+        this.enroll_shortcuts()
+    }
+
+    enroll_shortcuts = () => {
         const post_id = this.props.match.params.id;
         this.props.dispatch(enroll_shortcut("e", () => this.props.history.push(`/post/${post_id}/edit`)));
         this.props.dispatch(enroll_shortcut("h", () => this.props.history.push("/")));
@@ -43,6 +41,7 @@ class PostDetail extends React.Component {
     async componentDidUpdate(prevProps) {
         if (this.props.match.params.id !== prevProps.match.params.id) {
             await this.updatePostDetail()
+            this.enroll_shortcuts()
         }
     }
 
@@ -60,6 +59,11 @@ class PostDetail extends React.Component {
         } else {
             this.setState({...state})
         }
+    }
+    
+    handleWriteComment = async (nickname, title) => {
+        await writeComment(this.state.post.id, nickname, title)
+        await this.updatePostDetail()
     }
 
     render() {

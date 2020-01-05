@@ -1,7 +1,6 @@
 import React from 'react';
 import WritePostForm from '../components/WritePostForm';
-import {editPost} from "../apis/apis";
-import Unauthorized from "../components/Unauthorized";
+import {editPost, getPostDetail, getCategoryGenealogy} from "../apis/apis";
 import {Helmet} from "react-helmet";
 import styles from "../app.module.css";
 
@@ -11,7 +10,31 @@ import {enroll_shortcut, remove_shortcut} from "../redux/actions"
 
 class EditPost extends React.Component {
 
-    componentDidMount() {
+    state = {
+        post: null,
+        category: null
+    }
+
+    async componentDidMount() {
+
+        // Update post information
+        const state = {}
+        const post_id = this.props.match.params.id
+        const post_detail = await getPostDetail(post_id)
+        state.post = await post_detail.post
+        if (state.post.category_id) {
+            state.category = await getCategoryGenealogy(state.post.category_id)
+        }
+
+        // Can only edit self-writed posts
+        if (this.props.currentUser.id !== state.post.writer_id || !this.props.authenticated) {
+            alert("You have no access to this page!");
+            this.props.history.goBack();
+        }
+
+        this.setState({...state})
+        
+        // Enroll shortcuts
         this.props.dispatch(enroll_shortcut("h", () => this.props.history.push("/")));
         this.props.dispatch(enroll_shortcut("u", () => this.props.history.push("/post/write")));
     }
@@ -31,11 +54,6 @@ class EditPost extends React.Component {
     }
 
     render() {
-        if (!this.props.authenticated) {
-            return (
-                <Unauthorized/>
-            )
-        }
         return (
             <div className={styles.post}>
                 <Helmet>
@@ -44,7 +62,8 @@ class EditPost extends React.Component {
                 <WritePostForm
                     handle_write_post={this.handle_write_post}
                     save_post={this.save_post}
-                    post_id={this.props.match.params.id}
+                    post={this.state.post}
+                    category={this.state.category}
                 />
             </div>
         )

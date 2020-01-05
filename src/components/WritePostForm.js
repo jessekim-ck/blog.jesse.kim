@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../app.module.css';
-import {getCategoryGenealogy, getPostDetail} from "../apis/apis";
+import {getCategoryGenealogy} from "../apis/apis";
 import FloatButton from "./FloatButton";
 import button_ok from "../assets/button_ok.png";
 import CategorySelector from "./CategorySelector";
@@ -57,33 +57,27 @@ class WritePostForm extends React.Component {
     }
 
     async componentDidMount() {
-        const post_id = await this.props.post_id
-        const category_id = await this.props.category_id
-        const state = {}
-        if (post_id) {
-            // When editing post
-            const post_detail = await getPostDetail(post_id)
-            state.post = await post_detail.post
-            if (state.post.category_id) {
-                state.category = await getCategoryGenealogy(state.post.category_id)
-            }
-        } else if (category_id) {
-            // When creating post with selected category - now not used
-            state.category = await getCategoryGenealogy(category_id)
-        }
-        this.setState({...state})
-
         this.props.dispatch(enroll_shortcut("s", this.save_post))
         this.props.dispatch(enroll_shortcut("b", () => this.decorate_text("**")))
         this.props.dispatch(enroll_shortcut("i", () => this.decorate_text("*")))
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
+        
+        // Prevents from leaving/refreshing page unsaved
         if (!this.state.saved) {
-            // Prevents from leaving/refreshing site when unsaved
             window.onbeforeunload = () => true;
         } else {
             window.onbeforeunload = null;
+        }
+
+        // Update post title and description
+        if (!prevProps.post && this.props.post) {
+            this.setState({post: this.props.post})
+        }
+        // Update category
+        if (!prevProps.category && this.props.category) {
+            this.setState({category: this.props.category})
         }
     }
 
@@ -137,9 +131,9 @@ class WritePostForm extends React.Component {
 
     save_post = () => {
         if (this.state.saved) {
-	    this.props.handle_write_post(this.state)
-	} else {
-	    this.props.save_post(this.state);
+	        this.props.handle_write_post(this.state);
+        } else {
+            this.props.save_post(this.state);
             this.setState({saved: true});
         }
     }
@@ -193,10 +187,9 @@ class WritePostForm extends React.Component {
                     />
                     <ToastMessage saved={this.state.saved}/>
                 </form>
-                {/* Alert when unsaved changes would be discarded */}
                 <Prompt
                     when={!this.state.saved}
-                    message="Hey!"
+                    message="Unsaved change would be discarded!"
                 />
             </div>
             
