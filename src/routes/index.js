@@ -7,8 +7,14 @@ import styles from "../app.module.css";
 import {connect} from "react-redux";
 import {enroll_shortcut, remove_shortcut} from "../redux/actions";
 
+import Loader from "../components/Loader";
+
 
 class Index extends React.Component {
+
+    state = {
+        post_list: []
+    }
 
     async componentDidMount() {
         const post_list = await getPostList()
@@ -23,11 +29,13 @@ class Index extends React.Component {
         this.props.dispatch(remove_shortcut("u"));
     }
 
-    state = {
-        post_list: []
-    }
-
     render() {
+        if (this.state.post_list.length === 0) {
+            return (
+                <Loader />
+            )
+        }
+        
         return (
             <div>
                 <Helmet>

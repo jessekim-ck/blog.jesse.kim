@@ -17,6 +17,7 @@
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.3.0",
+    "react-spinners": "^0.8.0",
     "react-syntax-highlighter": "^11.0.2",
     "react-textarea-autosize": "^7.1.2",
     "redux": "^4.0.4",
