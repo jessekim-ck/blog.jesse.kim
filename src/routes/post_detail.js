@@ -1,5 +1,4 @@
 import React from 'react'
-// import PostDetailView from '../components/PostDetailView'
 import {getPostDetail, writeComment} from "../apis/apis";
 import CommentView from "../components/CommentView";
 import styles from "../app.module.css";
@@ -110,7 +109,6 @@ class PostDetail extends React.Component {
                         />
                     </div>
                 </div>
-                {/* <PostDetailView post_detail={this.state.post}/> */}
                 <CommentView
                     comment_list={this.state.comment_list}
                     handleWriteComment={this.handleWriteComment}

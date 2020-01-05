@@ -19,8 +19,10 @@ class WritePost extends React.Component {
             this.props.history.goBack();
         }
 
-        if (this.props.match) {
-            const category = await getCategoryGenealogy(this.props.match.params.id);
+        const category_id = this.props.match.params.id
+
+        if (category_id) {
+            const category = await getCategoryGenealogy(category_id);
             this.setState({category});
         }
 
