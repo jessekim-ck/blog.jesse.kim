@@ -57,9 +57,10 @@ class WritePostForm extends React.Component {
     }
 
     async componentDidMount() {
-        this.props.dispatch(enroll_shortcut("s", this.save_post))
-        this.props.dispatch(enroll_shortcut("b", () => this.decorate_text("**")))
-        this.props.dispatch(enroll_shortcut("i", () => this.decorate_text("*")))
+        this.props.dispatch(enroll_shortcut("s", this.save_post));
+        this.props.dispatch(enroll_shortcut("b", () => this.decorate_text("**")));
+        this.props.dispatch(enroll_shortcut("i", () => this.decorate_text("*")));
+        this.props.dispatch(enroll_shortcut("m", () => this.decorate_text("$")));
     }
 
     componentDidUpdate(prevProps) {
@@ -73,18 +74,19 @@ class WritePostForm extends React.Component {
 
         // Update post title and description
         if (!prevProps.post && this.props.post) {
-            this.setState({post: this.props.post})
+            this.setState({post: this.props.post});
         }
         // Update category
         if (!prevProps.category && this.props.category) {
-            this.setState({category: this.props.category})
+            this.setState({category: this.props.category});
         }
     }
 
     componentWillUnmount() {
-        this.props.dispatch(remove_shortcut("s"))
-        this.props.dispatch(remove_shortcut("b"))
-        this.props.dispatch(remove_shortcut("i"))
+        this.props.dispatch(remove_shortcut("s"));
+        this.props.dispatch(remove_shortcut("b"));
+        this.props.dispatch(remove_shortcut("i"));
+        this.props.dispatch(remove_shortcut("$"));
         window.onbeforeunload = null;
     }
 
