@@ -13,20 +13,50 @@ import Loader from "../components/Loader";
 class Index extends React.Component {
 
     state = {
-        post_list: []
+        post_list: [],
+        render_list: [],
     }
 
     async componentDidMount() {
         const post_list = await getPostList()
-        this.setState({post_list})
+        this.setState({
+            post_list: post_list,
+            render_list: post_list.slice(1, 20),
+        })
         
         this.props.dispatch(enroll_shortcut("h", () => this.props.history.push("/")));
         this.props.dispatch(enroll_shortcut("u", () => this.props.history.push("/post/write")));
+        document.addEventListener('scroll', this.handle_scroll);
     }
 
     componentWillUnmount() {
         this.props.dispatch(remove_shortcut("h"));
         this.props.dispatch(remove_shortcut("u"));
+        document.removeEventListener('scroll', this.handle_scroll);
+    }
+
+    update_render_list = () => {
+        const current_length = this.state.render_list.length;
+        const new_length = Math.min(this.state.post_list.length, current_length + 20)
+        this.setState({
+            render_list: this.state.post_list.slice(1, new_length),
+        })
+    }
+
+    handle_scroll = () => {
+        const body = document.body;
+        const html = document.documentElement;
+
+        // Window(browser) height
+        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+        // Document(page) height
+        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        // Scroll Height
+        const windowBottom = windowHeight + window.pageYOffset;
+
+        if (windowBottom >= docHeight) {
+            this.update_render_list();
+        }
     }
 
     render() {
@@ -44,7 +74,7 @@ class Index extends React.Component {
                     <link rel="canonical" href="https://blog.jesse.kim"/>
                 </Helmet>
                 <div className={styles.postList}>
-                    <PostList post_list={this.state.post_list}/>
+                    <PostList post_list={this.state.render_list}/>
                 </div>
             </div>
         )
