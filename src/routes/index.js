@@ -21,7 +21,7 @@ class Index extends React.Component {
         const post_list = await getPostList()
         this.setState({
             post_list: post_list,
-            render_list: post_list.slice(1, 20),
+            render_list: post_list.slice(0, 9),
         })
         
         this.props.dispatch(enroll_shortcut("h", () => this.props.history.push("/")));
@@ -37,9 +37,9 @@ class Index extends React.Component {
 
     update_render_list = () => {
         const current_length = this.state.render_list.length;
-        const new_length = Math.min(this.state.post_list.length, current_length + 20)
+        const new_length = Math.min(this.state.post_list.length, current_length + 10);
         this.setState({
-            render_list: this.state.post_list.slice(1, new_length),
+            render_list: this.state.post_list.slice(0, new_length - 1),
         })
     }
 
@@ -81,4 +81,4 @@ class Index extends React.Component {
     }
 }
 
-export default connect()(Index)
+export default connect()(Index);
