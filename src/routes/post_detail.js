@@ -27,7 +27,7 @@ class PostDetail extends React.Component {
 
     async componentDidMount() {
         await this.updatePostDetail();
-        this.enroll_shortcuts()
+        this.enroll_shortcuts();
     }
 
     enroll_shortcuts = () => {
@@ -39,8 +39,8 @@ class PostDetail extends React.Component {
 
     async componentDidUpdate(prevProps) {
         if (this.props.match.params.id !== prevProps.match.params.id) {
-            await this.updatePostDetail()
-            this.enroll_shortcuts()
+            await this.updatePostDetail();
+            this.enroll_shortcuts();
         }
     }
 
@@ -51,24 +51,24 @@ class PostDetail extends React.Component {
     }
 
     updatePostDetail = async () => {
-        const state = await getPostDetail(this.props.match.params.id)
+        const state = await getPostDetail(this.props.match.params.id);
         if (!state) {
-            alert("Invalid post id")
-            this.props.history.push("/")
+            alert("Invalid post id");
+            this.props.history.push("/");
         } else {
-            this.setState({...state})
+            this.setState({...state});
         }
     }
     
     handleWriteComment = async (nickname, title) => {
-        await writeComment(this.state.post.id, nickname, title)
-        await this.updatePostDetail()
+        await writeComment(this.state.post.id, nickname, title);
+        await this.updatePostDetail();
     }
 
     render() {
 
-        const title = (this.state.post.category && (this.state.post.category + "-") + this.state.post.title) || "JesseKim's Blog"
-        const description = this.state.post.text.split("\n\n")[0] || "제씨킴의 데이터사이언스 프로그래밍 일상 블로그입니다."
+        const title = (this.state.post.category && (this.state.post.category + "-") + this.state.post.title) || "JesseKim's Blog";
+        const description = this.state.post.text.split("\n\n")[0] || "제씨킴의 데이터사이언스 프로그래밍 일상 블로그입니다.";
 
         return (
             <div className={styles.post}>
@@ -91,22 +91,12 @@ class PostDetail extends React.Component {
                         {this.state.post.title}
                     </div>
                     <div className={styles.description}>
-                        <div>
-                            writer: {this.state.post.writer}
-                        </div>
-                        <div>
-                            created: {format_datetime(this.state.post.created)}
-                        </div>
-                        <div>
-                            last updated: {format_datetime(this.state.post.updated)}
-                        </div>
+                        <div>writer: {this.state.post.writer}</div>
+                        <div>created: {format_datetime(this.state.post.created)}</div>
+                        <div>last updated: {format_datetime(this.state.post.updated)}</div>
                     </div>
                     <div className={styles.body}>
-                        <MarkdownRenderer 
-                            source={
-                                this.state.post.text
-                            }
-                        />
+                        <MarkdownRenderer source={this.state.post.text}/>
                     </div>
                 </div>
                 <CommentView
@@ -127,6 +117,6 @@ class PostDetail extends React.Component {
     }
 }
 
-const mapStateToProps = state => state
+const mapStateToProps = state => state;
 
-export default connect(mapStateToProps)(PostDetail)
+export default connect(mapStateToProps)(PostDetail);
