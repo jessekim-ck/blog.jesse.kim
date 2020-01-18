@@ -44,13 +44,14 @@ class EditPost extends React.Component {
         this.props.dispatch(remove_shortcut("u"));
     }
 
-    handle_write_post = async data => {
-        await this.save_post(data)
-        this.props.history.push(`/post/${data.post.id}`)
-    }
+    // handle_write_post = async data => {
+    //     await this.save_post(data)
+    //     this.props.history.push(`/post/${data.post.id}`)
+    // }
 
     save_post = async data => {
-        await editPost(data.post.id, data.post.writer_id, data.category.id, data.post.title, data.post.text)
+        const saved_post = await editPost(data.post.id, data.post.writer_id, data.category.id, data.post.title, data.post.text);
+        return saved_post;
     }
 
     render() {
@@ -60,10 +61,10 @@ class EditPost extends React.Component {
                     <title>Edit post</title>
                 </Helmet>
                 <WritePostForm
-                    handle_write_post={this.handle_write_post}
                     save_post={this.save_post}
                     post={this.state.post}
                     category={this.state.category}
+                    history={this.props.history}
                 />
             </div>
         )

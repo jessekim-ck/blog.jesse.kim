@@ -18,21 +18,21 @@ class ToastMessage extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (!prevProps.saved && this.props.saved) {
-            this.setState({visible: true})
+            this.setState({visible: true});
             setTimeout(
                 () => this.setState({visible: false}),
                 1500
-            )
+            );
         }
     }
 
     render() {
 
         if (!this.state.visible) {
-            return null
+            return null;
         }
 
-        const now = new Date()
+        const now = new Date();
 
         return (
             <div className={styles.toast}>
@@ -97,7 +97,7 @@ class WritePostForm extends React.Component {
 
         const text = this.state.post.text;
 
-        const len = letter.length
+        const len = letter.length;
 
         let new_text = ""
         let new_start = 0;
@@ -131,30 +131,33 @@ class WritePostForm extends React.Component {
         body.selectionEnd = new_end;
     }
 
-    save_post = () => {
+    save_post = async () => {
         if (this.state.saved) {
-	        this.props.handle_write_post(this.state);
+            this.props.post && 
+            this.props.history.push(`/post/${this.props.post.id}`);
+            return;
         } else {
-            this.props.save_post(this.state);
             this.setState({saved: true});
+            await this.props.save_post(this.state);
+            return;
         }
     }
 
     handleSelectCategory = async category_id => {
-        const category = await getCategoryGenealogy(category_id)
-        this.setState({category: category})
+        const category = await getCategoryGenealogy(category_id);
+        this.setState({category: category});
     }
 
     handle_change = event => {
-        const name = event.target.name
-        const value = event.target.value
+        const name = event.target.name;
+        const value = event.target.value;
         this.setState({
             post: {
                 ...this.state.post,
                 [name]: value
             }
         })
-        this.setState({saved: false})
+        this.setState({saved: false});
     }
 
     render() {
@@ -185,7 +188,7 @@ class WritePostForm extends React.Component {
                     />
                     <FloatButton
                         source={button_ok}
-                        handle_click={() => this.props.handle_write_post(this.state)}
+                        handle_click={() => this.props.save_post(this.state)}
                     />
                     <ToastMessage saved={this.state.saved}/>
                 </form>
@@ -199,4 +202,4 @@ class WritePostForm extends React.Component {
     }
 }
 
-export default connect()(WritePostForm)
+export default connect()(WritePostForm);

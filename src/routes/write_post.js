@@ -35,24 +35,25 @@ class WritePost extends React.Component {
         this.props.dispatch(remove_shortcut("u"));
     }
 
-    handle_write_post = async data => {
-        const saved_post = await this.save_post(data);
-        this.props.history.push(`/post/${saved_post.id}`);
-    }
+    // handle_write_post = async data => {
+    //     const saved_post = await this.save_post(data);
+    //     this.props.history.push(`/post/${saved_post.id}`);
+    // }
 
     save_post = async data => {
         const writer_id = await this.props.currentUser.id;
-        const post = await writePost(writer_id, data.category.id, data.post.title, data.post.text);
-        return post;
+        const saved_post = await writePost(writer_id, data.category.id, data.post.title, data.post.text);
+        this.props.history.push(`/post/${saved_post.id}/edit`);
+        return;
     }
 
     render() {
         return (
             <div className={styles.post}>
                 <WritePostForm
-                    handle_write_post={this.handle_write_post}
-                    save_post={this.handle_write_post}
+                    save_post={this.save_post}
                     category={this.state.category}
+                    history={this.props.history}
                 />
             </div>
         )
