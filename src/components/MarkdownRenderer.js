@@ -25,7 +25,10 @@ const MarkdownRenderer = props => {
                 }
                 plugins={[RemarkMathPlugin]}
                 renderers={{
-                    code: props => <SyntaxHighlighter language={props.language} style={darcula}>{props.value}</SyntaxHighlighter>,
+                    code: props => <SyntaxHighlighter language={props.language} style={darcula}>
+                        {/* remove &nbsp; and following three spaces */}
+                        {props.value.replace(/&nbsp;\s{3}/gi, "")}
+                    </SyntaxHighlighter>,
                     math: props => <MathJax.Node formula={props.value}/>,
                     inlineMath: props => <MathJax.Node formula={props.value} inline/>,
                 }}/>
