@@ -19,18 +19,28 @@ class Category extends React.Component {
     }
 
     async componentDidMount() {
-        const category_id = this.props.match.params.id
-        const category_detail = await getCategoryDetail(category_id)
-        
-        this.setState({...category_detail})
+        await this.update_category_detail();
         
         this.props.dispatch(enroll_shortcut("h", () => this.props.history.push("/")));
         this.props.dispatch(enroll_shortcut("u", () => this.props.history.push(`/category/${this.state.category.id}/write`)));
     }
 
+    async componentDidUpdate(prevProps) {
+        if (this.props.match.params.id !== prevProps.match.params.id) {
+            await this.update_category_detail();
+        }
+    }
+
     componentWillUnmount() {
         this.props.dispatch(remove_shortcut("h"));
         this.props.dispatch(remove_shortcut("u"));
+    }
+
+    update_category_detail = async () => {
+        const category_id = this.props.match.params.id
+        const category_detail = await getCategoryDetail(category_id)
+        
+        this.setState({...category_detail})
     }
 
     render() {

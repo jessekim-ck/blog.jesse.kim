@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 import {getCategoryDetail, getCategoryList} from "../apis/apis";
 import styles from "../app.module.css";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 
 const PostItem = props => {
@@ -32,28 +32,58 @@ class CategoryItem extends React.Component {
     state = {
         children_category_list: [],
         children_post_list: [],
-    }
-
-    update_category_list = async category_id => {
-        const state = await getCategoryDetail(category_id)
-        this.setState({...state})
+        meta: false,
     }
 
     async componentDidMount() {
-        await this.update_category_list(this.props.category.id)
+        await this.update_category_list(this.props.category.id);
+        window.addEventListener('keydown', this.onMetaDown);
+        window.addEventListener('keyup', this.onMetaUp);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keydown');
+        window.removeEventListener('keyup');
+    }
+
+    onMetaDown = event => {
+        if (event.key === "Control" || event.key === "Meta") {
+            this.setState({meta: true});
+        }
+    }
+
+    onMetaUp = event => {
+        if (event.key === "Control" || event.key === "Meta") {
+            this.setState({meta: false});
+        }
+    }
+
+    on_click_category = () => {
+        this.state.meta && this.props.history.push(`/category/${this.props.category.id}`);
+    }
+
+    update_category_list = async category_id => {
+        const state = await getCategoryDetail(category_id);
+        this.setState({...state});
     }
 
     children_category_items = () => this.state.children_category_list.map(
-        category => <CategoryItem category={{...category}} key={category.id}/>
+        category => <CategoryItem 
+            key={category.id}
+            category={{...category}} 
+            history={this.props.history}
+        />
     )
 
     render() {
         return (
             <Accordion>
+                {/* Content Header */}
                 <Accordion.Toggle
                     className={styles.contentNavItem}
-                    eventKey={this.props.category.id}
+                    eventKey={!this.state.meta && this.props.category.id}
                     as={Card.Header}
+                    onClick={this.on_click_category}
                 >
                     <div className={styles.title}>
                         {this.props.category.title}
@@ -62,6 +92,8 @@ class CategoryItem extends React.Component {
                         {this.props.category.description} | {this.props.category.num_total_posts} posts
                     </div>
                 </Accordion.Toggle>
+
+                {/* Children contents */}
                 <Accordion.Collapse eventKey={this.props.category.id}>
                     <div className={styles.contentNavChildren}>
                         <div>
@@ -91,7 +123,11 @@ class ContentNavigator extends React.Component {
     }
 
     parent_category_items = () => this.state.children_category_list.map(
-        category => <CategoryItem category={{...category}} key={category.id} />
+        category => <CategoryItem 
+            key={category.id}     
+            category={{...category}}
+            history={this.props.history}
+        />
     )
 
     render() {
@@ -117,14 +153,12 @@ class ContentNavigator extends React.Component {
                             LOGIN
                         </Link>
                     }
-                    
                 </div>    
             </div>
-            
         )
     }
 }
 
 const mapStateToProps = state => state.user
 
-export default connect(mapStateToProps)(ContentNavigator)
+export default withRouter(connect(mapStateToProps)(ContentNavigator))
