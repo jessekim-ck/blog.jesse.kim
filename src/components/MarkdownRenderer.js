@@ -6,6 +6,18 @@ import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlig
 import {darcula} from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 
+const ImageRenderer = props => {
+
+    const [[alt], [width, height]] = props.alt.split("|").map(str => str.trim().split("x"));
+    
+    return (
+        <center>
+            <img src={props.src} alt={alt} width={width} height={height} style={{textAlign: "center"}}/>
+        </center>
+    )
+}
+
+
 const MarkdownRenderer = props => {
 
     return (
@@ -31,6 +43,7 @@ const MarkdownRenderer = props => {
                     </SyntaxHighlighter>,
                     math: props => <MathJax.Node formula={props.value}/>,
                     inlineMath: props => <MathJax.Node formula={props.value} inline/>,
+                    image: props => ImageRenderer(props)
                 }}/>
         </MathJax.Provider>
     )
