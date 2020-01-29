@@ -68,7 +68,7 @@ class PostDetail extends React.Component {
     render() {
 
         const title = (this.state.post.category && (this.state.post.category + "-") + this.state.post.title) || "JesseKim's Blog";
-        const description = this.state.post.text.split("\n\n")[0] || "제씨킴의 데이터사이언스 프로그래밍 일상 블로그입니다.";
+        const description = this.state.post.text.split("\n\n")[0] || "제씨킴의 데이터사이언스 프로그래밍 일상 블로그";
 
         return (
             <div className={styles.post}>
