@@ -29,6 +29,7 @@ const NavigationBar = props => {
             <div>
                 <Nav className="mr-auto">
                     <Link className="nav-link" to="/">HOME</Link>
+                    <Link className="nav-link" to="/about">ABOUT</Link>
                     {
                         props.authenticated &&
                         <Link className="nav-link" to="/post/write">+</Link>
