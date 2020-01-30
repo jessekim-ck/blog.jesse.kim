@@ -12,7 +12,7 @@ const ImageRenderer = props => {
     
     return (
         <center>
-            <img src={props.src} alt={alt} width={width} height={height} style={{textAlign: "center"}}/>
+            <img src={props.src} alt={alt} width={width} height={height}/>
         </center>
     )
 }
