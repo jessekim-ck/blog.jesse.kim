@@ -37,30 +37,30 @@ class App extends React.Component {
         }
 
         this.props.dispatch(enroll_shortcut("l", this.toggle_sidebar));
-        window.addEventListener('keydown', this.onMetaUp);
-        window.addEventListener('keyup', this.onMetaDown);
+        window.addEventListener('keydown', this.onMetaDown);
+        window.addEventListener('keyup', this.onMetaUp);
 
         this.setState({render: true})
     }
 
     componentWillUnmount() {
-        window.removeEventListener("keydown", this.onMetaUp);
-	    window.removeEventListener("keyup", this.onMetaDown);
-    }
-
-    onMetaUp = event => {
-        if (event.key === "Meta" || event.key === "Control") {
-            window.addEventListener('keydown', this.onKeyUp);
-        }
+        window.removeEventListener("keydown", this.onMetaDown);
+	    window.removeEventListener("keyup", this.onMetaUp);
     }
 
     onMetaDown = event => {
         if (event.key === "Meta" || event.key === "Control") {
-            window.removeEventListener('keydown', this.onKeyUp);
+            window.addEventListener('keydown', this.onKeyDown);
         }
     }
 
-    onKeyUp = event => {
+    onMetaUp = event => {
+        if (event.key === "Meta" || event.key === "Control") {
+            window.removeEventListener('keydown', this.onKeyDown);
+        }
+    }
+
+    onKeyDown = event => {
         if (this.props.shortcut.registered[event.key]) {
             event.preventDefault();
             this.props.shortcut.registered[event.key]();
