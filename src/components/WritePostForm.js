@@ -64,15 +64,7 @@ class WritePostForm extends React.Component {
         this.props.dispatch(enroll_shortcut("m", () => this.decorate_text("$")));
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        
-        // Prevents from leaving/refreshing page unsaved
-        if (!this.state.saved) {
-            window.onbeforeunload = () => true;
-        } else {
-            window.onbeforeunload = null;
-        }
-
+    componentDidUpdate(prevProps) {
         // Update post title and description
         if (!prevProps.post && this.props.post) {
             this.setState({post: this.props.post});
@@ -80,11 +72,6 @@ class WritePostForm extends React.Component {
         // Update category
         if (!prevProps.category && this.props.category) {
             this.setState({category: this.props.category});
-        }
-        
-        // update status when post updated
-        if (prevState.post.id && prevState.post !== this.state.post) {
-            this.setState({saved: false});
         }
     }
 
@@ -126,12 +113,8 @@ class WritePostForm extends React.Component {
             new_end = end + len;
         }
 
-        this.setState({
-            post: {
-                ...this.state.post,
-                text: new_text
-            }
-        })
+        this.setState({post: {text: new_text}});
+        this.unsave_post();
 
         body.selectionStart = new_start;
         body.selectionEnd = new_end;
@@ -139,18 +122,21 @@ class WritePostForm extends React.Component {
 
     save_post = async () => {
         if (this.state.saved) {
-            this.props.post && 
-            this.props.history.push(`/post/${this.props.post.id}`);
-            return;
+            this.props.post && this.props.history.push(`/post/${this.props.post.id}`);
         } else {
-            this.setState({saved: true});
             try {
+                this.setState({saved: true});
                 await this.props.save_post(this.state);
-                return;
+                window.onbeforeunload = null;
             } catch (err) {
-                this.setState({saved: false});
+                this.unsave_post();
             }
         }
+    }
+
+    unsave_post = () => {
+        this.setState({saved: false});
+        window.onbeforeunload = () => true;
     }
 
     handleSelectCategory = async category_id => {
@@ -161,12 +147,8 @@ class WritePostForm extends React.Component {
     handle_change = event => {
         const name = event.target.name;
         const value = event.target.value;
-        this.setState({
-            post: {
-                ...this.state.post,
-                [name]: value
-            }
-        });
+        this.setState({post: {[name]: value}});
+        this.unsave_post();
     }
 
     render() {
@@ -203,7 +185,7 @@ class WritePostForm extends React.Component {
                 </form>
                 <Prompt
                     when={!this.state.saved}
-                    message="Unsaved change would be discarded!"
+                    message="Changes you made may not be saved."
                 />
             </div>
             
