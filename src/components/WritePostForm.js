@@ -46,6 +46,7 @@ class WritePostForm extends React.Component {
 
     state = {
         post: {
+            id: '',
             title: '',
             text: '',
         },
@@ -63,7 +64,7 @@ class WritePostForm extends React.Component {
         this.props.dispatch(enroll_shortcut("m", () => this.decorate_text("$")));
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         
         // Prevents from leaving/refreshing page unsaved
         if (!this.state.saved) {
@@ -80,6 +81,11 @@ class WritePostForm extends React.Component {
         if (!prevProps.category && this.props.category) {
             this.setState({category: this.props.category});
         }
+        
+        // update status when post updated
+        if (prevState.post.id && prevState.post !== this.state.post) {
+            this.setState({saved: false});
+        }
     }
 
     componentWillUnmount() {
@@ -94,9 +100,7 @@ class WritePostForm extends React.Component {
         const body = document.getElementById("post_body");
         const start = body.selectionStart;
         const end = body.selectionEnd;
-
         const text = this.state.post.text;
-
         const len = letter.length;
 
         let new_text = ""
@@ -107,12 +111,14 @@ class WritePostForm extends React.Component {
             text.substring(start - len, start) === letter &&
             text.substring(end, end + len) === letter
         ) {
+            // remove decoration when the text is already decorated
             new_text = text.substring(0, start - len) +
                 text.substring(start, end) +
                 text.substring(end + len, text.length);
             new_start = start - len;
             new_end = end - len;
         } else {
+            // add decoration when the text is not decorated
             new_text = text.substring(0, start) +
                 letter + text.substring(start, end) + letter +
                 text.substring(end, text.length);
@@ -138,8 +144,12 @@ class WritePostForm extends React.Component {
             return;
         } else {
             this.setState({saved: true});
-            await this.props.save_post(this.state);
-            return;
+            try {
+                await this.props.save_post(this.state);
+                return;
+            } catch (err) {
+                this.setState({saved: false});
+            }
         }
     }
 
@@ -156,8 +166,7 @@ class WritePostForm extends React.Component {
                 ...this.state.post,
                 [name]: value
             }
-        })
-        this.setState({saved: false});
+        });
     }
 
     render() {
