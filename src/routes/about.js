@@ -8,8 +8,7 @@ const About = () => {
     "# Jesse Kim\n" +
     "- 데이터 사이언스, 인공지능, 머신 러닝을 공부하는 학생입니다.\n" +
     "- 서울대학교 경영학과에 재학 중입니다.\n" +
-    "- 창업에 관심이 많고, 실제로 했던 적도 있습니다.\n" +
-    "- 도움이 필요하거나, 도움을 주실 수 있다면 연락해주세요.\n" +
+    "- 창업에 관심이 많고, 실제로 했던 적이 있습니다.\n" +
     "- Email: [jessekim.ck.94@gmail.com](mailto:jessekim.ck.94@gmail.com)\n" +
     "- Github: https://github.com/weekendkim\n" +
     "\n" +
