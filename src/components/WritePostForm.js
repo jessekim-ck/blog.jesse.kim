@@ -46,7 +46,6 @@ class WritePostForm extends React.Component {
 
     state = {
         post: {
-            id: '',
             title: '',
             text: '',
         },
@@ -113,7 +112,7 @@ class WritePostForm extends React.Component {
             new_end = end + len;
         }
 
-        this.setState({post: {text: new_text}});
+        this.setState({post: {...this.state.post, text: new_text}});
         this.unsave_post();
 
         body.selectionStart = new_start;
@@ -147,11 +146,12 @@ class WritePostForm extends React.Component {
     handle_change = event => {
         const name = event.target.name;
         const value = event.target.value;
-        this.setState({post: {[name]: value}});
+        this.setState({post: {...this.state.post, [name]: value}});
         this.unsave_post();
     }
 
     render() {
+        console.log(this.state.post)
         return (
             <div>
                 <form>
