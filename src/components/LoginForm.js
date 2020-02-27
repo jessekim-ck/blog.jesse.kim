@@ -47,11 +47,11 @@ class LoginForm extends React.Component {
                         onChange={this.handle_change}
                     />
                     <div className={styles.authFormSubmit}>
-                        <button
+                        <div
                             className={styles.touchable}
                             onClick={event => this.props.handle_login(event, this.state)}>
                                 <img src={button_ok} width="60" height="60" alt="login"/>
-                        </button>
+                        </div>
                         <Link className={styles.touchable} to="/signup">
                             <img src={button_add} width="60" height="60" alt="signup"/>
                         </Link>

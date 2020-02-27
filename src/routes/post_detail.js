@@ -95,7 +95,7 @@ class PostDetail extends React.Component {
                         <div>created: {format_datetime(this.state.post.created)}</div>
                         <div>last updated: {format_datetime(this.state.post.updated)}</div>
                     </div>
-                    <div className={styles.body}>
+                    <div id="post-body" className={styles.body}>
                         <MarkdownRenderer source={this.state.post.text}/>
                     </div>
                 </div>
