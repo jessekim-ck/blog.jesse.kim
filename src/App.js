@@ -36,11 +36,11 @@ class App extends React.Component {
             }
         }
 
-        this.props.dispatch(enroll_shortcut("l", this.toggle_sidebar));
+        this.props.dispatch(enroll_shortcut(";", this.toggle_sidebar));
         window.addEventListener('keydown', this.onMetaDown);
         window.addEventListener('keyup', this.onMetaUp);
 
-        this.setState({render: true})
+        this.setState({render: true});
     }
 
     componentWillUnmount() {
