@@ -22,7 +22,7 @@ class About extends React.Component {
     "- 서울대학교 경영학과에 재학 중입니다.\n" +
     "- 창업에 관심이 많고, 실제로 했던 적이 있습니다.\n" +
     "- Email: [jessekim.ck.94@gmail.com](mailto:jessekim.ck.94@gmail.com)\n" +
-    "- Github: https://github.com/weekendkim\n" +
+    "- Github: https://github.com/jessekim-ck\n" +
     "\n" +
     "## 블로그 사용법\n" +
     "- 오른쪽 상단 로고를 누르면 사이드바를 소환합니다.\n" +
