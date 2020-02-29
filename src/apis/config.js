@@ -3,10 +3,12 @@ import axios from 'axios'
 
 export const get_header = async () => {
     const token = localStorage.getItem('token')
-    const header = {
-        Authorization: `JWT ${token}`
+    if (!token) {
+        return null
+    } else {
+        const header = {Authorization: `JWT ${token}`};
+        return header;
     }
-    return header
 }
 
 export const axios_api = axios.create({
