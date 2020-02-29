@@ -168,7 +168,7 @@ class WritePostForm extends React.Component {
                         value={this.state.post.title}
                         onChange={event => this.handle_change(event)}
                     />
-                    <div className={styles.description}>
+                    <div className={styles.options}>
                         <CategorySelector
                             handleSelectCategory={this.handleSelectCategory}
                             category={this.state.category}

@@ -76,7 +76,11 @@ export const signupUser = async (username, password) => {
 // Get Post List
 export const getPostList = async () => {
     try {
-        const response = await axios_api.get('api/post/')
+        const header = await get_header()
+        const response = await axios_api.get(
+            'api/post/',
+            {headers: header}
+        )
         const result = await response.data
         return result
     } catch (err) {
@@ -126,8 +130,10 @@ export const editPost = async (post_id, writer_id, category_id, title, text, is_
 // Get Post's Detail Information
 export const getPostDetail = async post_id => {
     try {
+        const header = await get_header()
         const response = await axios_api.get(
-            `api/post/${post_id}/`
+            `api/post/${post_id}/`,
+            {headers: header}
         )
         const result = await response.data
         return result

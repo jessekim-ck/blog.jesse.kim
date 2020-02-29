@@ -196,7 +196,7 @@ pre {
     outline: none;
 }
 
-.post .description {
+.post .options {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
