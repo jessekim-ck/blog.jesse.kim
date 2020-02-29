@@ -42,7 +42,13 @@ class WritePost extends React.Component {
 
     save_post = async data => {
         const writer_id = await this.props.currentUser.id;
-        const saved_post = await writePost(writer_id, data.category.id, data.post.title, data.post.text);
+        const saved_post = await writePost(
+            writer_id, 
+            data.category.id, 
+            data.post.title, 
+            data.post.text,
+            data.post.is_private
+        );
         this.props.history.push(`/post/${saved_post.id}/edit`);
         return;
     }

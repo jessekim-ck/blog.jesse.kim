@@ -51,6 +51,15 @@ class App extends React.Component {
     onMetaDown = event => {
         if (event.key === "Meta" || event.key === "Control") {
             window.addEventListener('keydown', this.onKeyDown);
+            const interval = window.setInterval(
+                () => {
+                    if (!document.hasFocus()) {
+                        window.removeEventListener('keydown', this.onKeyDown);
+                        window.clearInterval(interval);
+                    }
+                },
+                500
+            );
         }
     }
 
@@ -68,8 +77,8 @@ class App extends React.Component {
     }
 
     handle_logout = async () => {
-        localStorage.removeItem('token')
-        this.props.dispatch(logout())
+        localStorage.removeItem('token');
+        this.props.dispatch(logout());
     }
 
     toggle_sidebar = () => this.props.dispatch(toggle_sidebar())

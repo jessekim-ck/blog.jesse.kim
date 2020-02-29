@@ -48,6 +48,7 @@ class WritePostForm extends React.Component {
         post: {
             title: '',
             text: '',
+            is_private: false,
         },
         category: {
             id: null,
@@ -145,13 +146,17 @@ class WritePostForm extends React.Component {
 
     handle_change = event => {
         const name = event.target.name;
-        const value = event.target.value;
+        let value;
+        if (event.target.type === "checkbox") {
+            value = event.target.checked;
+        } else {
+            value = event.target.value;
+        }
         this.setState({post: {...this.state.post, [name]: value}});
         this.unsave_post();
     }
 
     render() {
-        console.log(this.state.post)
         return (
             <div>
                 <form>
@@ -163,10 +168,19 @@ class WritePostForm extends React.Component {
                         value={this.state.post.title}
                         onChange={event => this.handle_change(event)}
                     />
-                    <CategorySelector
-                        handleSelectCategory={this.handleSelectCategory}
-                        category={this.state.category}
-                    />
+                    <div className={styles.description}>
+                        <CategorySelector
+                            handleSelectCategory={this.handleSelectCategory}
+                            category={this.state.category}
+                        />
+                        <input 
+                            className={styles.checkbox}
+                            type="checkbox"
+                            name="is_private"
+                            checked={this.state.post.is_private}
+                            onChange={event => this.handle_change(event)}
+                        />
+                    </div>
                     <TextareaAutosize
                         id="post_body"
                         className={styles.body}

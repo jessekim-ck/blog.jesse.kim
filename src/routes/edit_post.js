@@ -50,7 +50,14 @@ class EditPost extends React.Component {
     // }
 
     save_post = async data => {
-        const saved_post = await editPost(data.post.id, data.post.writer_id, data.category.id, data.post.title, data.post.text);
+        const saved_post = await editPost(
+            data.post.id, 
+            data.post.writer_id, 
+            data.category.id, 
+            data.post.title, 
+            data.post.text,
+            data.post.is_private
+        );
         return saved_post;
     }
 

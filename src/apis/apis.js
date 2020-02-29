@@ -87,12 +87,12 @@ export const getPostList = async () => {
 
 
 // Write Post (Should be Authenticated)
-export const writePost = async (writer_id, category_id, title, text) => {
+export const writePost = async (writer_id, category_id, title, text, is_private) => {
     try {
         const header = await get_header()
         const response = await axios_api.post(
             'api/post/',
-            {writer_id, category_id, title, text},
+            {writer_id, category_id, title, text, is_private},
             {headers: header}
         )
         const result = await response.data
@@ -109,12 +109,12 @@ export const writePost = async (writer_id, category_id, title, text) => {
 }
 
 // Edit Existing Post's Content
-export const editPost = async (post_id, writer_id, category_id, title, text) => {
+export const editPost = async (post_id, writer_id, category_id, title, text, is_private) => {
     try {
         const header = await get_header()
         await axios_api.put(
             `api/post/${post_id}/`,
-            {writer_id, category_id, title, text},
+            {writer_id, category_id, title, text, is_private},
             {headers: header}
         )
     } catch (err) {

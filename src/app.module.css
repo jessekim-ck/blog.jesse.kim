@@ -36,6 +36,10 @@ pre {
     padding: 0.5em 1em !important;
 }
 
+.checkbox {
+    margin: auto 0;
+}
+
 .title {
     font-weight: bold;
     font-size: 18px;
@@ -190,6 +194,12 @@ pre {
     padding: 8px 0;
     margin: 4px 0;
     outline: none;
+}
+
+.post .description {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .post .body {
