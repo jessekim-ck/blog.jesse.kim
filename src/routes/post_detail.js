@@ -91,9 +91,9 @@ class PostDetail extends React.Component {
                         {this.state.post.title}
                     </div>
                     <div className={styles.description}>
-                        <div>writer: {this.state.post.writer}</div>
-                        <div>created: {format_datetime(this.state.post.created)}</div>
-                        <div>last updated: {format_datetime(this.state.post.updated)}</div>
+                        <div>Writer: {this.state.post.writer} {this.state.post.is_private ? "(private)" : ""}</div>
+                        <div>Created: {format_datetime(this.state.post.created)}</div>
+                        <div>Last Updated: {format_datetime(this.state.post.updated)}</div>
                     </div>
                     <div id="post-body" className={styles.body}>
                         <MarkdownRenderer source={this.state.post.text}/>

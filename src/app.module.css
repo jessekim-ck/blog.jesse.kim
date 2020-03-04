@@ -139,17 +139,19 @@ pre {
 }
 
 .postListItem .title {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .postListItem .description {
-    margin-bottom: 8px;
+    margin-bottom: 18px;
 }
 
 .postListItem .body {
-    height: 75px;
+    height: 136px;
+    line-height: 1.7;
     overflow: hidden;
     color: #555555;
+    white-space: pre-wrap;
 }
 
 .authForm {

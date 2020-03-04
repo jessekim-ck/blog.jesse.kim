@@ -12,10 +12,32 @@ const PostItem = props => {
                     {props.post.title}
                 </div>
                 <div className={styles.description}>
-                    {props.post.writer} | {props.post.category || 'UNCATEGORIZED'} | {props.post.num_comments} comments
+                    {
+                        `${props.post.writer} | ` +
+                        `${props.post.category || 'UNCATEGORIZED'} | ` +
+                        `${props.post.num_comments} comments` +
+                        (props.post.is_private ? ` (private)` : "")
+                    }
                 </div>
                 <div className={styles.body}>
-                    {props.post.text}
+                    {
+                        props.post.text.replace(
+                            // Remove markdown syntaxes from preview
+                            /(\*+|---)/gi, ""
+                        ).replace(
+                            // Parse arrow
+                            /-->/gi, "→"
+                        ).replace(
+                            // Remove math/code blocks from preview
+                            /(\$\$|~~~)(\n|.)+?(\$\$|~~~)/gi, ""
+                        ).replace(
+                            // Handle titles
+                            /(#+) (.*)\n+/gi, "$2. "
+                        ).replace(
+                            // Handle multiple new lines
+                            /\n+/gi, "\n"
+                        )
+                    }
                 </div>
             </Link>
         </div>
