@@ -5,25 +5,16 @@ import {Helmet} from "react-helmet";
 import styles from "../app.module.css";
 
 import {connect} from "react-redux";
-import {enroll_shortcut, remove_shortcut} from "../redux/actions";
+import {enroll_shortcut, remove_shortcut, update_post_list, update_render_list} from "../redux/actions";
 
 import Loader from "../components/Loader";
 
 
 class Index extends React.Component {
 
-    state = {
-        post_list: [],
-        render_list: [],
-    }
-
     async componentDidMount() {
-        const post_list = await getPostList()
-        this.setState({
-            post_list: post_list,
-            render_list: post_list.slice(0, 9),
-        })
-        
+        const post_list = await getPostList();
+        this.props.dispatch(update_post_list(post_list));
         this.props.dispatch(enroll_shortcut("h", () => this.props.history.push("/")));
         this.props.dispatch(enroll_shortcut("u", () => this.props.history.push("/post/write")));
         document.addEventListener('scroll', this.handle_scroll);
@@ -33,14 +24,6 @@ class Index extends React.Component {
         this.props.dispatch(remove_shortcut("h"));
         this.props.dispatch(remove_shortcut("u"));
         document.removeEventListener('scroll', this.handle_scroll);
-    }
-
-    update_render_list = () => {
-        const current_length = this.state.render_list.length;
-        const new_length = Math.min(this.state.post_list.length, current_length + 10);
-        this.setState({
-            render_list: this.state.post_list.slice(0, new_length - 1),
-        })
     }
 
     handle_scroll = () => {
@@ -55,15 +38,13 @@ class Index extends React.Component {
         const windowBottom = windowHeight + window.pageYOffset;
 
         if (windowBottom >= docHeight) {
-            this.update_render_list();
+            this.props.dispatch(update_render_list());
         }
     }
 
     render() {
-        if (this.state.post_list.length === 0) {
-            return (
-                <Loader />
-            )
+        if (!this.props.render_list.length) {
+            return (<Loader />);
         }
         
         return (
@@ -74,11 +55,13 @@ class Index extends React.Component {
                     <link rel="canonical" href="https://blog.jesse.kim"/>
                 </Helmet>
                 <div className={styles.postList}>
-                    <PostList post_list={this.state.render_list}/>
+                    <PostList post_list={this.props.render_list}/>
                 </div>
             </div>
-        )
+        );
     }
 }
 
-export default connect()(Index);
+const mapStateToProps = state => state.post;
+
+export default connect(mapStateToProps)(Index);

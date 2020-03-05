@@ -1,5 +1,14 @@
-import {LOGIN, LOGOUT, ENROLL_SHORTCUT, REMOVE_SHORTCUT, TOGGLE_SIDEBAR, SET_SIDEBAR} from './actions'
-import {combineReducers} from 'redux'
+import {
+    LOGIN, 
+    LOGOUT, 
+    ENROLL_SHORTCUT, 
+    REMOVE_SHORTCUT, 
+    TOGGLE_SIDEBAR, 
+    SET_SIDEBAR, 
+    UPDATE_POST_LIST,
+    UPDATE_RENDER_LIST
+} from './actions';
+import {combineReducers} from 'redux';
 
 
 const userReducer = (state = {authenticated: false, currentUser: {username: 'Stranger'}}, action) => {
@@ -9,7 +18,7 @@ const userReducer = (state = {authenticated: false, currentUser: {username: 'Str
                 ...state,
                 currentUser: action.payload.currentUser,
                 authenticated: true,
-            })
+            });
         case LOGOUT:
             return ({
                 ...state,
@@ -17,11 +26,11 @@ const userReducer = (state = {authenticated: false, currentUser: {username: 'Str
                     username: 'Stranger'
                 },
                 authenticated: false,
-            })
+            });
         default:
-            return state
+            return state;
     }
-}
+};
 
 const shortcutReducer = (state = {registered: {}}, action) => {
     switch (action.type) {
@@ -31,36 +40,58 @@ const shortcutReducer = (state = {registered: {}}, action) => {
                     ...state.registered,
                     [action.payload.key]: action.payload.func
                 }
-            })
+            });
         case REMOVE_SHORTCUT:
             delete state.registered[action.payload.key]
             return ({
                 registered: state.registered
-            })
+            });
         default:
-            return state
+            return state;
     }
-}
+};
 
 const sidebarReducer = (state = {visible: false}, action) => {
     switch (action.type) {
         case TOGGLE_SIDEBAR:
             return ({
                 visible: !state.visible
-            })
+            });
         case SET_SIDEBAR:
             return ({
                 visible: action.payload.visible
-            })
+            });
         default:
-            return state
+            return state;
     }
-}
+};
+
+const postReducer = (state = {post_list: [], render_list: []}, action) => {
+    const current_length = state.render_list.length;
+    let new_length;
+    switch (action.type) {
+        case UPDATE_POST_LIST:
+            new_length = Math.max(current_length, 9);
+            return ({
+                post_list: action.payload.post_list,
+                render_list: action.payload.post_list.slice(0, new_length)
+            });
+        case UPDATE_RENDER_LIST:
+            new_length = Math.min(state.post_list.length, current_length + 10);
+            return ({
+                ...state,
+                render_list: state.post_list.slice(0, new_length)
+            });
+        default:
+            return state;
+    }
+};
 
 const reducer = combineReducers({
     user: userReducer,
     shortcut: shortcutReducer,
     sidebar: sidebarReducer,
-})
+    post: postReducer
+});
 
-export default reducer
+export default reducer;
