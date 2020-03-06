@@ -11,7 +11,7 @@ const Loader = () => {
                 loading={true}
             />
         </div>
-    )
+    );
 }
 
 export default Loader;

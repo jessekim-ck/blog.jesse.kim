@@ -14,7 +14,7 @@ const ImageRenderer = props => {
         <center>
             <img src={props.src} alt={alt} width={width} height={height}/>
         </center>
-    )
+    );
 }
 
 
@@ -46,7 +46,7 @@ const MarkdownRenderer = props => {
                     image: props => ImageRenderer(props)
                 }}/>
         </MathJax.Provider>
-    )
+    );
 }
 
-export default MarkdownRenderer
+export default MarkdownRenderer;

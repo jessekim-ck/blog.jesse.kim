@@ -22,11 +22,9 @@ class CommentForm extends React.Component {
     }
 
     handle_change = event => {
-        const name = event.target.name
-        const value = event.target.value
-        this.setState({
-            [name]: value
-        })
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({[name]: value});
     }
 
     render() {
@@ -60,7 +58,7 @@ class CommentForm extends React.Component {
                     onChange={event => this.handle_change(event)}
                 />
             </div>
-        )
+        );
     }
 }
 

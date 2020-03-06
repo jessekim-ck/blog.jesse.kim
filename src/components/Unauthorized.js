@@ -2,9 +2,9 @@ import React from 'react'
 
 
 const Unauthorized = () => (
-    <div>
-        Unauthorized Approach!
-    </div>
+    <center>
+        <div>Unauthorized Approach!</div>
+    </center>
 )
 
-export default Unauthorized
+export default Unauthorized;

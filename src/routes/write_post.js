@@ -19,8 +19,7 @@ class WritePost extends React.Component {
             this.props.history.goBack();
         }
 
-        const category_id = this.props.match.params.id
-
+        const category_id = this.props.match.params.id;
         if (category_id) {
             const category = await getCategoryGenealogy(category_id);
             this.setState({category});
@@ -35,17 +34,12 @@ class WritePost extends React.Component {
         this.props.dispatch(remove_shortcut("u"));
     }
 
-    // handle_write_post = async data => {
-    //     const saved_post = await this.save_post(data);
-    //     this.props.history.push(`/post/${saved_post.id}`);
-    // }
-
     save_post = async data => {
-        const writer_id = await this.props.currentUser.id;
+        const writer_id = this.props.currentUser.id;
         const saved_post = await writePost(
-            writer_id, 
-            data.category.id, 
-            data.post.title, 
+            writer_id,
+            data.category.id,
+            data.post.title,
             data.post.text,
             data.post.is_private
         );
@@ -62,10 +56,10 @@ class WritePost extends React.Component {
                     history={this.props.history}
                 />
             </div>
-        )
+        );
     }
 }
 
-const mapStateToProps = state => state.user
+const mapStateToProps = state => state.user;
 
-export default connect(mapStateToProps)(WritePost)
+export default connect(mapStateToProps)(WritePost);

@@ -1,21 +1,21 @@
 import axios from 'axios'
 // import * as AxiosLogger from 'axios-logger'
 
-export const get_header = async () => {
+export const get_header = () => {
     const token = localStorage.getItem('token')
     if (!token) {
-        return null
+        return null;
     } else {
         const header = {Authorization: `JWT ${token}`};
         return header;
     }
-}
+};
 
 export const axios_api = axios.create({
     baseURL: 'https://api.jesse.kim/',
     // baseURL: 'http://127.0.0.1:8000/',
     timeout: 10000,
-})
+});
 
 // const axios_api = () => {
 //     const token = localStorage.getItem('token')

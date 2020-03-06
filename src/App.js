@@ -1,8 +1,8 @@
 import React from 'react';
 import {Helmet} from "react-helmet";
-import {getCurrentUser, refreshToken} from "./apis/apis"
-import styles from './app.module.css'
-import favicon from './assets/favicon.ico'
+import {getCurrentUser, refreshToken} from "./apis/apis";
+import styles from './app.module.css';
+import favicon from './assets/favicon.ico';
 import {BrowserRouter as Router} from "react-router-dom";
 import ContentNavigator from './components/ContentNavigator';
 import Route from './router';
@@ -10,14 +10,15 @@ import {Sidebar, Menu} from "semantic-ui-react";
 import NavigationBar from './components/NavigationBar';
 import {isMobile} from "react-device-detect";
 
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 import {
     login,
     logout,
     enroll_shortcut,
     toggle_sidebar,
     set_sidebar
-} from "./redux/actions"
+} from "./redux/actions";
+import Loader from "./components/Loader";
 
 
 class App extends React.Component {
@@ -57,8 +58,7 @@ class App extends React.Component {
                         window.removeEventListener('keydown', this.onKeyDown);
                         window.clearInterval(interval);
                     }
-                },
-                500
+                }, 500
             );
         }
     }
@@ -76,7 +76,7 @@ class App extends React.Component {
         }
     }
 
-    handle_logout = async () => {
+    handle_logout = () => {
         localStorage.removeItem('token');
         this.props.dispatch(logout());
     }
@@ -85,13 +85,10 @@ class App extends React.Component {
 
     render() {
         if (!this.state.render) {
-            return (
-                <div></div>
-            )
+            return (<Loader />);
         }
         
-        const sidebar_width = isMobile ? null : "wide"
-
+        const sidebar_width = isMobile ? null : "wide";
         return (
             <div className={styles.app}>
                 <Helmet>
@@ -117,10 +114,10 @@ class App extends React.Component {
                     </Sidebar>
                 </Router>
             </div>
-        )
+        );
     }
 }
 
-const mapStateToProps = state => state
+const mapStateToProps = state => state;
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(App);

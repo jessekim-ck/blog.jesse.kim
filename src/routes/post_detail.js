@@ -1,45 +1,38 @@
-import React from 'react'
-import {getPostDetail, writeComment} from "../apis/apis";
-import CommentView from "../components/CommentView";
+import React from 'react';
 import styles from "../app.module.css";
 import {Helmet} from "react-helmet";
 import {Link} from "react-router-dom";
+import {getPostDetail, writeComment} from "../apis/apis";
 import button_edit from "../assets/button_edit.png";
-import FloatButton from "../components/FloatButton";
 import format_datetime from "../utils/format_datetime";
-import MarkdownRenderer from "../components/MarkdownRenderer";
 
 import {connect} from "react-redux";
 import {enroll_shortcut, remove_shortcut} from "../redux/actions";
+
+import CommentView from "../components/CommentView";
+import MarkdownRenderer from "../components/MarkdownRenderer";
+import FloatButton from "../components/FloatButton";
+import Loader from "../components/Loader";
 
 
 class PostDetail extends React.Component {
 
     state = {
-        post: {
-            id: '',
-            title: '',
-            text: '',
-            category: '',
-        },
-        comment_list: []
+        post: null,
+        comment_list: null
     }
 
-    async componentDidMount() {
-        await this.updatePostDetail();
-        this.enroll_shortcuts();
-    }
-
-    enroll_shortcuts = () => {
+    componentDidMount() {
+        this.updatePostDetail();
         const post_id = this.props.match.params.id;
         this.props.dispatch(enroll_shortcut("e", () => this.props.history.push(`/post/${post_id}/edit`)));
         this.props.dispatch(enroll_shortcut("h", () => this.props.history.push("/")));
         this.props.dispatch(enroll_shortcut("u", () => this.props.history.push("/post/write")));
     }
 
-    async componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps) {
         if (this.props.match.params.id !== prevProps.match.params.id) {
-            await this.updatePostDetail();
+            this.updatePostDetail();
             this.enroll_shortcuts();
         }
     }
@@ -62,10 +55,13 @@ class PostDetail extends React.Component {
     
     handleWriteComment = async (nickname, title) => {
         await writeComment(this.state.post.id, nickname, title);
-        await this.updatePostDetail();
+        this.updatePostDetail();
     }
 
     render() {
+        if (!this.state.post) {
+            return (<Loader />);
+        }
 
         const title = (this.state.post.category && (this.state.post.category + "-") + this.state.post.title) || "JesseKim's Blog";
         const description = this.state.post.text.split("\n\n")[0] || "제씨킴의 데이터사이언스 프로그래밍 일상 블로그";
@@ -113,7 +109,7 @@ class PostDetail extends React.Component {
                     </Link>
                 }
             </div>
-        )
+        );
     }
 }
 

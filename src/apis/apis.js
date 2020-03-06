@@ -9,8 +9,11 @@ export const authenticateUser = async (username, password) => {
             {username, password},
         )
         const result = await response.data
-        localStorage.setItem('token', result.token)
-        return result
+        const token = result.token
+        const user = result.user
+        console.log(token, user)
+        localStorage.setItem('token', token)
+        return user
     } catch (err) {
         const err_msg = err.toString()
         if (err_msg.includes("400")) {

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styles from "../app.module.css";
 import {Link} from "react-router-dom";
@@ -14,13 +13,9 @@ class SignupForm extends React.Component {
     }
 
     handle_change = e => {
-        const name = e.target.name
-        const value = e.target.value
-        this.setState(prevState => {
-            const newState = { ...prevState }
-            newState[name] = value
-            return newState
-        })
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({[name]: value});
     }
 
     render() {
@@ -56,12 +51,8 @@ class SignupForm extends React.Component {
                     </div>
                 </div>
             </form>
-        )
+        );
     }
 }
 
-SignupForm.propTypes = {
-    handle_signup: PropTypes.func.isRequired
-}
-
-export default connect()(SignupForm)
+export default connect()(SignupForm);

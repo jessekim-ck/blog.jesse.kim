@@ -19,26 +19,27 @@ class ToastMessage extends React.Component {
     componentDidUpdate(prevProps) {
         if (!prevProps.saved && this.props.saved) {
             this.setState({visible: true});
-            setTimeout(
-                () => this.setState({visible: false}),
-                1500
+            this.timeout = setTimeout(
+                () => this.setState({visible: false}), 1500
             );
         }
     }
 
-    render() {
+    componentWillUnmount() {
+        clearTimeout(this.timeout);
+    }
 
+    render() {
         if (!this.state.visible) {
             return null;
-        }
-
-        const now = new Date();
-
-        return (
-            <div className={styles.toast}>
-                Saved at {`${now.getFullYear()}-${now.getMonth()}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`}
-            </div>
-        )
+        } else {
+            const now = new Date();
+            return (
+                <div className={styles.toast}>
+                    {`Saved at ${now.getFullYear()}-${now.getMonth()}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`}
+                </div>
+            );
+        }        
     }
 }
 
@@ -58,21 +59,19 @@ class WritePostForm extends React.Component {
     }
 
     async componentDidMount() {
+        // Update post title and description
+        if (this.props.post) {
+            this.setState({post: this.props.post});
+        }
+        // Update category
+        if (this.props.category) {
+            this.setState({category: this.props.category});
+        }
+        
         this.props.dispatch(enroll_shortcut("s", this.save_post));
         this.props.dispatch(enroll_shortcut("b", () => this.decorate_text("**")));
         this.props.dispatch(enroll_shortcut("i", () => this.decorate_text("*")));
         this.props.dispatch(enroll_shortcut("m", () => this.decorate_text("$")));
-    }
-
-    componentDidUpdate(prevProps) {
-        // Update post title and description
-        if (!prevProps.post && this.props.post) {
-            this.setState({post: this.props.post});
-        }
-        // Update category
-        if (!prevProps.category && this.props.category) {
-            this.setState({category: this.props.category});
-        }
     }
 
     componentWillUnmount() {
@@ -202,8 +201,7 @@ class WritePostForm extends React.Component {
                     message="Changes you made may not be saved."
                 />
             </div>
-            
-        )
+        );
     }
 }
 

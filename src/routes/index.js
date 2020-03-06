@@ -12,12 +12,16 @@ import Loader from "../components/Loader";
 
 class Index extends React.Component {
 
-    async componentDidMount() {
-        const post_list = await getPostList();
-        this.props.dispatch(update_post_list(post_list));
+    componentDidMount() {
+        this.update_posts();
         this.props.dispatch(enroll_shortcut("h", () => this.props.history.push("/")));
         this.props.dispatch(enroll_shortcut("u", () => this.props.history.push("/post/write")));
         document.addEventListener('scroll', this.handle_scroll);
+    }
+
+    update_posts = async () => {
+        const post_list = await getPostList();
+        this.props.dispatch(update_post_list(post_list));
     }
 
     componentWillUnmount() {
@@ -45,20 +49,20 @@ class Index extends React.Component {
     render() {
         if (!this.props.render_list.length) {
             return (<Loader />);
-        }
-        
-        return (
-            <div>
-                <Helmet>
-                    <title>Jessekim's Blog</title>
-                    <meta name="description" content="제씨킴의 데이터사이언스 프로그래밍 일상 블로그"/>
-                    <link rel="canonical" href="https://blog.jesse.kim"/>
-                </Helmet>
-                <div className={styles.postList}>
-                    <PostList post_list={this.props.render_list}/>
+        } else {
+            return (
+                <div>
+                    <Helmet>
+                        <title>Jessekim's Blog</title>
+                        <meta name="description" content="제씨킴의 데이터사이언스 프로그래밍 일상 블로그"/>
+                        <link rel="canonical" href="https://blog.jesse.kim"/>
+                    </Helmet>
+                    <div className={styles.postList}>
+                        <PostList post_list={this.props.render_list}/>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
     }
 }
 

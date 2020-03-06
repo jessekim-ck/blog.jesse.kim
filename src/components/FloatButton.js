@@ -14,7 +14,7 @@ const FloatButton = props => {
                 alt="login"
             />
         </div>
-    )
+    );
 }
 
-export default FloatButton
+export default FloatButton;

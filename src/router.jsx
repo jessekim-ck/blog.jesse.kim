@@ -16,8 +16,8 @@ import PageNotFound from "./components/PageNotFound";
 export default (
     <Switch>
         <Route exact path="/" component={Index} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route path="/user/login" component={Login} />
+        <Route path="/user/signup" component={Signup} />
         <Route path="/post/write" component={WritePost} />
         <Route path="/post/:id/edit" component={EditPost} />
         <Route path="/post/:id" component={PostDetail} />

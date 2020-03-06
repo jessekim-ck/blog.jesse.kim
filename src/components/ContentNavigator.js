@@ -149,7 +149,7 @@ class ContentNavigator extends React.Component {
                                 LOGOUT
                             </div>
                         </div> :
-                        <Link className={styles.touchable} to={"/login"}>
+                        <Link className={styles.touchable} to={"/user/login"}>
                             LOGIN
                         </Link>
                     }

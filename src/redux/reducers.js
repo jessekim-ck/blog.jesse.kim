@@ -71,17 +71,13 @@ const postReducer = (state = {post_list: [], render_list: []}, action) => {
     let new_length;
     switch (action.type) {
         case UPDATE_POST_LIST:
-            new_length = Math.max(current_length, 9);
-            return ({
-                post_list: action.payload.post_list,
-                render_list: action.payload.post_list.slice(0, new_length)
-            });
+            new_length = Math.max(current_length, 9);    
+            const post_list = action.payload.post_list;
+            const render_list = post_list.slice(0, new_length);
+            return ({post_list, render_list});
         case UPDATE_RENDER_LIST:
             new_length = Math.min(state.post_list.length, current_length + 10);
-            return ({
-                ...state,
-                render_list: state.post_list.slice(0, new_length)
-            });
+            return ({...state, render_list: state.post_list.slice(0, new_length)});
         default:
             return state;
     }

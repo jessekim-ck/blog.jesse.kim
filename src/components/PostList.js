@@ -29,10 +29,10 @@ const PostItem = props => {
                             /-->/gi, "→"
                         ).replace(
                             // Remove math/code blocks from preview
-                            /(\$\$|~~~)(\n|.)+?(\$\$|~~~)/gi, ""
+                            /(\$\$|~~~|```)(\n|.)+?(\$\$|~~~|```)/gi, ""
                         ).replace(
                             // Handle titles
-                            /(#+) (.*)\n+/gi, "$2. "
+                            /#+ (.*)\n+/gi, "$1. "
                         ).replace(
                             // Handle multiple new lines
                             /\n+/gi, "\n"
@@ -41,7 +41,7 @@ const PostItem = props => {
                 </div>
             </Link>
         </div>
-    )
+    );
 }
 
 
