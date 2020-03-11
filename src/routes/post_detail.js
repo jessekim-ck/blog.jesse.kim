@@ -31,10 +31,7 @@ class PostDetail extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.match.params.id !== prevProps.match.params.id) {
-            this.updatePostDetail();
-            this.enroll_shortcuts();
-        }
+        this.props.match.params.id !== prevProps.match.params.id && this.updatePostDetail();
     }
 
     componentWillUnmount() {
