@@ -21,17 +21,31 @@ class WritePost extends React.Component {
 
         const category_id = this.props.match.params.id;
         if (category_id) {
-            const category = await getCategoryGenealogy(category_id);
-            this.setState({category});
+            this.update_category(category_id);
         }
 
         this.props.dispatch(enroll_shortcut("h", () => this.props.history.push("/")));
         this.props.dispatch(enroll_shortcut("u", () => this.props.history.push("/post/write")));
     }
 
+    async componentDidUpdate(prevProps) {
+        if (prevProps.match.params.id !== this.props.match.params.id) {
+            if (this.props.match.params.id) {
+                this.update_category(this.props.match.params.id);
+            } else {
+                this.setState({category: null});
+            }            
+        }
+    }
+
     componentWillUnmount() {
         this.props.dispatch(remove_shortcut("h"));
         this.props.dispatch(remove_shortcut("u"));
+    }
+
+    update_category = async category_id => {
+        const category = await getCategoryGenealogy(category_id);
+        this.setState({category});
     }
 
     save_post = async data => {
@@ -44,7 +58,6 @@ class WritePost extends React.Component {
             data.post.is_private
         );
         this.props.history.push(`/post/${saved_post.id}/edit`);
-        return;
     }
 
     render() {
@@ -52,6 +65,7 @@ class WritePost extends React.Component {
             <div className={styles.post}>
                 <WritePostForm
                     save_post={this.save_post}
+                    post={null}
                     category={this.state.category}
                     history={this.props.history}
                 />

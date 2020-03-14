@@ -51,27 +51,25 @@ class WritePostForm extends React.Component {
             text: '',
             is_private: false,
         },
-        category: {
-            id: null,
-            title: null,
-        },
+        category: null,
         saved: true,
     }
 
     async componentDidMount() {
-        // Update post title and description
-        if (this.props.post) {
-            this.setState({post: this.props.post});
-        }
-        // Update category
-        if (this.props.category) {
-            this.setState({category: this.props.category});
-        }
-        
         this.props.dispatch(enroll_shortcut("s", this.save_post));
         this.props.dispatch(enroll_shortcut("b", () => this.decorate_text("**")));
         this.props.dispatch(enroll_shortcut("i", () => this.decorate_text("*")));
         this.props.dispatch(enroll_shortcut("m", () => this.decorate_text("$")));
+    }
+
+    componentDidUpdate(prevProps) {
+        const is_post_changed = prevProps.post !== this.props.post;
+        const is_category_changed = prevProps.category !== this.props.category;
+        if (is_post_changed || is_category_changed) {
+            const post = this.props.post || {title: "", text: "", is_private: false};
+            const category = this.props.category || null;
+            this.setState({post, category});
+        }
     }
 
     componentWillUnmount() {

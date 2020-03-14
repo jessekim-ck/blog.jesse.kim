@@ -42,18 +42,18 @@ class CategorySelector extends React.Component {
     }
 
     async componentDidUpdate(prevProps) {
-        if (prevProps.category.id !== this.props.category.id) {
+        if (prevProps.category !== this.props.category) {
             this.renderObjectList();
         }
     }
 
     renderObjectList = async () => {
         let list = [];
-        let category = this.props.category;
+        let category = this.props.category
         let depth = 0;
 
         // When category is set
-        if (category.id) {
+        if (category) {
 
             // Get child list
             const temp_child_list = await getCategoryDetail(category.id);
@@ -97,8 +97,8 @@ class CategorySelector extends React.Component {
         list.push(
             <CategoryOption
                 key={depth}
-                category_id={category.id}
-                category_title={category.title}
+                category_id={category && category.id}
+                category_title={category && category.title}
                 category_list={parent_list.children_category_list}
                 handleSelectCategory={this.props.handleSelectCategory}
                 renderObjectList={this.renderObjectList}
