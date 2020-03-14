@@ -20,14 +20,18 @@ import {
 } from "./redux/actions";
 import Loader from "./components/Loader";
 
+import ReactGa from "react-ga";
+
 
 class App extends React.Component {
 
     state = {
-        render: false
+        render: false,
+        pathname: null,
     }
     
     async componentDidMount() {
+        ReactGa.initialize("UA-160691470-1"); // initialize GA module
         const token = localStorage.getItem('token');
         if (token) {
             const token_refreshed = await refreshToken();
@@ -42,6 +46,14 @@ class App extends React.Component {
         window.addEventListener('keyup', this.onMetaUp);
 
         this.setState({render: true});
+    }
+
+    componentDidUpdate() {
+        if (this.state.pathname !== window.location.pathname) {
+            // update current pathname and invoke GA pageview
+            this.setState({pathname: window.location.pathname}); 
+            ReactGa.pageview(window.location.pathname + window.location.search);
+        }
     }
 
     componentWillUnmount() {
