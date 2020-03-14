@@ -24,9 +24,7 @@ class EditPost extends React.Component {
         const post_id = this.props.match.params.id;
         const post_detail = await getPostDetail(post_id);
         state.post = post_detail.post;
-        if (state.post.category_id) {
-            state.category = await getCategoryGenealogy(state.post.category_id);
-        }
+        state.post.category_id && (state.category = await getCategoryGenealogy(state.post.category_id));
 
         // Can only edit self-writed posts
         if (!this.props.authenticated || this.props.currentUser.id !== state.post.writer_id) {

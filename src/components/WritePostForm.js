@@ -9,6 +9,8 @@ import {connect} from 'react-redux';
 import {enroll_shortcut, remove_shortcut} from '../redux/actions';
 import {Prompt} from "react-router-dom";
 
+import Loader from 'react-spinners/PulseLoader';
+
 
 class ToastMessage extends React.Component {
 
@@ -46,16 +48,15 @@ class ToastMessage extends React.Component {
 class WritePostForm extends React.Component {
 
     state = {
-        post: {
-            title: '',
-            text: '',
-            is_private: false,
-        },
+        post: null,
         category: null,
         saved: true,
     }
 
-    async componentDidMount() {
+    componentDidMount() {
+        // When editting exisiting post
+        this.update_form(this.props.post, this.props.category);
+
         this.props.dispatch(enroll_shortcut("s", this.save_post));
         this.props.dispatch(enroll_shortcut("b", () => this.decorate_text("**")));
         this.props.dispatch(enroll_shortcut("i", () => this.decorate_text("*")));
@@ -65,11 +66,17 @@ class WritePostForm extends React.Component {
     componentDidUpdate(prevProps) {
         const is_post_changed = prevProps.post !== this.props.post;
         const is_category_changed = prevProps.category !== this.props.category;
+
+        // When switching between different form
         if (is_post_changed || is_category_changed) {
-            const post = this.props.post || {title: "", text: "", is_private: false};
-            const category = this.props.category || null;
-            this.setState({post, category});
+            this.update_form(this.props.post, this.props.category);
         }
+    }
+
+    update_form = (post, category) => {
+        post = this.props.post || {title: "", text: "", is_private: false};
+        category = this.props.category || null;
+        this.setState({post, category});
     }
 
     componentWillUnmount() {
@@ -131,16 +138,19 @@ class WritePostForm extends React.Component {
         }
     }
 
+    // change saved state so that you cannot leave the page
     unsave_post = () => {
         this.setState({saved: false});
         window.onbeforeunload = () => true;
     }
 
+    // change selected category
     handleSelectCategory = async category_id => {
         const category = await getCategoryGenealogy(category_id);
         this.setState({category: category});
     }
 
+    // change post detail
     handle_change = event => {
         const name = event.target.name;
         let value;
@@ -154,52 +164,56 @@ class WritePostForm extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                <form>
-                    <input
-                        className={styles.title}
-                        type="text"
-                        name="title"
-                        placeholder="Title"
-                        value={this.state.post.title}
-                        onChange={event => this.handle_change(event)}
-                    />
-                    <div className={styles.options}>
-                        <CategorySelector
-                            handleSelectCategory={this.handleSelectCategory}
-                            category={this.state.category}
-                        />
-                        <input 
-                            className={styles.checkbox}
-                            type="checkbox"
-                            name="is_private"
-                            checked={this.state.post.is_private}
+        if (!this.state.post) {
+            return (<Loader />);
+        } else {
+            return (
+                <div>
+                    <form>
+                        <input
+                            className={styles.title}
+                            type="text"
+                            name="title"
+                            placeholder="Title"
+                            value={this.state.post.title}
                             onChange={event => this.handle_change(event)}
                         />
-                    </div>
-                    <TextareaAutosize
-                        id="post_body"
-                        className={styles.body}
-                        minRows={12}
-                        as="textarea"
-                        name="text"
-                        placeholder="Write your post..."
-                        value={this.state.post.text}
-                        onChange={event => this.handle_change(event)}
+                        <div className={styles.options}>
+                            <CategorySelector
+                                handleSelectCategory={this.handleSelectCategory}
+                                category={this.state.category}
+                            />
+                            <input 
+                                className={styles.checkbox}
+                                type="checkbox"
+                                name="is_private"
+                                checked={this.state.post.is_private}
+                                onChange={event => this.handle_change(event)}
+                            />
+                        </div>
+                        <TextareaAutosize
+                            id="post_body"
+                            className={styles.body}
+                            minRows={12}
+                            as="textarea"
+                            name="text"
+                            placeholder="Write your post..."
+                            value={this.state.post.text}
+                            onChange={event => this.handle_change(event)}
+                        />
+                        <FloatButton
+                            source={button_ok}
+                            handle_click={() => this.props.save_post(this.state)}
+                        />
+                        <ToastMessage saved={this.state.saved}/>
+                    </form>
+                    <Prompt
+                        when={!this.state.saved}
+                        message="Changes you made may not be saved."
                     />
-                    <FloatButton
-                        source={button_ok}
-                        handle_click={() => this.props.save_post(this.state)}
-                    />
-                    <ToastMessage saved={this.state.saved}/>
-                </form>
-                <Prompt
-                    when={!this.state.saved}
-                    message="Changes you made may not be saved."
-                />
-            </div>
-        );
+                </div>
+            );
+        }
     }
 }
 

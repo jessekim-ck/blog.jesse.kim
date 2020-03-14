@@ -12,9 +12,9 @@ const NavigationBar = props => {
         <Navbar variant="dark" className={styles.navContainer}>
             <div>
                 <Navbar.Collapse>
-                    <Link className="navbar-brand" to="/">
+                    <Nav.Link className="navbar-brand" href="/">
                         JESSEKIM'S BLOG
-                    </Link>
+                    </Nav.Link>
                     <Navbar.Collapse className="justify-content-end">
                         <img 
                             src={logo} 

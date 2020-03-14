@@ -34,22 +34,22 @@ const CategoryOption = props => {
 class CategorySelector extends React.Component {
 
     state = {
-        list: [],
+        list: null
     }
 
     async componentDidMount() {
-        this.renderObjectList();
+        // wait until category is ready
+        await this.renderObjectList(this.props.category);
     }
 
-    async componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps) {
         if (prevProps.category !== this.props.category) {
-            this.renderObjectList();
+            this.renderObjectList(this.props.category);
         }
     }
 
-    renderObjectList = async () => {
+    renderObjectList = async category => {
         let list = [];
-        let category = this.props.category
         let depth = 0;
 
         // When category is set
@@ -58,9 +58,7 @@ class CategorySelector extends React.Component {
             // Get child list
             const temp_child_list = await getCategoryDetail(category.id);
             const child_list = temp_child_list.children_category_list;
-            if (!child_list.length) {
-                // Do nothing
-            } else {
+            if (child_list.length) {
                 list.push(
                     <CategoryOption
                         key={depth}
@@ -111,7 +109,7 @@ class CategorySelector extends React.Component {
     render() {
         return (
             <div className={styles.categorySelector}>
-                {this.state.list}
+                {this.state.list ? this.state.list : "/"}
             </div>
         );
     }

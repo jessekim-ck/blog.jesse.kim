@@ -21,9 +21,9 @@ const PostItem = props => {
                 </Card.Body>
             </Link>
         )
-    )
+    );
 
-    return children_post_items()
+    return children_post_items();
 }
 
 
@@ -35,8 +35,8 @@ class CategoryItem extends React.Component {
         meta: false,
     }
 
-    async componentDidMount() {
-        await this.update_category_list(this.props.category.id);
+    componentDidMount() {
+        this.update_category_list(this.props.category.id);
         window.addEventListener('keydown', this.onMetaDown);
         window.addEventListener('keyup', this.onMetaUp);
     }
@@ -105,7 +105,7 @@ class CategoryItem extends React.Component {
                     </div>
                 </Accordion.Collapse>
             </Accordion>
-        )
+        );
     }
 }
 
@@ -118,8 +118,8 @@ class ContentNavigator extends React.Component {
     }
 
     async componentDidMount() {
-        const state = await getCategoryList()
-        this.setState({...state})
+        const state = await getCategoryList();
+        this.setState({...state});
     }
 
     parent_category_items = () => this.state.children_category_list.map(
@@ -155,10 +155,10 @@ class ContentNavigator extends React.Component {
                     }
                 </div>    
             </div>
-        )
+        );
     }
 }
 
-const mapStateToProps = state => state.user
+const mapStateToProps = state => state.user;
 
-export default withRouter(connect(mapStateToProps)(ContentNavigator))
+export default withRouter(connect(mapStateToProps)(ContentNavigator));

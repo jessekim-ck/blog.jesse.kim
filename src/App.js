@@ -18,7 +18,6 @@ import {
     toggle_sidebar,
     set_sidebar
 } from "./redux/actions";
-import Loader from "./components/Loader";
 
 import ReactGa from "react-ga";
 
@@ -97,36 +96,36 @@ class App extends React.Component {
 
     render() {
         if (!this.state.render) {
-            return (<Loader />);
-        }
-        
-        const sidebar_width = isMobile ? null : "wide";
-        return (
-            <div className={styles.app}>
-                <Helmet>
-                    <link rel="shortcut icon" href={favicon}/>
-                </Helmet>
+            return (<div></div>);
+        } else {
+            const sidebar_width = isMobile ? null : "wide";
+            return (
+                <div className={styles.app}>
+                    <Helmet>
+                        <link rel="shortcut icon" href={favicon}/>
+                    </Helmet>
 
-                <Router>
-                    <NavigationBar toggle_sidebar={this.toggle_sidebar}/>
-                    <div className={styles.appContainer}>
-                        {Route}
-                    </div>
-                    <Sidebar
-                        as={Menu}
-                        onHide={() => this.props.dispatch(set_sidebar(false))}
-                        animation="overlay"
-                        direction="right"
-                        width={sidebar_width}
-                        visible={this.props.sidebar.visible}
-                    >
-                        <ContentNavigator 
-                            handle_logout={this.handle_logout}
-                        />
-                    </Sidebar>
-                </Router>
-            </div>
-        );
+                    <Router>
+                        <NavigationBar toggle_sidebar={this.toggle_sidebar}/>
+                        <div className={styles.appContainer}>
+                            {Route}
+                        </div>
+                        <Sidebar
+                            as={Menu}
+                            onHide={() => this.props.dispatch(set_sidebar(false))}
+                            animation="overlay"
+                            direction="right"
+                            width={sidebar_width}
+                            visible={this.props.sidebar.visible}
+                        >
+                            <ContentNavigator 
+                                handle_logout={this.handle_logout}
+                            />
+                        </Sidebar>
+                    </Router>
+                </div>
+            );
+        }
     }
 }
 
