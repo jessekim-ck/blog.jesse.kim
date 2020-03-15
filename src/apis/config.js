@@ -12,8 +12,8 @@ export const get_header = () => {
 };
 
 export const axios_api = axios.create({
-    baseURL: 'https://api.jesse.kim/',
-    // baseURL: 'http://127.0.0.1:8000/',
+    // baseURL: 'https://api.jesse.kim/',
+    baseURL: 'http://127.0.0.1:8000/',
     timeout: 10000,
 });
 

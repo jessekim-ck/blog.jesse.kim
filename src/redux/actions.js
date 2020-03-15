@@ -7,7 +7,8 @@ export const REMOVE_SHORTCUT = "REMOVE_SHORTCUT";
 export const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR";
 export const SET_SIDEBAR = "SET_SIDEBAR";
 export const UPDATE_POST_LIST = "UPDATE_POST_LIST";
-export const UPDATE_RENDER_LIST = "UPDATE_RENDER_LIST";
+// export const UPDATE_RENDER_LIST = "UPDATE_RENDER_LIST";
+export const UPDATE_POST = "UPDATE_POST";
 
 
 // Action Creators
@@ -61,9 +62,16 @@ export const update_post_list = post_list => {
     });
 };
 
-export const update_render_list = () => {
+// export const update_render_list = () => {
+//     return ({
+//         type: UPDATE_RENDER_LIST,
+//         payload: {}
+//     });
+// };
+
+export const update_post = post => {
     return ({
-        type: UPDATE_RENDER_LIST,
-        payload: {}
+        type: UPDATE_POST,
+        payload: {post}
     });
 };

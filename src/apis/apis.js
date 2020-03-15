@@ -7,54 +7,57 @@ export const authenticateUser = async (username, password) => {
         const response = await axios_api.post(
             'token-auth/',
             {username, password},
-        )
-        const result = await response.data
-        const token = result.token
-        const user = result.user
-        console.log(token, user)
-        localStorage.setItem('token', token)
-        return user
+        );
+        const result = response.data;
+        const token = result.token;
+        const user = result.user;
+        localStorage.setItem('token', token);
+        return user;
     } catch (err) {
-        const err_msg = err.toString()
+        const err_msg = err.toString();
         if (err_msg.includes("400")) {
-            alert("Cannot find the account!")
+            alert("Cannot find the account!");
         }
-        throw err
+        throw err;
     }
 }
 
 // Refresh JWT Token using Current Token
 export const refreshToken = async () => {
     try {
-        const header = await get_header()
-        const token = localStorage.getItem('token')
+        const header = get_header();
+        const token = localStorage.getItem('token');
         const response = await axios_api.post(
             'token-refresh/',
             {token},
             {headers: header}
-        )
-        const result = await response.data
-        localStorage.setItem('token', result.token)
-        return true
+        );
+        const result = response.data;
+        localStorage.setItem('token', result.token);
+        return true;
     } catch (err) {
-        console.log("Error Refreshing Token")
-        return false
+        console.log("Failed to refresh token. Msg: \n" + err);
+        if (err.toString().includes("400")) {
+            localStorage.removeItem("token");
+            console.log("Deleted invalid token");
+        }
+        return false;
     }
 }
 
 // Get Current User Information using Saved Token
 export const getCurrentUser = async () => {
     try {
-        const header = await get_header()
+        const header = get_header();
         const response = await axios_api.get(
             'api/current_user/',
             {headers: header}
-        )
-        const result = await response.data
-        return result
+        );
+        const result = response.data;
+        return result;
     } catch (err) {
-        console.log(err)
-        throw err
+        console.log("Cannot current user info. Msg: \n" + err);
+        throw err;
     }
 }
 
@@ -64,31 +67,30 @@ export const signupUser = async (username, password) => {
         const response = await axios_api.post(
             'api/user/',
             {username, password},
-        )
-        const result = await response.data
-        localStorage.setItem('token', result.token)
-        return result
+        );
+        const result = response.data;
+        localStorage.setItem('token', result.token);
+        return result;
     } catch (err) {
-        console.log(err)
-        throw err
+        console.log(err);
+        throw err;
     }
 }
 
 
-
 // Get Post List
-export const getPostList = async () => {
+export const getPostList = async (count, from_idx) => {
     try {
-        const header = await get_header()
+        const header = get_header();
         const response = await axios_api.get(
             'api/post/',
-            {headers: header}
-        )
-        const result = await response.data
-        return result
+            {headers: header, params: {count, from_idx}}
+        );
+        const result = response.data;
+        return result;
     } catch (err) {
-        console.log(err)
-        throw err
+        console.log("Cannot get post list. Msg: \n" + err);
+        throw err;
     }
 }
 
@@ -96,21 +98,21 @@ export const getPostList = async () => {
 // Write Post (Should be Authenticated)
 export const writePost = async (writer_id, category_id, title, text, is_private) => {
     try {
-        const header = await get_header()
+        const header = get_header();
         const response = await axios_api.post(
             'api/post/',
             {writer_id, category_id, title, text, is_private},
             {headers: header}
-        )
-        const result = await response.data
-        return result
+        );
+        const result = await response.data;
+        return result;
     } catch (err) {
         if (err.message.includes("400")) {
-            alert("Bad Request!")
-            throw err
+            alert("Bad Request!");
+            throw err;
         } else {
-            console.log(err)
-            throw err
+            console.log("Failed to write post. Msg: \n" + err);
+            throw err;
         }
     }
 }
@@ -118,34 +120,37 @@ export const writePost = async (writer_id, category_id, title, text, is_private)
 // Edit Existing Post's Content
 export const editPost = async (post_id, writer_id, category_id, title, text, is_private) => {
     try {
-        const header = await get_header()
-        await axios_api.put(
+        const header = get_header();
+        const response = await axios_api.put(
             `api/post/${post_id}/`,
             {writer_id, category_id, title, text, is_private},
             {headers: header}
-        )
+        );
+        const result = response.data;
+        return result;
     } catch (err) {
-        console.log(err)
-        throw err
+        console.log("Failed to edit post. Msg: \n" + err);
+        throw err;
     }
 }
 
 // Get Post's Detail Information
 export const getPostDetail = async post_id => {
     try {
-        const header = await get_header()
+        const header = get_header();
         const response = await axios_api.get(
             `api/post/${post_id}/`,
             {headers: header}
-        )
-        const result = await response.data
-        return result
+        );
+        const result = response.data;
+        return result;
     } catch (err) {
         if (err.message.includes("404")) {
-            return null
+            alert("Cannot find the post!");
+            throw err;
         } else {
-            console.log(err)
-            throw err
+            console.log("Failed to get post info. Msg: \n" + err);
+            throw err;
         }
     }
 }
@@ -153,42 +158,42 @@ export const getPostDetail = async post_id => {
 
 export const getCategoryList = async () => {
     try {
-        const response = await axios_api.get('api/category/list/')
-        const result = await response.data
-        return result
+        const response = await axios_api.get('api/category/list/');
+        const result = response.data;
+        return result;
     } catch (err) {
-        console.log(err)
-        throw err
+        console.log("Failed to get category list. Msg: \n" + err);
+        throw err;
     }
 }
 
 
 export const getCategoryDetail = async category_id => {
     try {
-        const response = await axios_api.get(`api/category/${category_id}/`)
-        const result = await response.data
-        return result
+        const response = await axios_api.get(`api/category/${category_id}/`);
+        const result = response.data;
+        return result;
     } catch (err) {
-        console.log(err)
-        throw err
+        console.log("Failed to get category info. Msg: \n" + err);
+        throw err;
     }
 }
 
 
 export const getCategoryGenealogy = async category_id => {
     try {
-        const response = await axios_api.get(`api/category/${category_id}/`)
-        const result = await response.data.category
+        const response = await axios_api.get(`api/category/${category_id}/`);
+        const result = response.data.category;
         if (result.parent_category_id) {
-            const parent = await getCategoryGenealogy(result.parent_category_id)
-            result.parent = await parent
+            const parent = await getCategoryGenealogy(result.parent_category_id);
+            result.parent = parent;
         } else {
-            result.parent = null
+            result.parent = null;
         }
-        return result
+        return result;
     } catch (err) {
-        console.log(err)
-        throw err
+        console.log("Failed to get category geneology. Msg: \n" + err);
+        throw err;
     }
 }
 
@@ -198,11 +203,11 @@ export const writeComment = async (post_id, nickname, text) => {
         const response = await axios_api.post(
             `api/comment/${post_id}/`,
             {post_id, nickname, text}
-        )
-        const result = await response.data
-        return result
+        );
+        const result = response.data;
+        return result;
     } catch (err) {
-        console.log (err)
-        throw err
+        alert("Failed to write comment. Msg: \n" + err);
+        throw err;
     }
 }

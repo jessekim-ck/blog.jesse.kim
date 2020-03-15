@@ -5,7 +5,7 @@ import {Helmet} from "react-helmet";
 import styles from "../app.module.css";
 
 import {connect} from "react-redux";
-import {enroll_shortcut, remove_shortcut, update_post_list, update_render_list} from "../redux/actions";
+import {enroll_shortcut, remove_shortcut, update_post_list} from "../redux/actions";
 
 import Loader from "../components/Loader";
 
@@ -13,14 +13,14 @@ import Loader from "../components/Loader";
 class Index extends React.Component {
 
     componentDidMount() {
-        this.update_posts();
+        !this.props.post_list.length && this.update_posts(10, 10000);
         this.props.dispatch(enroll_shortcut("h", () => this.props.history.push("/")));
         this.props.dispatch(enroll_shortcut("u", () => this.props.history.push("/post/write")));
         document.addEventListener('scroll', this.handle_scroll);
     }
 
-    update_posts = async () => {
-        const post_list = await getPostList();
+    update_posts = async (count, from_idx) => {
+        const post_list = await getPostList(count, from_idx);
         this.props.dispatch(update_post_list(post_list));
     }
 
@@ -42,12 +42,14 @@ class Index extends React.Component {
         const windowBottom = windowHeight + window.pageYOffset;
 
         if (windowBottom >= docHeight) {
-            this.props.dispatch(update_render_list());
+            const from_idx = this.props.post_list[this.props.post_list.length - 1].id;
+            this.update_posts(10, from_idx);
+            // this.props.dispatch(update_render_list());
         }
     }
 
     render() {
-        if (!this.props.render_list.length) {
+        if (!this.props.post_list.length) {
             return (<Loader />);
         } else {
             return (
@@ -58,7 +60,7 @@ class Index extends React.Component {
                         <link rel="canonical" href="https://blog.jesse.kim"/>
                     </Helmet>
                     <div className={styles.postList}>
-                        <PostList post_list={this.props.render_list}/>
+                        <PostList post_list={this.props.post_list}/>
                     </div>
                 </div>
             );

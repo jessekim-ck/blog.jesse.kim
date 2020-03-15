@@ -203,7 +203,7 @@ class WritePostForm extends React.Component {
                         />
                         <FloatButton
                             source={button_ok}
-                            handle_click={() => this.props.save_post(this.state)}
+                            handle_click={this.save_post}
                         />
                         <ToastMessage saved={this.state.saved}/>
                     </form>

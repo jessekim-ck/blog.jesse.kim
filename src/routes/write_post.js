@@ -3,7 +3,7 @@ import {writePost, getCategoryGenealogy} from "../apis/apis";
 import styles from '../app.module.css';
 
 import {connect} from "react-redux";
-import {enroll_shortcut, remove_shortcut} from "../redux/actions"
+import {enroll_shortcut, remove_shortcut, update_post} from "../redux/actions"
 
 import WritePostForm from '../components/WritePostForm';
 import Loader from 'react-spinners/PulseLoader';
@@ -17,7 +17,7 @@ class WritePost extends React.Component {
     }
 
     async componentDidMount() {
-        if (!this.props.authenticated) {
+        if (!this.props.user.authenticated) {
             alert("You have no access to this page!");
             this.props.history.goBack();
         }
@@ -47,14 +47,15 @@ class WritePost extends React.Component {
     }
 
     save_post = async data => {
-        const writer_id = this.props.currentUser.id;
+        const writer_id = this.props.user.currentUser.id;
         const saved_post = await writePost(
             writer_id,
-            data.category.id,
+            data.category ? data.category.id : null,
             data.post.title,
             data.post.text,
             data.post.is_private
         );
+        this.props.dispatch(update_post(saved_post));
         this.props.history.push(`/post/${saved_post.id}/edit`);
     }
 
@@ -76,6 +77,6 @@ class WritePost extends React.Component {
     }
 }
 
-const mapStateToProps = state => state.user;
+const mapStateToProps = state => state;
 
 export default connect(mapStateToProps)(WritePost);

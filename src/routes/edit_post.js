@@ -5,7 +5,7 @@ import {Helmet} from "react-helmet";
 import styles from "../app.module.css";
 
 import {connect} from "react-redux";
-import {enroll_shortcut, remove_shortcut} from "../redux/actions"
+import {enroll_shortcut, remove_shortcut, update_post} from "../redux/actions"
 
 import Loader from "../components/Loader";
 
@@ -27,7 +27,7 @@ class EditPost extends React.Component {
         state.post.category_id && (state.category = await getCategoryGenealogy(state.post.category_id));
 
         // Can only edit self-writed posts
-        if (!this.props.authenticated || this.props.currentUser.id !== state.post.writer_id) {
+        if (!this.props.user.authenticated || this.props.user.currentUser.id !== state.post.writer_id) {
             alert("You have no access to this page!");
             this.props.history.goBack();
         }
@@ -48,11 +48,12 @@ class EditPost extends React.Component {
         const saved_post = await editPost(
             data.post.id, 
             data.post.writer_id, 
-            data.category.id, 
+            data.category ? data.category.id : null, 
             data.post.title, 
             data.post.text,
             data.post.is_private
         );
+        this.props.dispatch(update_post(saved_post));
         return saved_post;
     }
 
@@ -77,6 +78,6 @@ class EditPost extends React.Component {
     }
 }
 
-const mapStateToProps = state => state.user;
+const mapStateToProps = state => state;
 
 export default connect(mapStateToProps)(EditPost);
