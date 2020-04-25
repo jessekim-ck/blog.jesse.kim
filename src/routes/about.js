@@ -17,19 +17,21 @@ class About extends React.Component {
     }
 
     source = "" +
-    "# Jesse Kim\n" +
-    "- 데이터 사이언스, 인공지능, 머신 러닝을 공부하는 학생입니다.\n" +
-    "- 서울대학교 경영학과에 재학 중입니다.\n" +
-    "- 창업에 관심이 많고, 실제로 했던 적이 있습니다.\n" +
+    "## Jesse Kim\n" +
+    "- Learning Data Science, Artificial Intelligence and Deep Learning.\n" +
+    "- Interested in technology, science and startup.\n" +
+    "- Student @ business school of Seoul National Univerity\n" +
+    "- Previous COO @ [Minding](https://minding.today)\n" +
+    "- Researcher @ [mAy-I](https://may-i.io)\n" +
     "- Email: [jessekim.ck.94@gmail.com](mailto:jessekim.ck.94@gmail.com)\n" +
     "- Github: https://github.com/jessekim-ck\n" +
     "\n" +
-    "## 블로그 사용법\n" +
-    "- 오른쪽 상단 로고를 누르면 사이드바를 소환합니다.\n" +
-    "- 사이드바에서 포스트를 탐색할 수 있습니다.\n" +
-    "- 사이드바에서 `ctrl`나 `cmd` 키를 누른 채 카테고리를 클릭하면 해당 카테고리 페이지로 이동합니다.\n" +
-    "- `ctrl/cmd` + `;`: 사이드바를 소환합니다.\n" +
-    "- `ctrl/cmd` + `h`: 포스트 목록 페이지로 이동합니다.";
+    "## Blog Manual\n" +
+    "- Click top right logo for sidebar menu.\n" +
+    "- Browse categories & posts with sidebar.\n" +
+    "- Click category with `ctrl` or `cmd` button pushed to move to that category page.\n" +
+    "- `ctrl/cmd` + `;`: Open sidebar.\n" +
+    "- `ctrl/cmd` + `h`: Move to home.";
 
     render() {
         return (
