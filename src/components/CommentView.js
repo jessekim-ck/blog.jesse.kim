@@ -31,16 +31,17 @@ class CommentForm extends React.Component {
         return (
             <div className={styles.commentForm}>
                 <div className={styles.commentFormHeader}>
-                    <input
+                    <Form.Control
+                        as="textarea"
                         className={styles.commentFormNickname}
-                        type="text"
                         name="nickname"
+                        rows="1"
                         placeholder="Nickname"
                         value={this.state.nickname}
                         onChange={event => this.handle_change(event)}
                     />
                     <div
-                        className={styles.commentFormButton}
+                        className={styles.touchable}
                         onClick={() => {
                             this.props.handleWriteComment(this.state.nickname, this.state.text)
                             this.setState({nickname: '', text: ''})

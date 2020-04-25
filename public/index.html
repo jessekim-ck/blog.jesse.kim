@@ -1,79 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160691470-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160691470-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-      gtag('config', 'UA-160691470-1');
-    </script>
+            gtag('config', 'UA-160691470-1');
+        </script>
 
-    <meta charset="utf-8"/>
+        <meta charset="utf-8"/>
 
-    <!--  Responsive to the device width  -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!--  Responsive to the device width  -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta name="theme-color" content="#000000" />
-    <link rel="apple-touch-icon" href="logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+        <meta name="theme-color" content="#000000" />
+        <link rel="apple-touch-icon" href="logo192.png" />
+        <!--
+            manifest.json provides metadata used when your web app is installed on a
+            user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+        -->
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        <!--
+            Notice the use of %PUBLIC_URL% in the tags above.
+            It will be replaced with the URL of the `public` folder during the build.
+            Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+            Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+            work correctly both with client-side routing and a non-root public URL.
+            Learn how to configure a non-root public URL by running `npm run build`.
+        -->
 
-    <!--  Bootstrap  -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+        <!--  Bootstrap  -->
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
 
-    <!--  Google webmaster  -->
-    <meta name="google-site-verification" content="3nreyuM5Ql0Ppj-3500ujsVpLfYu4oOgBDT82HAJHXA"/>
+        <!--  Google webmaster  -->
+        <meta name="google-site-verification" content="3nreyuM5Ql0Ppj-3500ujsVpLfYu4oOgBDT82HAJHXA"/>
 
-    <!--  Naver webmaster  -->
-    <meta name="naver-site-verification" content="e6af66fbcd959904661ed7fec9795cd851803c3d"/>
+        <!--  Naver webmaster  -->
+        <meta name="naver-site-verification" content="e6af66fbcd959904661ed7fec9795cd851803c3d"/>
 
-    <!--  OpenGraph  -->
-    <meta property="og:title" content="Jessekim's Blog"/>
-    <meta property="og:description" content="제씨킴의 데이터사이언스 프로그래밍 일상 블로그"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:image" content="https://blog.jesse.kim/opengraph.jpg"/>
-    <meta property="og:url" content="https://blog.jesse.kim/"/>
+        <!--  OpenGraph  -->
+        <meta property="og:title" content="Jessekim's Blog"/>
+        <meta property="og:description" content="제씨킴의 데이터사이언스 프로그래밍 일상 블로그"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:image" content="https://blog.jesse.kim/opengraph.jpg"/>
+        <meta property="og:url" content="https://blog.jesse.kim/"/>
 
-    <!-- Semantic UI theme -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
+        <!-- Semantic UI theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
 
-    <!-- Noto Sans KR -->
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+        <!-- Noto Sans KR -->
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
-    <!-- Custom Style -->
-    <style>
-      body {font-family: inherit;}
-      textarea {background-color: inherit !important;}
-      input {background-color: inherit !important;}
-      .navbar-brand {padding: 7px 0 8px 0;}
-      .navbar-expand .navbar-nav .nav-link {padding: 12px 24px 7px 0;}
-      .card-header {background-color: transparent;}
-      .mjx-block {min-height: 32px; margin: 12px !important;}
-    </style>
+        <!-- Custom Style -->
+        <style>
+            body {font-family: inherit; background-color: #fefefe; color: #555555;}
+            textarea {background-color: inherit; color: inherit;}
+            input {background-color: inherit;}
+            .navbar-brand {padding: 7px 0 8px 0;}
+            .navbar-expand .navbar-nav .nav-link {padding: 12px 24px 7px 0;}
+            .card-header {background-color: transparent;}
+            .mjx-block {min-height: 32px; margin: 12px !important;}
+            .form-control {border: 0px; padding: 0px; margin: 0px; height: auto;}
+            .form-control:focus {border-color: inherit; box-shadow: none; -webkit-box-shadow: none;}
+        </style>
 
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
+    </head>
+    <body>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="root"></div>
+    </body>
 </html>
