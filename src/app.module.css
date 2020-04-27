@@ -1,3 +1,7 @@
+a {
+    color: lightsteelblue;
+}
+
 a:hover {
     color: inherit;
 }
@@ -9,6 +13,10 @@ textarea {
     box-shadow: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
+}
+
+hr {
+    border-top: 1px solid grey;
 }
 
 p, ul {
@@ -25,7 +33,7 @@ blockquote {
 
 h1, h2, h3, h4, h5, strong {
     line-height: 2.2;
-    color: black !important;
+    color: inherit;
 }
 
 h1 {
@@ -57,7 +65,7 @@ pre {
     font-weight: bold;
     font-size: 18px;
     line-height: 1.3;
-    color: black;
+    color: inherit;
 }
 
 .subtitle {
@@ -93,7 +101,8 @@ pre {
 
 .sidebar {
     width: 100%;
-    /* background-color: inherit; */
+    height: 100%;
+    background-color: #333333;
     padding: 12px;
     display: flex;
     flex-direction: column;
@@ -105,7 +114,8 @@ pre {
 }
 
 .contentNavItem {
-    border-bottom: 1px solid rgba(0,0,0,.125);
+    /* border-bottom: 1px solid rgba(0,0,0,.125); */
+    border-bottom: 1px solid grey;
 }
 
 .contentNavItem .title {
@@ -125,7 +135,8 @@ pre {
 
 .contentNavItem:hover {
     text-decoration: underline;
-    color: black;
+    /* color: black; */
+    color: grey;
 }
 
 .sidebar .authentication {
@@ -148,7 +159,8 @@ pre {
 
 .postListItem {
     padding: 28px 12px;
-    border-bottom: solid 1px rgba(0,0,0,.125);
+    /* border-bottom: solid 1px rgba(0,0,0,.125); */
+    border-bottom: solid 1px grey;
 }
 
 .postListItem .title {
@@ -163,7 +175,6 @@ pre {
     height: 139px;
     line-height: 1.7;
     overflow: hidden;
-    /* color: #555555; */
     white-space: pre-wrap;
 }
 
@@ -204,7 +215,8 @@ pre {
 .post .title {
     width: 100%;
     border: 0px;
-    border-bottom: 1px solid black;
+    /* border-bottom: 1px solid black; */
+    border-bottom: 1px solid grey;
     font-size: 24px;
     padding: 8px 0;
     margin: 4px 0;
@@ -274,6 +286,7 @@ pre {
 .touchable:hover {
     opacity: 0.6;
     text-decoration: underline;
+    text-decoration-color: grey;
     color: inherit;
 }
 
@@ -288,13 +301,11 @@ pre {
 }
 
 .commentRowNickname {
-    color: black;
     font-size: 12px;
     margin-bottom: 8px;
 }
 
 .commentRowText {
-    color: black;
     font-size: 14px;
 }
 
@@ -314,7 +325,9 @@ pre {
     font-size: 14px;
     border: 0px;
     border-radius: 0%;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid grey;
+    color: inherit;
+    background-color: inherit;
 }
 
 .commentFormText {
@@ -322,6 +335,14 @@ pre {
     padding: 4px 10px 4px 10px;
     border: 1px solid grey;
     font-size: 14px;
+    color: inherit;
+    background-color: inherit;
+}
+
+.commentFormText:focus, .commentFormNickname:focus {
+    background-color: inherit;
+    border-color: #fefefe;
+    color: inherit;
 }
 
 .toast {
