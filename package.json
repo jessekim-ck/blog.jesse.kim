@@ -6,6 +6,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "core-js": "^3.6.5",
+    "gh-pages": "^2.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
@@ -32,6 +33,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "aws2 s3 sync ./build s3://weekendkim-blog --profile=jessekim",
+    "deploy-github": "gh-pages -d build",
     "invalidate": "aws2 cloudfront create-invalidation --profile=jessekim --distribution-id E2HEUID0DBIRC --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico /sitemap.xml /robots.txt"
   },
   "react-scripts": "2.0.3",
@@ -52,5 +54,6 @@
   },
   "devDependencies": {
     "axios-logger": "^2.3.1"
-  }
+  },
+  "homepage": "http://jessekim-ck.github.io"
 }
