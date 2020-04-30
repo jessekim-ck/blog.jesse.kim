@@ -95,6 +95,23 @@ export const getPostList = async (count, from_idx) => {
 }
 
 
+// Get Post List by Keyword
+export const searchPost = async keyword => {
+    try {
+        const header = get_header();
+        const response = await axios_api.get(
+            'api/post/',
+            {headers: header, params: {keyword}}
+        );
+        const result = response.data;
+        return result;
+    } catch (err) {
+        console.log("Cannot search posts. Msg: \n" + err);
+        throw err;
+    }
+}
+
+
 // Write Post (Should be Authenticated)
 export const writePost = async (writer_id, category_id, title, text, is_private) => {
     try {
