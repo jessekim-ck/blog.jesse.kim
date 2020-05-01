@@ -99,7 +99,16 @@ pre {
     font-size: 16px;
 }
 
-.navContainer input {
+.navContainer input:focus {
+    outline: none;
+}
+
+.searchBar {
+    position: relative;
+    display: inline-block;
+}
+
+.searchBar input {
     width: 172px;
     height: 28px;
     border: 1px solid grey;
@@ -110,17 +119,8 @@ pre {
     padding: 0 14px;
 }
 
-.navContainer input:focus {
-    outline: none;
-}
-
-.searchBar {
-    position: relative;
-    display: inline-block;
-}
-
 .searchResult {
-    display: none;
+    display: block;
     position: absolute;
     background-color: #333333;
     width: 280px;
@@ -130,10 +130,6 @@ pre {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     padding-bottom: 14px;
-}
-
-.searchBar:hover .searchResult {
-    display: block;
 }
 
 .searchResult li {
@@ -416,7 +412,7 @@ pre {
         padding: 12px 18px;
     }
 
-    .searchBar {
-        display: none;
+    .searchBar input {
+        width: 80px;
     }
 }
