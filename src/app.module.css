@@ -412,7 +412,7 @@ pre {
         padding: 12px 18px;
     }
 
-    .searchBar input {
-        width: 80px;
+    .searchBar {
+        display: none;
     }
 }
