@@ -28,8 +28,10 @@ class SearchBar extends React.Component {
             search_result.style.display = "block";
             window.addEventListener('keydown', initialize_searched_posts);
         });
-        search_bar.addEventListener('blur', () => {
-            search_result.style.display = "none";
+        search_bar.addEventListener('focusout', () => {
+            setTimeout(() => {
+                search_result.style.display = "none";
+            }, 100);
             window.removeEventListener('keydown', initialize_searched_posts);
         });
     }
